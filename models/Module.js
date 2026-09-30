@@ -16,20 +16,23 @@ const moduleSchema = new mongoose.Schema(
 
         description: {
             type: String,
-            required: true,
-            trim: true
+            required: true
         },
 
         order: {
             type: Number,
-            required: true,
-            min: 1
+            required: true
         },
 
         estimatedDuration: {
             type: Number,
-            required: true,
-            min: 1
+            required: true
+        },
+
+        status: {
+            type: String,
+            enum: ["draft", "published"],
+            default: "draft"
         }
     },
     {
@@ -37,7 +40,6 @@ const moduleSchema = new mongoose.Schema(
     }
 );
 
-// L'ordre doit être unique pour un même cours
 moduleSchema.index(
     { course: 1, order: 1 },
     { unique: true }

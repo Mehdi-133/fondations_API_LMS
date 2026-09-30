@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const connectDB = require("../config/db");
 const Course = require("../models/Course");
+const Module = require("../models/Module");
 
 dotenv.config();
 
@@ -55,10 +56,56 @@ const seed = async () => {
         await connectDB();
 
         await Course.deleteMany();
+        await Module.deleteMany();
 
-        await Course.insertMany(courses);
+        const createdCourses = await Course.insertMany(courses);
 
-        console.log("Courses seeded successfully");
+        const nodeCourse = createdCourses.find(
+            course => course.title === "Node.js avec Express"
+        );
+
+        const javascriptCourse = createdCourses.find(
+            course => course.title === "JavaScript pour débutants"
+        );
+
+        const modules = [
+            {
+                course: nodeCourse._id,
+                title: "Introduction à Node.js",
+                description: "Découvrir Node.js et son fonctionnement.",
+                order: 1,
+                estimatedDuration: 10,
+                status: "published"
+            },
+            {
+                course: nodeCourse._id,
+                title: "Créer un serveur Express",
+                description: "Créer un serveur avec Express.",
+                order: 2,
+                estimatedDuration: 15,
+                status: "published"
+            },
+            {
+                course: nodeCourse._id,
+                title: "Créer des routes",
+                description: "Créer et organiser les routes Express.",
+                order: 3,
+                estimatedDuration: 15,
+                status: "published"
+            },
+            {
+                course: javascriptCourse._id,
+                title: "Les variables JavaScript",
+                description: "Comprendre les variables en JavaScript.",
+                order: 1,
+                estimatedDuration: 10,
+                status: "published"
+            }
+        ];
+
+        await Module.insertMany(modules);
+
+        console.log("Courses and modules seeded successfully");
 
         process.exit(0);
     } catch (error) {
