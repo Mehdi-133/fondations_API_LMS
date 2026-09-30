@@ -54,6 +54,30 @@ const getCourses = async (req, res, next) => {
     }
 };
 
+
+const getCourseById = async (req, res, next) => {
+    try {
+        const course = await Course.findOne({
+            _id: req.params.id,
+            status: "published"
+        });
+
+        if (!course) {
+            return res.status(404).json({
+                message: "Course not found"
+            });
+        }
+
+        res.status(200).json({
+            data: course
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+
 module.exports = {
-    getCourses
+    getCourses,
+    getCourseById
 };
