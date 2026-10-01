@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 
 const courseRoutes = require("./routes/courseRoutes");
+const resourceRoutes = require("./routes/resourceRoutes");
 
 dotenv.config();
 
@@ -19,6 +20,17 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/courses", courseRoutes);
+
+app.get("/api/modules/test", (req, res) => {
+    res.json({
+        message: "modules route works"
+    });
+});
+
+app.use("/api/modules", resourceRoutes);
+
+
+
 
 const PORT = process.env.PORT || 3000;
 
