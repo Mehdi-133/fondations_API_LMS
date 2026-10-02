@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const connectDB = require("../config/db");
 const Course = require("../models/Course");
 const Module = require("../models/Module");
+const Resource = require("../models/Resource");
 
 dotenv.config();
 
@@ -57,6 +58,7 @@ const seed = async () => {
 
         await Course.deleteMany();
         await Module.deleteMany();
+        await Resource.deleteMany();
 
         const createdCourses = await Course.insertMany(courses);
 
@@ -103,9 +105,44 @@ const seed = async () => {
             }
         ];
 
-        await Module.insertMany(modules);
+        const createdModules = await Module.insertMany(modules);
 
-        console.log("Courses and modules seeded successfully");
+        const introductionModule = createdModules.find(
+            module => module.title === "Introduction à Node.js"
+        );
+
+        const serveurModule = createdModules.find(
+            module => module.title === "Créer un serveur Express"
+        );
+
+        const routesModule = createdModules.find(
+            module => module.title === "Créer des routes"
+        );
+
+        const resources = [
+            {
+                module: introductionModule._id,
+                type: "video",
+                url: "https://www.youtube.com/watch?v=example1",
+                order: 1
+            },
+            {
+                module: serveurModule._id,
+                type: "document",
+                url: "https://example.com/express-document.pdf",
+                order: 1
+            },
+            {
+                module: routesModule._id,
+                type: "link",
+                url: "https://expressjs.com/",
+                order: 1
+            }
+        ];
+
+        await Resource.insertMany(resources);
+
+        console.log("Courses, modules and resources seeded successfully");
 
         process.exit(0);
     } catch (error) {
