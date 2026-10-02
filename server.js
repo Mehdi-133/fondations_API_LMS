@@ -5,6 +5,9 @@ const connectDB = require("./config/db");
 const courseRoutes = require("./routes/courseRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
 
+const notFound = require("./middlewares/notFound");
+const errorHandler = require("./middlewares/errorHandler");
+
 dotenv.config();
 
 const app = express();
@@ -28,6 +31,9 @@ app.get("/api/modules/test", (req, res) => {
 });
 
 app.use("/api/modules", resourceRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 
 
