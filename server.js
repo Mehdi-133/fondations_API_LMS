@@ -4,6 +4,7 @@ const connectDB = require("./config/db");
 
 const courseRoutes = require("./routes/courseRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
+const enrollmentRoutes = require("./routes/enrollmentRoutes");
 
 
 const notFound = require("./middlewares/notFound");
@@ -35,6 +36,7 @@ app.get("/api/modules/test", (req, res) => {
 });
 
 app.use("/api/modules", resourceRoutes);
+app.use("/api", enrollmentRoutes);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
