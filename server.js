@@ -4,7 +4,7 @@ const connectDB = require("./config/db");
 
 const courseRoutes = require("./routes/courseRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
-
+const authRoutes = require("./routes/authRoutes");
 
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
@@ -35,6 +35,7 @@ app.get("/api/modules/test", (req, res) => {
 });
 
 app.use("/api/modules", resourceRoutes);
+app.use("/api/auth", authRoutes);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
