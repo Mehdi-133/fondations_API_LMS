@@ -1,11 +1,24 @@
+
 const express = require("express");
 const router = express.Router();
 
-const { enrollInCourse , getMyEnrollments } = require("../controllers/enrollmentController");
+const {
+    enrollInCourse,
+    getMyEnrollments
+} = require("../controllers/enrollmentController");
 
-router.post("/courses/:courseId/enroll", enrollInCourse);
+const authenticate = require("../middlewares/authenticate");
 
-router.get("/enrollments/me", getMyEnrollments);
+router.post(
+    "/courses/:courseId/enroll",
+    authenticate,
+    enrollInCourse
+);
 
+router.get(
+    "/enrollments/me",
+    authenticate,
+    getMyEnrollments
+);
 
 module.exports = router;
