@@ -1,10 +1,8 @@
 const express = require("express");
-const { register, login } = require("../controllers/authController");
+const { register, login, getMe } = require("../controllers/authController");
 const validate = require("../middlewares/validate");
-const {
-    registerSchema,
-    loginSchema
-} = require("../validators/authValidator");
+const authenticate = require("../middlewares/authenticate");
+const { registerSchema, loginSchema } = require("../validators/authValidator");
 
 const router = express.Router();
 
@@ -87,5 +85,53 @@ router.post("/register", validate(registerSchema), register);
  *         description: Internal server error
  */
 router.post("/login", validate(loginSchema), login);
+
+/**
+ * @swagger
+ * /api/auth/me:
+ *   get:
+ *     summary: Get the authenticated user's profile
+ *     tags:
+ *       - Authentication
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Profile retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: profile retrieved success
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                     name:
+ *                       type: string
+ *                     email:
+ *                       type: string
+ *                       format: email
+ *                     role:
+ *                       type: string
+ *                       enum: [learner, trainer, admin]
+ *                     status:
+ *                       type: string
+ *                       enum: [active, suspended]
+ *       401:
+ *         description: Missing, invalid, or expired token
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
+ */
+router.get("/me", authenticate, getMe);
 
 module.exports = router;
