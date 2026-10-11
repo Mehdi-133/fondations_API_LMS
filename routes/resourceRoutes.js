@@ -5,7 +5,11 @@ const {
   getResourcesByModule
 } = require("../controllers/resourceController");
 
+const {
+  markResourceAsConsulted
+} = require("../controllers/resourceProgressController");
 
+const authenticate = require("../middlewares/authenticate");
 
 /**
  * @swagger
@@ -38,5 +42,10 @@ const {
  *         description: Erreur interne du serveur
  */
 router.get("/:id/resources", getResourcesByModule);
+router.post(
+  "/:resourceId/consult",
+  authenticate,
+  markResourceAsConsulted
+);
 
 module.exports = router;
