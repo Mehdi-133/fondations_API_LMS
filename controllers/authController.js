@@ -11,10 +11,9 @@ const register = async (req, res, next) => {
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      return res.status(409).json({
-        status: 409,
-        message: "Email already registered",
-      });
+      const error = new Error("Email already registered");
+      error.statusCode = 409;
+      return next(error);
     }
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
@@ -47,23 +46,20 @@ const login = async (req, res, next) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email }).select("+password");
     if (!user) {
-      return res.status(401).json({
-        status: 401,
-        message: "Invalid email or password",
-      });
+      const error = new Error("Invalid email or password");
+      error.statusCode = 401;
+      return next(error);
     }
     const check = await bcrypt.compare(password, user.password);
     if (!check) {
-      return res.status(401).json({
-        status: 401,
-        message: "Invalid email or password",
-      });
+      const error = new Error("Invalid email or password");
+      error.statusCode = 401;
+      return next(error);
     }
     if (user.status !== "active") {
-      return res.status(403).json({
-        status: 403,
-        message: "Account is suspended",
-      });
+      const error = new Error("Account is suspended");
+      error.statusCode = 403;
+      return next(error);
     }
 
     if (!process.env.JWT_SECRET) {
@@ -97,10 +93,9 @@ const getMe = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id);
     if (!user) {
-      return res.status(404).json({
-        status: 404,
-        message: "user not found ",
-      });
+      const error = new Error("User not found");
+      error.statusCode = 404;
+      return next(error);
     }
     return res.status(200).json({
       status: 200,

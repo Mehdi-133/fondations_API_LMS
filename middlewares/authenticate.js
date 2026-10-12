@@ -4,18 +4,20 @@ const authenticate = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
-      return res.status(401).json({
-        status: 401,
-        message: "Authorization header missing",
-      });
+      const error = new Error("Authorization header missing");
+      error.statusCode = 401;
+      return next(error);
     }
     const [scheme, token] = authHeader.split(" ");
 
     if (scheme !== "Bearer" || !token) {
-      return res.status(401).json({
-        status: 401,
-        message: "Invalid authorization header format",
-      });
+      const error = new Error("Invalid authorization header format");
+      error.statusCode = 401;
+      return next(error);
+    }
+
+    if (!process.env.JWT_SECRET) {
+      throw new Error("jwt secret is not configured");
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -25,16 +27,7 @@ const authenticate = (req, res, next) => {
     };
     next();
   } catch (error) {
-    if (error.name === "TokenExpiredError") {
-      return res.status(401).json({
-        status: 401,
-        message: "Token has expired",
-      });
-    }
-    return res.status(401).json({
-      status: 401,
-      message: "Invalid token",
-    });
+    next(error);
   }
 };
 module.exports = authenticate;
