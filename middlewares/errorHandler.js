@@ -1,6 +1,4 @@
 const errorHandler = (err, req, res, next) => {
-    console.error(err);
-
     if (err.name === "ValidationError") {
         return res.status(400).json({
             status: 400,
@@ -22,6 +20,33 @@ const errorHandler = (err, req, res, next) => {
             message: "Email already registered"
         });
     }
+
+    if (err.name === "TokenExpiredError") {
+        return res.status(401).json({
+            status: 401,
+            message: "Token has expired"
+        });
+    }
+
+    if (err.name === "JsonWebTokenError" || err.name === "NotBeforeError") {
+        return res.status(401).json({
+            status: 401,
+            message: "Invalid token"
+        });
+    }
+
+    if (err.statusCode) {
+        if (err.statusCode >= 500) {
+            console.error(err);
+        }
+
+        return res.status(err.statusCode).json({
+            status: err.statusCode,
+            message: err.message
+        });
+    }
+
+    console.error(err);
 
     res.status(500).json({
         status: 500,
