@@ -1,13 +1,19 @@
 const express = require("express");
+const { roles } = require("../consts/roles");
+const { authorize } = require("../middlewares/authorize");
+const authenticate = require("../middlewares/authenticate");
+const validate = require("../middlewares/validate");
+const { createCourseSchema } = require("../validators/courseValidator");
 
 const {
-    getCourses,
-    getCourseById
+  getCourses,
+  getCourseById,
+  createCourse,
+  updateCourse,
+  deleteCourse,
 } = require("../controllers/courseController");
 
-const {
-    getModulesByCourse
-} = require("../controllers/moduleController");
+const { getModulesByCourse } = require("../controllers/moduleController");
 
 const checkEnrollment = require("../middlewares/checkEnrollment");
 const authenticate = require("../middlewares/authenticate");
@@ -60,7 +66,6 @@ const router = express.Router();
  */
 router.get("/", getCourses);
 
-
 /**
  * @swagger
  * /api/courses/{id}/modules:
@@ -86,7 +91,6 @@ router.get("/", getCourses);
  *         description: Erreur interne du serveur
  */
 router.get("/:id/modules",authenticate, checkEnrollment ,getModulesByCourse);
-
 
 /**
  * @swagger
@@ -116,5 +120,246 @@ router.get("/:id/modules",authenticate, checkEnrollment ,getModulesByCourse);
  */
 router.get("/:id", getCourseById);
 
+/**
+ * @swagger
+ * /api/courses:
+ *   post:
+ *     summary: Create a draft course
+ *     description: Only trainers can create courses. The owner comes from the authenticated user; trainer, status, and other extra fields are rejected in the request body.
+ *     tags:
+ *       - Courses
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             additionalProperties: false
+ *             required: [title, description, level, category, estimatedDuration]
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 minLength: 1
+ *                 description: Trimmed; must not be blank.
+ *                 example: JavaScript Basics
+ *               description:
+ *                 type: string
+ *                 minLength: 1
+ *                 description: Trimmed; must not be blank.
+ *                 example: Learn JavaScript fundamentals
+ *               objectives:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   minLength: 1
+ *                   description: Trimmed; must not be blank.
+ *                 example: [Understand variables, Write functions]
+ *               level:
+ *                 type: string
+ *                 enum: [beginner, intermediate, advanced]
+ *               category:
+ *                 type: string
+ *                 minLength: 1
+ *                 description: Trimmed; must not be blank.
+ *                 example: Development
+ *               estimatedDuration:
+ *                 type: number
+ *                 minimum: 1
+ *                 example: 60
+ *     responses:
+ *       201:
+ *         description: Draft course created and assigned to the authenticated trainer.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                   example: 201
+ *                 message:
+ *                   type: string
+ *                   example: Course created successfully
+ *                 data:
+ *                   type: object
+ *                   description: Created course document, including the submitted fields and database-generated fields.
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                     trainer:
+ *                       type: string
+ *                       description: Authenticated trainer's user ID.
+ *                     status:
+ *                       type: string
+ *                       enum: [draft]
+ *                     publishedAt:
+ *                       type: string
+ *                       format: date-time
+ *                       nullable: true
+ *                       example: null
+ *       400:
+ *         description: Invalid or missing course fields, or unrecognized request properties. Returns JSON with status, message, and validation errors.
+ *       401:
+ *         description: Missing, invalid, or expired token. Returns JSON with status and message.
+ *       403:
+ *         description: Authenticated user is not a trainer. Returns JSON with status 403 and message Forbidden.
+ *       500:
+ *         description: Internal server error.
+ */
+router.post(
+  "/",
+  authenticate,
+  authorize(roles.TRAINER),
+  validate(createCourseSchema),
+  createCourse,
+);
+
+/**
+ * @swagger
+ * /api/courses/{id}:
+ *   put:
+ *     summary: Update a course's main information
+ *     description: Only the trainer who owns the course can update it. All required fields must be supplied. Ownership and publication fields cannot be changed through this endpoint; admins are not allowed by the current role policy.
+ *     tags:
+ *       - Courses
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Course MongoDB ObjectId.
+ *         schema:
+ *           type: string
+ *         example: 68da12345678901234567890
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             additionalProperties: false
+ *             required: [title, description, level, category, estimatedDuration]
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 minLength: 1
+ *                 description: Trimmed; must not be blank.
+ *               description:
+ *                 type: string
+ *                 minLength: 1
+ *                 description: Trimmed; must not be blank.
+ *               objectives:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   minLength: 1
+ *                   description: Trimmed; must not be blank.
+ *               level:
+ *                 type: string
+ *                 enum: [beginner, intermediate, advanced]
+ *               category:
+ *                 type: string
+ *                 minLength: 1
+ *                 description: Trimmed; must not be blank.
+ *               estimatedDuration:
+ *                 type: number
+ *                 minimum: 1
+ *           example:
+ *             title: JavaScript Updated
+ *             description: Updated course description
+ *             objectives: [Learn functions]
+ *             level: beginner
+ *             category: Development
+ *             estimatedDuration: 90
+ *     responses:
+ *       200:
+ *         description: Course updated; ownership and publication fields are preserved.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: Course updated successfully
+ *                 data:
+ *                   type: object
+ *                   description: Updated course document, including its trainer ID and database-generated fields.
+ *       400:
+ *         description: Invalid course ID, invalid or missing fields, or unrecognized body properties. Returns JSON with status and message; body validation errors also include errors.
+ *       401:
+ *         description: Missing, invalid, or expired token. Returns JSON with status and message.
+ *       403:
+ *         description: User is not a trainer (Forbidden), or the trainer does not own the course (You are not authorized to update this course). Returns JSON with status and message.
+ *       404:
+ *         description: Course does not exist. Returns JSON with status 404 and message course not found.
+ *       500:
+ *         description: Internal server error.
+ */
+router.put(
+  "/:id",
+  authenticate,
+  authorize(roles.TRAINER),
+  validate(createCourseSchema),
+  updateCourse,
+);
+
+/**
+ * @swagger
+ * /api/courses/{id}:
+ *   delete:
+ *     summary: Delete an empty course
+ *     description: Permanently deletes a course only when the authenticated trainer owns it and no modules or enrollments reference it. Admins are not allowed by the current role policy. No request body is required.
+ *     tags:
+ *       - Courses
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Course MongoDB ObjectId.
+ *         schema:
+ *           type: string
+ *         example: 68da12345678901234567890
+ *     responses:
+ *       200:
+ *         description: Course permanently deleted.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: Course deleted successfully
+ *       400:
+ *         description: Invalid course ID. Returns JSON with status 400 and message Invalid ID.
+ *       401:
+ *         description: Missing, invalid, or expired token. Returns JSON with status and message.
+ *       403:
+ *         description: User is not a trainer (Forbidden), or the trainer does not own the course (You are not authorized to delete this course). Returns JSON with status and message.
+ *       404:
+ *         description: Course does not exist. Returns JSON with status 404 and message course not found.
+ *       409:
+ *         description: Course has associated modules or enrollments; nothing is deleted.
+ *         content:
+ *           application/json:
+ *             example:
+ *               status: 409
+ *               message: Cannot delete course with associated modules or enrollments
+ *       500:
+ *         description: Internal server error.
+ */
+router.delete("/:id", authenticate, authorize(roles.TRAINER), deleteCourse);
 
 module.exports = router;
