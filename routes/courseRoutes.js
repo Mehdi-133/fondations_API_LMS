@@ -10,6 +10,7 @@ const {
   getCourseById,
   createCourse,
   updateCourse,
+  deleteCourse,
 } = require("../controllers/courseController");
 
 const { getModulesByCourse } = require("../controllers/moduleController");
@@ -305,5 +306,57 @@ router.put(
   validate(createCourseSchema),
   updateCourse,
 );
+
+/**
+ * @swagger
+ * /api/courses/{id}:
+ *   delete:
+ *     summary: Delete an empty course
+ *     description: Permanently deletes a course only when the authenticated trainer owns it and no modules or enrollments reference it. Admins are not allowed by the current role policy. No request body is required.
+ *     tags:
+ *       - Courses
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Course MongoDB ObjectId.
+ *         schema:
+ *           type: string
+ *         example: 68da12345678901234567890
+ *     responses:
+ *       200:
+ *         description: Course permanently deleted.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: Course deleted successfully
+ *       400:
+ *         description: Invalid course ID. Returns JSON with status 400 and message Invalid ID.
+ *       401:
+ *         description: Missing, invalid, or expired token. Returns JSON with status and message.
+ *       403:
+ *         description: User is not a trainer (Forbidden), or the trainer does not own the course (You are not authorized to delete this course). Returns JSON with status and message.
+ *       404:
+ *         description: Course does not exist. Returns JSON with status 404 and message course not found.
+ *       409:
+ *         description: Course has associated modules or enrollments; nothing is deleted.
+ *         content:
+ *           application/json:
+ *             example:
+ *               status: 409
+ *               message: Cannot delete course with associated modules or enrollments
+ *       500:
+ *         description: Internal server error.
+ */
+router.delete("/:id", authenticate, authorize(roles.TRAINER), deleteCourse);
 
 module.exports = router;

@@ -1,4 +1,6 @@
 const Course = require("../models/Course");
+const Enrollment = require("../models/Enrollment");
+const Module = require("../models/Module");
 
 const getCourses = async (req, res, next) => {
   try {
@@ -146,9 +148,44 @@ const updateCourse = async (req, res, next) => {
     next(error);
   }
 };
+
+const deleteCourse = async (req, res, next) => {
+  try {
+    const course = await Course.findById(req.params.id);
+    if (!course) {
+      const err = new Error("course not found");
+      err.statusCode = 404;
+      return next(err);
+    }
+    if (course.trainer.toString() !== req.user.id) {
+      const err = new Error("You are not authorized to delete this course");
+      err.statusCode = 403;
+      return next(err);
+    }
+
+    const hasModule = await Module.exists({ course: course._id });
+    const hasEnrollment = await Enrollment.exists({ course: course._id });
+
+    if (hasModule || hasEnrollment) {
+      const err = new Error(
+        "Cannot delete course with associated modules or enrollments",
+      );
+      err.statusCode = 409;
+      return next(err);
+    }
+    await course.deleteOne();
+    res.status(200).json({
+      status: 200,
+      message: "Course deleted successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 module.exports = {
   getCourses,
   getCourseById,
   createCourse,
   updateCourse,
+  deleteCourse,
 };
