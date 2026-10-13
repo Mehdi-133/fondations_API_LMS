@@ -8,8 +8,7 @@ const completeModule = async (req, res, next) => {
     try {
         const module = await Module.findById(req.params.moduleId);
 
-        console.log("MODULE ID:", req.params.moduleId);
-        console.log("MODULE:", module);
+        
 
         if (!module) {
             return res.status(404).json({
