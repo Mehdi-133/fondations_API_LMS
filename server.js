@@ -6,6 +6,7 @@ const courseRoutes = require("./routes/courseRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
 const enrollmentRoutes = require("./routes/enrollmentRoutes");
 const authRoutes = require("./routes/authRoutes");
+const moduleRoutes = require("./routes/moduleRoutes");
 
 
 const notFound = require("./middlewares/notFound");
@@ -14,6 +15,8 @@ const errorHandler = require("./middlewares/errorHandler");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./docs/swagger");
+
+
 
 dotenv.config();
 
@@ -40,6 +43,8 @@ app.get("/api/modules/test", (req, res) => {
 app.use("/api/modules", resourceRoutes);
 app.use("/api", enrollmentRoutes);
 app.use("/api/auth", authRoutes);
+
+app.use("/api/modules", moduleRoutes);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
