@@ -106,8 +106,49 @@ const createCourse = async (req, res, next) => {
   }
 };
 
+const updateCourse = async (req, res, next) => {
+  try {
+    const course = await Course.findById(req.params.id);
+    if (!course) {
+      const err = new Error("course not found");
+      err.statusCode = 404;
+      return next(err);
+    }
+    if (course.trainer.toString() !== req.user.id) {
+      const err = new Error("You are not authorized to update this course");
+      err.statusCode = 403;
+      return next(err);
+    }
+
+    const {
+      title,
+      description,
+      objectives,
+      level,
+      category,
+      estimatedDuration,
+    } = req.body;
+
+    course.title = title;
+    course.description = description;
+    course.objectives = objectives;
+    course.level = level;
+    course.category = category;
+    course.estimatedDuration = estimatedDuration;
+
+    await course.save();
+    res.status(200).json({
+      status: 200,
+      message: "Course updated successfully",
+      data: course,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 module.exports = {
   getCourses,
   getCourseById,
   createCourse,
+  updateCourse,
 };

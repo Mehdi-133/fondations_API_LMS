@@ -9,6 +9,7 @@ const {
   getCourses,
   getCourseById,
   createCourse,
+  updateCourse,
 } = require("../controllers/courseController");
 
 const { getModulesByCourse } = require("../controllers/moduleController");
@@ -209,6 +210,100 @@ router.post(
   authorize(roles.TRAINER),
   validate(createCourseSchema),
   createCourse,
+);
+
+/**
+ * @swagger
+ * /api/courses/{id}:
+ *   put:
+ *     summary: Update a course's main information
+ *     description: Only the trainer who owns the course can update it. All required fields must be supplied. Ownership and publication fields cannot be changed through this endpoint; admins are not allowed by the current role policy.
+ *     tags:
+ *       - Courses
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Course MongoDB ObjectId.
+ *         schema:
+ *           type: string
+ *         example: 68da12345678901234567890
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             additionalProperties: false
+ *             required: [title, description, level, category, estimatedDuration]
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 minLength: 1
+ *                 description: Trimmed; must not be blank.
+ *               description:
+ *                 type: string
+ *                 minLength: 1
+ *                 description: Trimmed; must not be blank.
+ *               objectives:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   minLength: 1
+ *                   description: Trimmed; must not be blank.
+ *               level:
+ *                 type: string
+ *                 enum: [beginner, intermediate, advanced]
+ *               category:
+ *                 type: string
+ *                 minLength: 1
+ *                 description: Trimmed; must not be blank.
+ *               estimatedDuration:
+ *                 type: number
+ *                 minimum: 1
+ *           example:
+ *             title: JavaScript Updated
+ *             description: Updated course description
+ *             objectives: [Learn functions]
+ *             level: beginner
+ *             category: Development
+ *             estimatedDuration: 90
+ *     responses:
+ *       200:
+ *         description: Course updated; ownership and publication fields are preserved.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: Course updated successfully
+ *                 data:
+ *                   type: object
+ *                   description: Updated course document, including its trainer ID and database-generated fields.
+ *       400:
+ *         description: Invalid course ID, invalid or missing fields, or unrecognized body properties. Returns JSON with status and message; body validation errors also include errors.
+ *       401:
+ *         description: Missing, invalid, or expired token. Returns JSON with status and message.
+ *       403:
+ *         description: User is not a trainer (Forbidden), or the trainer does not own the course (You are not authorized to update this course). Returns JSON with status and message.
+ *       404:
+ *         description: Course does not exist. Returns JSON with status 404 and message course not found.
+ *       500:
+ *         description: Internal server error.
+ */
+router.put(
+  "/:id",
+  authenticate,
+  authorize(roles.TRAINER),
+  validate(createCourseSchema),
+  updateCourse,
 );
 
 module.exports = router;
