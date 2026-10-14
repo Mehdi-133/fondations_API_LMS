@@ -4,6 +4,7 @@ const { authorize } = require("../middlewares/authorize");
 const authenticate = require("../middlewares/authenticate");
 const validate = require("../middlewares/validate");
 const { createCourseSchema } = require("../validators/courseValidator");
+const { createModuleSchema } = require("../validators/moduleValidator");
 
 const {
   getCourses,
@@ -98,6 +99,7 @@ router.post(
     "/:courseId/modules",
     authenticate,
     authorize(roles.TRAINER),
+    validate(createModuleSchema),
     createModule
 );
 
@@ -105,6 +107,7 @@ router.put(
     "/modules/:moduleId",
     authenticate,
     authorize(roles.TRAINER),
+    validate(createModuleSchema),
     updateModule
 );
 
@@ -121,6 +124,7 @@ router.patch(
     "/modules/:moduleId/status/:status",
     authenticate,
     authorize(roles.TRAINER),
+    validate(createModuleSchema),
     changeModuleStatus
 );
 
