@@ -5,6 +5,7 @@ const authenticate = require("../middlewares/authenticate");
 const validate = require("../middlewares/validate");
 const { createCourseSchema } = require("../validators/courseValidator");
 const { createModuleSchema } = require("../validators/moduleValidator");
+const { resumeCourse } = require("../controllers/courseResumeController");
 
 const {
   getCourses,
@@ -127,6 +128,10 @@ router.patch(
     validate(createModuleSchema),
     changeModuleStatus
 );
+
+
+
+router.get("/:courseId/resume", authenticate, resumeCourse);
 
 /**
  * @swagger
