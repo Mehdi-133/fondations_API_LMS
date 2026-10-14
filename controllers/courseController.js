@@ -182,7 +182,60 @@ const deleteCourse = async (req, res, next) => {
     next(error);
   }
 };
+const changeCourseStatus = async (req, res, next) => {
+  try {
+    const { status } = req.params;
+    if (!["published", "draft"].includes(status)) {
+      const error = new Error("Status must be published or draft");
+      error.statusCode = 400;
+      return next(error);
+    }
+
+    const course = await Course.findById(req.params.id);
+    if (!course) {
+      const error = new Error("Course not found");
+      error.statusCode = 404;
+      return next(error);
+    }
+    if (course.trainer.toString() !== req.user.id) {
+      const error = new Error(
+        "You are not authorized to change this course's status",
+      );
+      error.statusCode = 403;
+      return next(error);
+    }
+
+    if (course.status === status) {
+      return res.status(200).json({
+        status: 200,
+        message:
+          status === "published"
+            ? "Course is already published"
+            : "Course is already a draft",
+        data: course,
+      });
+    }
+
+    if (status === "published") {
+      course.publishedAt = new Date();
+    } else if (status === "draft") {
+      course.publishedAt = null;
+    }
+    course.status = status;
+    await course.save();
+
+    res.status(200).json({
+      status: 200,
+      message: "Course status updated successfully",
+      data: course,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
+  changeCourseStatus,
   getCourses,
   getCourseById,
   createCourse,
