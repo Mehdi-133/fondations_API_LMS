@@ -6,14 +6,15 @@ const validate = require("../middlewares/validate");
 const { createCourseSchema } = require("../validators/courseValidator");
 
 const {
-  getCourses,
-  getCourseById,
-  createCourse,
-  updateCourse,
-  deleteCourse,
+    getCourses,
+    getCourseById,
+    createCourse,
+    updateCourse,
+    deleteCourse,
+    
 } = require("../controllers/courseController");
 
-const { getModulesByCourse } = require("../controllers/moduleController");
+const { getModulesByCourse, createModule,updateModule, deleteModule, changeModuleStatus } = require("../controllers/moduleController");
 
 const checkEnrollment = require("../middlewares/checkEnrollment");
 
@@ -90,7 +91,38 @@ router.get("/", getCourses);
  *       500:
  *         description: Erreur interne du serveur
  */
-router.get("/:id/modules",authenticate, checkEnrollment ,getModulesByCourse);
+router.get("/:id/modules", authenticate, checkEnrollment, getModulesByCourse);
+
+
+router.post(
+    "/:courseId/modules",
+    authenticate,
+    authorize(roles.TRAINER),
+    createModule
+);
+
+router.put(
+    "/modules/:moduleId",
+    authenticate,
+    authorize(roles.TRAINER),
+    updateModule
+);
+
+router.delete(
+    "/modules/:moduleId",
+    authenticate,
+    authorize(roles.TRAINER),
+    deleteModule
+);
+
+
+
+router.patch(
+    "/modules/:moduleId/status/:status",
+    authenticate,
+    authorize(roles.TRAINER),
+    changeModuleStatus
+);
 
 /**
  * @swagger
@@ -209,11 +241,11 @@ router.get("/:id", getCourseById);
  *         description: Internal server error.
  */
 router.post(
-  "/",
-  authenticate,
-  authorize(roles.TRAINER),
-  validate(createCourseSchema),
-  createCourse,
+    "/",
+    authenticate,
+    authorize(roles.TRAINER),
+    validate(createCourseSchema),
+    createCourse,
 );
 
 /**
@@ -303,11 +335,11 @@ router.post(
  *         description: Internal server error.
  */
 router.put(
-  "/:id",
-  authenticate,
-  authorize(roles.TRAINER),
-  validate(createCourseSchema),
-  updateCourse,
+    "/:id",
+    authenticate,
+    authorize(roles.TRAINER),
+    validate(createCourseSchema),
+    updateCourse,
 );
 
 /**
