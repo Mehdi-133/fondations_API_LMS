@@ -13,6 +13,8 @@ const {
 } = require("../controllers/resourceProgressController");
 
 const authenticate = require("../middlewares/authenticate");
+const { authorize } = require("../middlewares/authorize");
+const { roles } = require("../consts/roles");
 const validate = require("../middlewares/validate");
 const { createResourceSchema } = require("../validators/resourceValidator");
 
@@ -152,6 +154,8 @@ router.get("/:id/resources", getResourcesByModule);
 router.post(
   "/:id/resources",
   validate(createResourceSchema),
+  authenticate,
+  authorize(roles.TRAINER),
   createResource,
 );
 /**
@@ -239,6 +243,8 @@ router.post(
 router.put(
   "/:id/resources/:resourceId",
   validate(createResourceSchema),
+  authenticate,
+  authorize(roles.TRAINER),
   updateResource,
 );
 
@@ -247,9 +253,10 @@ router.put(
  * /api/modules/{id}/resources/{resourceId}:
  *   delete:
  *     summary: Delete a resource without learner progress
- *     description: Permanently deletes a resource belonging to the specified module only when no learner progress references it. No request body is required. Authentication and access protection are planned separately.
+ *     description: Only authenticated trainers can delete a resource. The resource must belong to the specified module and have no associated learner progress. No request body is required. This endpoint checks the trainer role but does not check course ownership.
  *     tags: [Resources]
- *     security: []
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -273,6 +280,10 @@ router.put(
  *               message: Resource deleted successfully
  *       400:
  *         description: Invalid module or resource ID. Returns status 400 and message Invalid ID.
+ *       401:
+ *         description: Missing, invalid, or expired Bearer token. Returns JSON with status and message.
+ *       403:
+ *         description: Authenticated user is not a trainer. Returns JSON with status 403 and message Forbidden.
  *       404:
  *         description: Resource does not exist or belongs to another module.
  *         content:
@@ -290,7 +301,12 @@ router.put(
  *       500:
  *         description: Internal server error.
  */
-router.delete("/:id/resources/:resourceId", deleteResource);
+router.delete(
+  "/:id/resources/:resourceId",
+  authenticate,
+  authorize(roles.TRAINER),
+  deleteResource,
+);
 
 router.post(
   "/:resourceId/consult",
