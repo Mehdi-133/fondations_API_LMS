@@ -18,6 +18,7 @@ const { getModulesByCourse } = require("../controllers/moduleController");
 
 const checkEnrollment = require("../middlewares/checkEnrollment");
 
+
 const router = express.Router();
 
 /**
