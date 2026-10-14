@@ -16,7 +16,7 @@ const {
 const { getModulesByCourse } = require("../controllers/moduleController");
 
 const checkEnrollment = require("../middlewares/checkEnrollment");
-const authenticate = require("../middlewares/authenticate");
+
 
 const router = express.Router();
 
