@@ -15,11 +15,19 @@ const errorHandler = (err, req, res, next) => {
   }
 
   if (err.code === 11000) {
-    return res.status(409).json({
-      status: 409,
-      message: "Email already registered",
-    });
+  const field = Object.keys(err.keyPattern)[0];
+
+  let message = `${field} already exists`;
+
+  if (field === "email") {
+    message = "Email already registered";
   }
+
+  return res.status(409).json({
+    status: 409,
+    message,
+  });
+}
 
   if (err.name === "TokenExpiredError") {
     return res.status(401).json({
