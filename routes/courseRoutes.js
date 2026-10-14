@@ -11,12 +11,12 @@ const {
   createCourse,
   updateCourse,
   deleteCourse,
+  changeCourseStatus,
 } = require("../controllers/courseController");
 
 const { getModulesByCourse } = require("../controllers/moduleController");
 
 const checkEnrollment = require("../middlewares/checkEnrollment");
-const authenticate = require("../middlewares/authenticate");
 
 const router = express.Router();
 
@@ -90,7 +90,7 @@ router.get("/", getCourses);
  *       500:
  *         description: Erreur interne du serveur
  */
-router.get("/:id/modules",authenticate, checkEnrollment ,getModulesByCourse);
+router.get("/:id/modules", authenticate, checkEnrollment, getModulesByCourse);
 
 /**
  * @swagger
@@ -361,5 +361,107 @@ router.put(
  *         description: Internal server error.
  */
 router.delete("/:id", authenticate, authorize(roles.TRAINER), deleteCourse);
+
+/**
+ * @swagger
+ * /api/courses/{id}/{status}:
+ *   patch:
+ *     summary: Publish a course or return it to draft
+ *     operationId: changeCourseStatus
+ *     description: Only the trainer who owns the course can change its status. Publishing sets publishedAt. Returning to draft clears the date. If the course already has the requested status, returns 200 with an already-published or already-draft message and the unchanged course without saving. No request body is required.
+ *     tags: [Courses]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: MongoDB ObjectId of the course owned by the authenticated trainer.
+ *         schema:
+ *           type: string
+ *         example: 68da12345678901234567890
+ *       - in: path
+ *         name: status
+ *         required: true
+ *         description: Use published to publish the course or draft to unpublish it.
+ *         schema:
+ *           type: string
+ *           enum: [published, draft]
+ *         example: published
+ *     responses:
+ *       200:
+ *         description: Course status updated, or course already has the requested status. The response includes the course document.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   type: object
+ *                   description: Course document including its publication status and date.
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                     status:
+ *                       type: string
+ *                       enum: [published, draft]
+ *                     publishedAt:
+ *                       type: string
+ *                       format: date-time
+ *                       nullable: true
+ *             examples:
+ *               published:
+ *                 summary: Course published (abbreviated course document)
+ *                 value:
+ *                   status: 200
+ *                   message: Course status updated successfully
+ *                   data:
+ *                     _id: 68da12345678901234567890
+ *                     status: published
+ *                     publishedAt: '2026-10-14T10:00:00.000Z'
+ *               draft:
+ *                 summary: Course returned to draft (abbreviated course document)
+ *                 value:
+ *                   status: 200
+ *                   message: Course status updated successfully
+ *                   data:
+ *                     _id: 68da12345678901234567890
+ *                     status: draft
+ *                     publishedAt: null
+ *               alreadyPublished:
+ *                 summary: Already published; date remains unchanged
+ *                 value:
+ *                   status: 200
+ *                   message: Course is already published
+ *                   data:
+ *                     _id: 68da12345678901234567890
+ *                     status: published
+ *                     publishedAt: '2026-10-14T10:00:00.000Z'
+ *               alreadyDraft:
+ *                 summary: Already a draft
+ *                 value:
+ *                   status: 200
+ *                   message: Course is already a draft
+ *                   data:
+ *                     _id: 68da12345678901234567890
+ *                     status: draft
+ *                     publishedAt: null
+ *       400:
+ *         description: Invalid ID (Invalid ID) or unsupported status (Status must be published or draft). Returns JSON with status and message.
+ *       401:
+ *         description: Missing, invalid, or expired Bearer token. Returns JSON with status and message.
+ *       403:
+ *         description: User is not a trainer (Forbidden) or does not own the course (You are not authorized to change this course's status). Returns JSON with status and message.
+ *       404:
+ *         description: Course not found. Returns JSON with status 404 and message Course not found.
+ *       500:
+ *         description: Internal server error.
+ */
+router.patch("/:id/:status", authenticate, authorize(roles.TRAINER), changeCourseStatus);
 
 module.exports = router;
