@@ -15,19 +15,19 @@ const errorHandler = (err, req, res, next) => {
   }
 
   if (err.code === 11000) {
-  const field = Object.keys(err.keyPattern)[0];
+    const field = Object.keys(err.keyPattern)[0];
 
-  let message = `${field} already exists`;
+    let message = `${field} already exists`;
 
-  if (field === "email") {
-    message = "Email already registered";
+    if (field === "email") {
+      message = "Email already registered";
+    }
+
+    return res.status(409).json({
+      status: 409,
+      message,
+    });
   }
-
-  return res.status(409).json({
-    status: 409,
-    message,
-  });
-}
 
   if (err.name === "TokenExpiredError") {
     return res.status(401).json({
@@ -58,7 +58,7 @@ const errorHandler = (err, req, res, next) => {
 
   res.status(500).json({
     status: 500,
-    message: "Internal server error",
+    message: err.message
   });
 };
 

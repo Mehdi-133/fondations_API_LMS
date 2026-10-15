@@ -7,6 +7,7 @@ const resourceRoutes = require("./routes/resourceRoutes");
 const enrollmentRoutes = require("./routes/enrollmentRoutes");
 const authRoutes = require("./routes/authRoutes");
 const moduleRoutes = require("./routes/moduleRoutes");
+const trainerProgressRoutes = require("./routes/trainerProgressRoutes");
 
 
 const notFound = require("./middlewares/notFound");
@@ -45,6 +46,8 @@ app.use("/api", enrollmentRoutes);
 app.use("/api/auth", authRoutes);
 
 app.use("/api/modules", moduleRoutes);
+
+app.use("/api/trainer", trainerProgressRoutes);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
