@@ -8,4 +8,10 @@ const createResourceSchema = z
   })
   .strict();
 
-module.exports = { createResourceSchema };
+const uploadResourceSchema = z
+  .object({
+    order: z.coerce.number().int().positive(),
+  })
+  .strict();
+
+module.exports = { createResourceSchema, uploadResourceSchema };
