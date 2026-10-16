@@ -1,6 +1,8 @@
 const Resource = require("../models/Resource");
 const Module = require("../models/Module");
 const ResourceProgress = require("../models/ResourceProgress");
+const { unlink } = require("fs/promises");
+const { uploadResourceSchema } = require("../validators/resourceValidator");
 
 const getResourcesByModule = async (req, res) => {
   try {
@@ -43,6 +45,57 @@ const createResource = async (req, res, next) => {
       data: resource,
     });
   } catch (error) {
+    next(error);
+  }
+};
+
+const uploadResource = async (req, res, next) => {
+  try {
+    if (!req.file) {
+      const error = new Error("No file uploaded");
+      error.statusCode = 400;
+      return next(error);
+    }
+
+    const result = uploadResourceSchema.safeParse(req.body);
+    if (!result.success) {
+      const error = new Error("Validation error");
+      error.statusCode = 400;
+      throw error;
+    }
+
+    const module = await Module.findById(req.params.id);
+    if (!module) {
+      const error = new Error("Module not found");
+      error.statusCode = 404;
+      throw error;
+    }
+
+    const resource = await Resource.create({
+      module: module._id,
+      type: "document",
+      url: req.file.path,
+      originalName: req.file.originalname,
+      size: req.file.size,
+      order: result.data.order,
+    });
+
+    res.status(201).json({
+      status: 201,
+      message: "Resource uploaded successfully",
+      data: resource,
+    });
+  } catch (error) {
+    if (req.file) {
+      try {
+        await unlink(req.file.path);
+      } catch (cleanupError) {
+        if (cleanupError.code !== "ENOENT") {
+          console.error("Failed to remove uploaded file:", cleanupError);
+        }
+      }
+    }
+
     next(error);
   }
 };
@@ -107,6 +160,7 @@ const deleteResource = async (req, res, next) => {
 module.exports = {
   getResourcesByModule,
   createResource,
+  uploadResource,
   updateResource,
   deleteResource,
 };

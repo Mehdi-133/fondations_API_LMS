@@ -1,4 +1,11 @@
 const errorHandler = (err, req, res, next) => {
+  if (err.code === "LIMIT_FILE_SIZE") {
+    return res.status(413).json({
+      status: 413,
+      message: "File must not exceed 5 MB",
+    });
+  }
+
   if (err.name === "ValidationError") {
     return res.status(400).json({
       status: 400,

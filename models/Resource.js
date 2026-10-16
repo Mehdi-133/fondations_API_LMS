@@ -19,6 +19,14 @@ const resourceSchema = new mongoose.Schema(
       required: true
     },
 
+    originalName: {
+      type: String
+    },
+
+    size: {
+      type: Number
+    },
+
     order: {
       type: Number,
       required: true
