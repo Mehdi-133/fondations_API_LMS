@@ -5,10 +5,26 @@ const ModuleProgress = require("../models/ModuleProgress");
 const Resource = require("../models/Resource");
 const ResourceProgress = require("../models/ResourceProgress");
 
-const getTrainerCourses = async(trainerId) =>{
-    return await Course.find({
+const getTrainerCourses = async(trainerId, status) =>{
+    const filter = {
         trainer: trainerId
-    }).sort({ createdAt: -1 });
+    };
+
+    if(status){
+        const allowedstatus = ["draft", "published", "archived"];
+
+        if(!allowedstatus.includes(status)){
+            const error = new Error("status du coure invalide");
+            error.statusCode = 400;
+            throw error;
+
+        }
+        
+        filter.status = status;
+    }
+
+    return await Course.find(filter).sort({createdAt: -1});
+
 };
 
 const getCourseLearners = async (courseId, trainerId) => {

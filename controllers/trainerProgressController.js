@@ -6,7 +6,11 @@ const {
 
 const getMyCourses = async (req, res, next) => {
     try {
-        const courses = await getTrainerCourses(req.user.id);
+        const courses = await getTrainerCourses(
+            req.user.id,
+            req.query.status
+
+        );
 
         res.status(200).json({
             message: "Cours du formateur récupérés avec succès",

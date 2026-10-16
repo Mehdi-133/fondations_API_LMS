@@ -185,8 +185,8 @@ const deleteCourse = async (req, res, next) => {
 const changeCourseStatus = async (req, res, next) => {
   try {
     const { status } = req.params;
-    if (!["published", "draft"].includes(status)) {
-      const error = new Error("Status must be published or draft");
+    if (!["published", "draft", "archived"].includes(status)) {
+      const error = new Error("Status must be published, draft or archived ");
       error.statusCode = 400;
       return next(error);
     }
@@ -211,7 +211,9 @@ const changeCourseStatus = async (req, res, next) => {
         message:
           status === "published"
             ? "Course is already published"
-            : "Course is already a draft",
+            : status === "draft"
+            ? "Course is already a draft"
+            : "course is already archived",
         data: course,
       });
     }
