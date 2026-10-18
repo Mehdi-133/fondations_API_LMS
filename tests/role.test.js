@@ -82,4 +82,147 @@ describe("Role Authorization", () => {
 
 
 
+
+    // Vérifier qu'un learner ne peut pas créer un cours.
+    test("should return 403 when learner tries to create a course", async () => {
+        const loginResponse = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: "learner@test.com",
+                password: "Password123"
+            });
+
+        expect(loginResponse.statusCode).toBe(200);
+
+        const token = loginResponse.body.data.token;
+
+        const response = await request(app)
+            .post("/api/courses")
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                title: "Test Course",
+                description: "Course for authorization testing",
+                level: "beginner",
+                category: "Development",
+                estimatedDuration: 60
+            });
+
+        expect(response.statusCode).toBe(403);
+    });
+
+
+
+
+
+    // verifier qu'un learner ne peut pas modifier un cours
+    test("should return 403 when learner tries to update a course", async () => {
+        const loginResponse = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: "learner@test.com",
+                password: "Password123"
+            });
+
+        expect(loginResponse.statusCode).toBe(200);
+
+        const token = loginResponse.body.data.token;
+
+        const response = await request(app)
+            .put("/api/courses/68da12345678901234567890")
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                title: "Updated Course",
+                description: "Updated description",
+                level: "beginner",
+                category: "Development",
+                estimatedDuration: 90
+            });
+
+        expect(response.statusCode).toBe(403);
+    });
+
+
+
+
+
+    test("should return 403 when learner tries to delete a course", async () => {
+        const loginResponse = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: "learner@test.com",
+                password: "Password123"
+            });
+
+        expect(loginResponse.statusCode).toBe(200);
+
+        const token = loginResponse.body.data.token;
+
+        const response = await request(app)
+            .delete("/api/courses/68da12345678901234567890")
+            .set("Authorization", `Bearer ${token}`);
+
+        expect(response.statusCode).toBe(403);
+    });
+
+
+
+
+
+    test("should return 403 when learner tries to publish a course", async () => {
+        const loginResponse = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: "learner@test.com",
+                password: "Password123"
+            });
+
+        expect(loginResponse.statusCode).toBe(200);
+
+        const token = loginResponse.body.data.token;
+
+        const response = await request(app)
+            .patch("/api/courses/68da12345678901234567890/published")
+            .set("Authorization", `Bearer ${token}`);
+
+        expect(response.statusCode).toBe(403);
+    });
+
+
+
+
+
+    test("should allow trainer to create a course", async () => {
+        const loginResponse = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: "kordi@example.com",
+                password: "Password123"
+            });
+
+        expect(loginResponse.statusCode).toBe(200);
+
+        const token = loginResponse.body.data.token;
+
+        const response = await request(app)
+            .post("/api/courses")
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                title: "Test Course Jest",
+                description: "Course created for authorization testing",
+                objectives: ["Learn API testing"],
+                level: "beginner",
+                category: "Development",
+                estimatedDuration: 60
+            });
+
+        expect(response.statusCode).toBe(201);
+    });
+
+
+
+
+
+
+
+
 });
