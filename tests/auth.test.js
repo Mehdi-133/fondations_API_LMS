@@ -63,17 +63,69 @@ describe("Authentcation", () => {
 
 
     //verifier le rejet de données d'inscription invalides
-    test("should return 400 when registration data is invalid" , async()=>{
+    test("should return 400 when registration data is invalid", async () => {
         const response = await request(app)
-        .post("/api/auth/register")
-        .send({
-            email: "invalid-email",
-            password: "123"
-        });
+            .post("/api/auth/register")
+            .send({
+                email: "invalid-email",
+                password: "123"
+            });
 
-    expect(response.statusCode).toBe(400);
+        expect(response.statusCode).toBe(400);
     });
 
+
+    // verifier qu'un learner peut se connecter
+    test("should login successfully as learner", async () => {
+        const response = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: "learner@test.com",
+                password: "Password123"
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.data.token).toBeDefined();
+    });
+
+
+
+
+    // verifier qu'un trainer peut se connecter
+    test("should login successfully as trainer", async () => {
+        const response = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: "kordi@example.com",
+                password: "Password123"
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.data.token).toBeDefined();
+    });
+
+
+
+
+    // verifier qu'un trainer peut acceder aux routes trainer
+    test("should allow trainer to access trainer route", async () => {
+        const loginResponse = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: "kordi@example.com",
+                password: "Password123"
+            });
+
+        expect(loginResponse.statusCode).toBe(200);
+
+        const trainerToken = loginResponse.body.data.token;
+
+        const response = await request(app)
+            .get("/api/trainer/courses")
+            .set("Authorization", `Bearer ${trainerToken}`);
+
+        expect(response.statusCode).toBe(200);
+    });
 
 
 
