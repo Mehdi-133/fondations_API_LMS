@@ -1,7 +1,8 @@
 const Resource = require("../models/Resource");
 const Module = require("../models/Module");
+const Course = require("../models/Course");
 const ResourceProgress = require("../models/ResourceProgress");
-const { unlink } = require("fs/promises");
+const { unlink, readFile } = require("fs/promises");
 const { uploadResourceSchema } = require("../validators/resourceValidator");
 
 const getResourcesByModule = async (req, res) => {
@@ -71,9 +72,36 @@ const uploadResource = async (req, res, next) => {
       throw error;
     }
 
+    const course = await Course.findById(module.course);
+    if (!course) {
+      const error = new Error("Course not found");
+      error.statusCode = 404;
+      throw error;
+    }
+    if (course.trainer.toString() !== req.user.id) {
+      const error = new Error("You are not authorized to upload to this course");
+      error.statusCode = 403;
+      throw error;
+    }
+
+    const content = await readFile(req.file.path);
+    let detectedMime;
+    if (content.subarray(0, 5).equals(Buffer.from("%PDF-"))) {
+      detectedMime = "application/pdf";
+    } else if (content.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) {
+      detectedMime = "image/png";
+    } else if (content.length >= 3 && content[0] === 255 && content[1] === 216 && content[2] === 255) {
+      detectedMime = "image/jpeg";
+    }
+    if (!detectedMime || detectedMime !== req.file.mimetype) {
+      const error = new Error("File content does not match an allowed file type");
+      error.statusCode = 400;
+      throw error;
+    }
+
     const resource = await Resource.create({
       module: module._id,
-      type: "document",
+      type: detectedMime === "application/pdf" ? "document" : "image",
       url: req.file.path,
       originalName: req.file.originalname,
       size: req.file.size,
