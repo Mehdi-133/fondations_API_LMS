@@ -1,3 +1,4 @@
+const { useTestAccounts, learnerEmail, trainerEmail, domain } = require("./helpers/accounts");
 
 const request = require("supertest");
 const app = require("../app");
@@ -7,12 +8,13 @@ const bcrypt = require("bcrypt");
 
 
 describe("Role Authorization", () => {
+    useTestAccounts();
     //verifier qu'un learner ne peut pas accéder aux routes trainer.
     test("should return 403 when learner accesses trainer route", async () => {
         const loginResponse = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "learner@test.com",
+                email: learnerEmail,
                 password: "Password123"
             });
 
@@ -32,7 +34,7 @@ describe("Role Authorization", () => {
         const loginResponse = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "kordi@example.com",
+                email: trainerEmail,
                 password: "Password123"
             });
 
@@ -49,7 +51,7 @@ describe("Role Authorization", () => {
 
     // verifier qu'un admin ne peut pas accéder à une route réservée au trainer.
     test("should return 403 when admin accesses trainer route", async () => {
-        const email = `admin-test-${Date.now()}@example.com`;
+        const email = `admin-test-${Date.now()}@${domain}`;
         const password = "Password123";
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -88,7 +90,7 @@ describe("Role Authorization", () => {
         const loginResponse = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "learner@test.com",
+                email: learnerEmail,
                 password: "Password123"
             });
 
@@ -119,7 +121,7 @@ describe("Role Authorization", () => {
         const loginResponse = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "learner@test.com",
+                email: learnerEmail,
                 password: "Password123"
             });
 
@@ -149,7 +151,7 @@ describe("Role Authorization", () => {
         const loginResponse = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "learner@test.com",
+                email: learnerEmail,
                 password: "Password123"
             });
 
@@ -172,7 +174,7 @@ describe("Role Authorization", () => {
         const loginResponse = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "learner@test.com",
+                email: learnerEmail,
                 password: "Password123"
             });
 
@@ -195,7 +197,7 @@ describe("Role Authorization", () => {
         const loginResponse = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "kordi@example.com",
+                email: trainerEmail,
                 password: "Password123"
             });
 

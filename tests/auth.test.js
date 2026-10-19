@@ -1,3 +1,4 @@
+const { useTestAccounts, learnerEmail, trainerEmail, domain } = require("./helpers/accounts");
 const request = require("supertest");
 const app = require("../app");
 const jwt = require("jsonwebtoken");
@@ -8,6 +9,7 @@ const bcrypt = require("bcrypt");
 
 
 describe("Authentcation", () => {
+    useTestAccounts();
 
 
 
@@ -36,7 +38,7 @@ describe("Authentcation", () => {
         const loginResponse = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "learner@test.com",
+                email: learnerEmail,
                 password: "Password123"
             });
 
@@ -58,7 +60,7 @@ describe("Authentcation", () => {
         const response = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "learner@test.com",
+                email: learnerEmail,
                 password: "WrongPassword123"
             });
 
@@ -84,7 +86,7 @@ describe("Authentcation", () => {
         const response = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "learner@test.com",
+                email: learnerEmail,
                 password: "Password123"
             });
 
@@ -100,7 +102,7 @@ describe("Authentcation", () => {
         const response = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "kordi@example.com",
+                email: trainerEmail,
                 password: "Password123"
             });
 
@@ -116,7 +118,7 @@ describe("Authentcation", () => {
         const loginResponse = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "kordi@example.com",
+                email: trainerEmail,
                 password: "Password123"
             });
 
@@ -134,7 +136,7 @@ describe("Authentcation", () => {
 
     // verifier la création d'un nouveau compte
     test("should register a new learner successfully", async () => {
-        const email = `test-${Date.now()}@example.com`;
+        const email = `test-${Date.now()}@${domain}`;
 
         const response = await request(app)
             .post("/api/auth/register")
@@ -154,7 +156,7 @@ describe("Authentcation", () => {
 
     // verifier le rejet d'un email déjà utilisé
     test("should return 409 when email is already registered", async () => {
-        const email = `duplicate-${Date.now()}@example.com`;
+        const email = `duplicate-${Date.now()}@${domain}`;
 
         const firstResponse = await request(app)
             .post("/api/auth/register")
@@ -184,7 +186,7 @@ describe("Authentcation", () => {
         const loginResponse = await request(app)
             .post("/api/auth/login")
             .send({
-                email: "learner@test.com",
+                email: learnerEmail,
                 password: "Password123"
             });
 
@@ -197,7 +199,7 @@ describe("Authentcation", () => {
             .set("Authorization", `Bearer ${token}`);
 
         expect(response.statusCode).toBe(200);
-        expect(response.body.data.email).toBe("learner@test.com");
+        expect(response.body.data.email).toBe(learnerEmail);
     });
 
 
@@ -247,7 +249,7 @@ describe("Authentcation", () => {
 
     //verifier qu'un utilisateur suspendu ne peut pas se connecter.
 test("should return 403 when user is suspended", async () => {
-    const email = `suspended-${Date.now()}@example.com`;
+    const email = `suspended-${Date.now()}@${domain}`;
 
     const password = "Password123";
     const hashedPassword = await bcrypt.hash(password, 10);
