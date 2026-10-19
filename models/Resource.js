@@ -10,7 +10,7 @@ const resourceSchema = new mongoose.Schema(
 
     type: {
       type: String,
-      enum: ["video", "document", "link"],
+      enum: ["video", "document", "image", "link"],
       required: true
     },
 

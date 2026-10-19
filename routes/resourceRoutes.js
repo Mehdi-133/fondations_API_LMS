@@ -25,7 +25,7 @@ const { createResourceSchema } = require("../validators/resourceValidator");
  * /api/modules/{id}/resources/upload:
  *   post:
  *     summary: Upload a file linked to a module
- *     description: Requires an authenticated trainer. Accepts one file using its declared PDF, JPEG or PNG MIME type, up to 5242880 bytes (5 MiB). Stores the file locally and creates a document resource with its original name, size and module link. The returned URL field is a storage path, not a public download URL. This route checks the trainer role but does not check course ownership.
+ *     description: Requires the authenticated trainer to own the module's course. Accepts one PDF, JPEG or PNG up to 5242880 bytes (5 MiB). Checks the file signature against the declared MIME type; this is not full content validation or malware scanning. Creates a document resource for PDF or an image resource for JPEG/PNG. The URL field is a local storage path, not a public download URL.
  *     tags: [Resources]
  *     security:
  *       - bearerAuth: []
@@ -78,7 +78,7 @@ const { createResourceSchema } = require("../validators/resourceValidator");
  *                       type: string
  *                     type:
  *                       type: string
- *                       enum: [document]
+ *                       enum: [document, image]
  *                     url:
  *                       type: string
  *                       description: Local file storage path.
@@ -94,13 +94,13 @@ const { createResourceSchema } = require("../validators/resourceValidator");
  *                       type: integer
  *                       example: 1
  *       400:
- *         description: Missing file, unsupported declared MIME type, invalid module ID, invalid order or extra text fields. Returns JSON with status and message.
+ *         description: Missing file, unsupported or mismatched file signature/MIME type, invalid module ID, invalid order or extra text fields. Returns JSON with status and message.
  *       401:
  *         description: Missing, invalid or expired Bearer token.
  *       403:
- *         description: Authenticated user is not a trainer.
+ *         description: Authenticated user is not a trainer or does not own the module's course.
  *       404:
- *         description: Module not found. The uploaded file is removed.
+ *         description: Module or course not found. The uploaded file is removed.
  *       413:
  *         description: File exceeds the size limit.
  *         content:
