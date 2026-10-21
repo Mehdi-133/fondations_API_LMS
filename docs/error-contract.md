@@ -2,6 +2,8 @@
 
 Status: Draft for backend team review. This document defines the proposed error format; it does not confirm that every endpoint implements it yet.
 
+Local API test results and reproduction steps are recorded in [FAL-179 verification](error-contract-verification.md). React integration and team approval remain pending.
+
 ## Response fields
 
 | Field | Type | Required | Purpose |
