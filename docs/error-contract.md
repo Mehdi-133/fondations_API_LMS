@@ -26,7 +26,7 @@ The following table defines the proposed behavior. Example messages describe the
 
 An incorrectly formatted ID returns `400`; a correctly formatted ID pointing to a missing resource returns `404`. Missing authentication returns `401`; insufficient permission after authentication returns `403`.
 
-Implementation gaps to address in FAL-178: normalize Mongoose validation details to the same array format as Zod, handle malformed JSON explicitly, and replace internal error messages in `500` responses with the generic message above. These behaviors have not been verified at runtime by this document.
+Implemented in FAL-178: Mongoose validation details use the same array format as Zod, malformed JSON receives an explicit response, and unexpected server errors use the generic message above. Direct controller errors include `status`; the error handler accepts both `error.statusCode` and `error.status`. Focused isolated checks do not replace database-backed endpoint verification in FAL-179. Backend team review is still pending.
 
 ## Invalid email example
 
@@ -69,4 +69,4 @@ An unexpected server failure returns HTTP `500 Internal Server Error`. The respo
 }
 ```
 
-The `500` example is the target contract for FAL-178, not verified current API behavior.
+The `500` example is implemented in the error handler; full endpoint verification remains part of FAL-179.

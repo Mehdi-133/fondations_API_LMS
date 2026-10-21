@@ -65,6 +65,7 @@ const getCourseById = async (req, res, next) => {
 
     if (!course) {
       return res.status(404).json({
+        status: 404,
         message: "Course not found",
       });
     }

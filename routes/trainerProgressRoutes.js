@@ -57,8 +57,7 @@ router.get("/courses",
  *     summary: List course learners
  *     description: >-
  *       Requires course ownership. Includes active and completed enrollments with learner name and
- *       email populated. Missing or unowned courses currently return 500 because error.status is not
- *       handled.
+ *       email populated. Missing or unowned courses return 404.
  *     tags:
  *       - Trainer
  *     security:
@@ -79,6 +78,8 @@ router.get("/courses",
  *         description: Missing, invalid, or expired Bearer token.
  *       '403':
  *         description: Trainer role required.
+ *       '404':
+ *         description: Course not found or not owned by the trainer.
  *       '500':
  *         description: Internal server error.
  */
@@ -97,8 +98,7 @@ router.get(
  *     description: >-
  *       Requires course ownership and active or completed learner enrollment. Returns stored
  *       enrollment progress and current module/resource counts without recalculating the stored
- *       percentage. Missing course, ownership or enrollment currently produces 500 because
- *       error.status is not handled.
+ *       percentage. Missing course, ownership or enrollment returns 404.
  *     tags:
  *       - Trainer
  *     security:
@@ -127,6 +127,8 @@ router.get(
  *         description: Missing, invalid, or expired Bearer token.
  *       '403':
  *         description: Trainer role required.
+ *       '404':
+ *         description: Course not found, not owned by the trainer, or learner not enrolled.
  *       '500':
  *         description: Internal server error.
  */

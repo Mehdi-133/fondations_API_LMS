@@ -10,6 +10,7 @@ const enrollInCourse = async (req, res, next) => {
 
         if (!course) {
             return res.status(404).json({
+                status: 404,
                 message: "Cours introuvable"
             });
         }
@@ -18,6 +19,7 @@ const enrollInCourse = async (req, res, next) => {
         // verifier que cours est publié
         if (course.status !== "published") {
             return res.status(400).json({
+                status: 400,
                 message: "Impossible de s'inscrire à un cours non publié"
             });
         }
@@ -31,6 +33,7 @@ const enrollInCourse = async (req, res, next) => {
 
         if (existingEnrollment) {
             return res.status(409).json({
+                status: 409,
                 message: "Vous êtes déjà inscrit à ce cours"
             });
         }

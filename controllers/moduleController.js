@@ -93,6 +93,7 @@ const updateModule = async (req, res, next) => {
 
         if (!module) {
             return res.status(404).json({
+                status: 404,
                 message: "Module introuvable"
             });
         }
@@ -116,6 +117,7 @@ const deleteModule = async (req, res, next) => {
 
         if (!module) {
             return res.status(404).json({
+                status: 404,
                 message: "Module introuvable"
             });
         }
