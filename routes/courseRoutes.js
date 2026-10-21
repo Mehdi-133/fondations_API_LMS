@@ -73,6 +73,9 @@ router.get("/", getCourses);
  * @swagger
  * /api/courses/{id}/modules:
  *   get:
+ *     security:
+ *       - bearerAuth: []
+ *     description: Requires active enrollment; returns published modules ordered by order.
  *     summary: Liste des modules d'un cours
  *     tags:
  *       - Modules
@@ -90,12 +93,85 @@ router.get("/", getCourses);
  *         description: Liste des modules récupérée avec succès
  *       400:
  *         description: ID du cours invalide
+ *       401:
+ *         description: Missing, invalid, or expired token.
+ *       403:
+ *         description: Active enrollment required.
  *       500:
  *         description: Erreur interne du serveur
  */
 router.get("/:id/modules", authenticate, checkEnrollment, getModulesByCourse);
 
 
+/**
+ * @swagger
+ * /api/courses/{id}/modules:
+ *   post:
+ *     summary: Create a module
+ *     description: >-
+ *       Trainer role required. Checks duplicate title and order within the course. Currently does not
+ *       check course existence or ownership.
+ *     tags:
+ *       - Modules
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId.
+ *     responses:
+ *       '201':
+ *         description: Returns message and the created module in data.
+ *       '400':
+ *         description: Invalid ID or module body.
+ *       '401':
+ *         description: Missing, invalid, or expired Bearer token.
+ *       '403':
+ *         description: Trainer role required.
+ *       '409':
+ *         description: Title or order already exists.
+ *       '500':
+ *         description: Internal server error.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             additionalProperties: false
+ *             required:
+ *               - title
+ *               - description
+ *               - order
+ *               - estimatedDuration
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 minLength: 1
+ *               description:
+ *                 type: string
+ *                 minLength: 1
+ *               order:
+ *                 type: integer
+ *                 minimum: 1
+ *               estimatedDuration:
+ *                 type: number
+ *                 minimum: 1
+ *               status:
+ *                 type: string
+ *                 enum:
+ *                   - draft
+ *                   - published
+ *           example:
+ *             title: Introduction
+ *             description: First lesson
+ *             order: 1
+ *             estimatedDuration: 10
+ *             status: draft
+ */
 router.post(
     "/:courseId/modules",
     authenticate,
@@ -104,6 +180,73 @@ router.post(
     createModule
 );
 
+/**
+ * @swagger
+ * /api/courses/modules/{moduleId}:
+ *   put:
+ *     summary: Update a module
+ *     description: Trainer role required; course ownership is not checked. Supply all required module fields.
+ *     tags:
+ *       - Modules
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: moduleId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId.
+ *     responses:
+ *       '200':
+ *         description: Returns message and updated module in data.
+ *       '400':
+ *         description: Invalid ID or module body.
+ *       '401':
+ *         description: Missing, invalid, or expired Bearer token.
+ *       '403':
+ *         description: Trainer role required.
+ *       '404':
+ *         description: Module not found.
+ *       '500':
+ *         description: Internal server error.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             additionalProperties: false
+ *             required:
+ *               - title
+ *               - description
+ *               - order
+ *               - estimatedDuration
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 minLength: 1
+ *               description:
+ *                 type: string
+ *                 minLength: 1
+ *               order:
+ *                 type: integer
+ *                 minimum: 1
+ *               estimatedDuration:
+ *                 type: number
+ *                 minimum: 1
+ *               status:
+ *                 type: string
+ *                 enum:
+ *                   - draft
+ *                   - published
+ *           example:
+ *             title: Introduction
+ *             description: First lesson
+ *             order: 1
+ *             estimatedDuration: 10
+ *             status: draft
+ */
 router.put(
     "/modules/:moduleId",
     authenticate,
@@ -112,6 +255,39 @@ router.put(
     updateModule
 );
 
+/**
+ * @swagger
+ * /api/courses/modules/{moduleId}:
+ *   delete:
+ *     summary: Delete a module
+ *     description: >-
+ *       Trainer role required; course ownership is not checked. Deletes only the module document,
+ *       without checking or removing related resources or progress.
+ *     tags:
+ *       - Modules
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: moduleId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId.
+ *     responses:
+ *       '200':
+ *         description: Returns a confirmation message.
+ *       '400':
+ *         description: Invalid module ID.
+ *       '401':
+ *         description: Missing, invalid, or expired Bearer token.
+ *       '403':
+ *         description: Trainer role required.
+ *       '404':
+ *         description: Module not found.
+ *       '500':
+ *         description: Internal server error.
+ */
 router.delete(
     "/modules/:moduleId",
     authenticate,
@@ -121,6 +297,84 @@ router.delete(
 
 
 
+/**
+ * @swagger
+ * /api/courses/modules/{moduleId}/status/{status}:
+ *   patch:
+ *     summary: Change module publication status
+ *     description: >-
+ *       Requires the trainer who owns the course. The current route also validates a full module body,
+ *       although the controller only changes status from the URL.
+ *     tags:
+ *       - Modules
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: moduleId
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: status
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum:
+ *             - draft
+ *             - published
+ *     responses:
+ *       '200':
+ *         description: >-
+ *           Returns status, message and module in data, including when already at the requested
+ *           status.
+ *       '400':
+ *         description: Invalid ID, body, or target status.
+ *       '401':
+ *         description: Missing, invalid, or expired Bearer token.
+ *       '403':
+ *         description: Trainer role or course ownership required.
+ *       '404':
+ *         description: Module or course not found.
+ *       '500':
+ *         description: Internal server error.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             additionalProperties: false
+ *             required:
+ *               - title
+ *               - description
+ *               - order
+ *               - estimatedDuration
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 minLength: 1
+ *               description:
+ *                 type: string
+ *                 minLength: 1
+ *               order:
+ *                 type: integer
+ *                 minimum: 1
+ *               estimatedDuration:
+ *                 type: number
+ *                 minimum: 1
+ *               status:
+ *                 type: string
+ *                 enum:
+ *                   - draft
+ *                   - published
+ *           example:
+ *             title: Introduction
+ *             description: First lesson
+ *             order: 1
+ *             estimatedDuration: 10
+ *             status: draft
+ */
 router.patch(
     "/modules/:moduleId/status/:status",
     authenticate,
@@ -131,6 +385,39 @@ router.patch(
 
 
 
+/**
+ * @swagger
+ * /api/courses/{courseId}/resume:
+ *   get:
+ *     summary: Resume a course
+ *     description: >-
+ *       Uses active or completed enrollment. Returns the first unfinished published module, the next
+ *       module, courseCompleted and progress. Modules can be null. Recalculates and saves enrollment
+ *       progress. Currently missing enrollment produces 500 because the service sets error.status,
+ *       which the error handler does not read.
+ *     tags:
+ *       - Progress
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: courseId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId.
+ *     responses:
+ *       '200':
+ *         description: >-
+ *           Returns message and data containing courseId, currentModule, nextModule, courseCompleted
+ *           and progress.
+ *       '400':
+ *         description: Invalid course ID.
+ *       '401':
+ *         description: Missing, invalid, or expired Bearer token.
+ *       '500':
+ *         description: Internal server error.
+ */
 router.get("/:courseId/resume", authenticate, resumeCourse);
 
 /**

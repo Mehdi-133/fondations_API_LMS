@@ -123,31 +123,20 @@ router.post(
  * @swagger
  * /api/modules/{id}/resources:
  *   get:
- *     summary: Liste les ressources d'un module
- *     tags:
- *       - Resources
- *
+ *     summary: List module resources in order
+ *     description: Public endpoint. Returns an empty list for an unknown valid module ID.
+ *     tags: [Resources]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: ID du module
- *         example: 68da12345678901234567890
- *
  *     responses:
  *       200:
- *         description: Liste des ressources récupérée avec succès
- *
- *       400:
- *         description: ID du module invalide
- *
- *       404:
- *         description: Module introuvable
- *
+ *         description: Returns count and resource documents in data.
  *       500:
- *         description: Erreur interne du serveur
+ *         description: Invalid ID or database error.
  */
 router.get("/:id/resources", getResourcesByModule);
 
@@ -157,9 +146,10 @@ router.get("/:id/resources", getResourcesByModule);
  * /api/modules/{id}/resources:
  *   post:
  *     summary: Create a resource linked to a module
- *     description: Creates a resource using an existing HTTP or HTTPS URL. The module must exist and its ID comes from the path. Extra body fields are rejected. File upload and route protection are separate tasks; this endpoint currently requires no authentication.
+ *     description: Creates a resource using an existing HTTP or HTTPS URL. The module must exist and its ID comes from the path. Extra body fields are rejected. Requires a trainer token; course ownership is not checked. Body validation runs before authentication.
  *     tags: [Resources]
- *     security: []
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -242,6 +232,10 @@ router.get("/:id/resources", getResourcesByModule);
  *                   errors:
  *                     - field: url
  *                       message: Invalid URL
+ *       401:
+ *         description: Missing, invalid, or expired Bearer token.
+ *       403:
+ *         description: Trainer role required.
  *       404:
  *         description: Module does not exist.
  *         content:
@@ -264,9 +258,10 @@ router.post(
  * /api/modules/{id}/resources/{resourceId}:
  *   put:
  *     summary: Update a resource in a module
- *     description: Updates type, URL, and order. All three fields are required. The resource must belong to the module in the path; its module cannot be changed. No file upload. Authentication and access protection are planned separately.
+ *     description: Updates type, URL, and order. All three fields are required. The resource must belong to the module in the path; its module cannot be changed. No file upload. Requires a trainer token; course ownership is not checked. Body validation runs before authentication.
  *     tags: [Resources]
- *     security: []
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -331,6 +326,10 @@ router.post(
  *                 order: 2
  *       400:
  *         description: Invalid ID or invalid, missing, or extra body fields. Returns status and message; body validation errors include errors.
+ *       401:
+ *         description: Missing, invalid, or expired Bearer token.
+ *       403:
+ *         description: Trainer role required.
  *       404:
  *         description: Resource does not exist or belongs to another module.
  *         content:
@@ -409,6 +408,41 @@ router.delete(
   deleteResource,
 );
 
+/**
+ * @swagger
+ * /api/modules/{resourceId}/consult:
+ *   post:
+ *     summary: Mark a resource as consulted
+ *     description: >-
+ *       Requires active enrollment in the resource module course. The URL parameter is a resource ID
+ *       despite the modules prefix. No request body required.
+ *     tags:
+ *       - Progress
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: resourceId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId.
+ *     responses:
+ *       '200':
+ *         description: Already consulted; returns message and existing progress in data.
+ *       '201':
+ *         description: Returns message and new resource progress in data.
+ *       '400':
+ *         description: Invalid resource ID.
+ *       '401':
+ *         description: Missing, invalid, or expired Bearer token.
+ *       '403':
+ *         description: No active enrollment.
+ *       '404':
+ *         description: Resource or module not found.
+ *       '500':
+ *         description: Internal server error.
+ */
 router.post(
   "/:resourceId/consult",
   authenticate,
