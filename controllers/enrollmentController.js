@@ -1,5 +1,7 @@
 const Enrollment = require("../models/Enrollment");
 const Course = require("../models/Course");
+const User = require("../models/User");
+const { sendEmail } = require("../services/email/emailService");
 
 const enrollInCourse = async (req, res, next) => {
     try {
@@ -35,11 +37,36 @@ const enrollInCourse = async (req, res, next) => {
             });
         }
 
+        const learner = await User.findById(req.user.id);
+        if (!learner) {
+            return res.status(404).json({
+                message: "Utilisateur introuvable"
+            });
+        }
+        
         // Créer l'inscription
         const enrollment = await Enrollment.create({
             learner: req.user.id,
             course: courseId
         });
+        // envoyer email confirmation
+        try {
+            await sendEmail({
+                to: learner.email,
+                subject: "Confirmation d'inscription au cours",
+                template: "enrollment",
+                data: {
+                    name: learner.name,
+                    course: course.title
+                },
+                event: "course_enrolled"
+            });
+        } catch (emailError) {
+            console.error(
+                "Échec de l'email course_enrolled:",
+                emailError.message
+            );
+        }
 
         return res.status(201).json({
             message: "Inscription réussie",
