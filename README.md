@@ -107,7 +107,7 @@ Swagger describes request bodies, parameters, authentication and responses. Path
 - Module status updates require a complete module body because the route uses the creation validator, although the controller only changes status from the URL.
 - Course deletion is blocked when modules or enrollments exist. Resource deletion is blocked when learner progress exists. Module deletion has no dependency check or cascade cleanup.
 - Consultation, completion and module listing require active enrollment. Progress and resume also accept completed enrollment.
-- Some progress/resume/trainer service errors set `error.status`, but the error handler reads `error.statusCode`. Missing enrollment or ownership in these services currently returns 500. Swagger reflects the current behavior.
+- The error handler accepts both `error.statusCode` and `error.status`. Expected progress/resume/trainer failures preserve their declared 403 or 404 status; unexpected server errors use a generic message. See [the draft error contract](docs/error-contract.md).
 - Uploaded resource URLs are local storage paths; no file-download route is exposed.
 - Response shapes vary: most wrap results in `data`, enrollment creation uses `enrollment`, and listing your enrollments returns an array directly.
 

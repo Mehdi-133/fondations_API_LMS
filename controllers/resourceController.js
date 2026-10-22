@@ -5,7 +5,7 @@ const ResourceProgress = require("../models/ResourceProgress");
 const { unlink, readFile } = require("fs/promises");
 const { uploadResourceSchema } = require("../validators/resourceValidator");
 
-const getResourcesByModule = async (req, res) => {
+const getResourcesByModule = async (req, res, next) => {
   try {
     const resources = await Resource.find({
       module: req.params.id
@@ -16,10 +16,7 @@ const getResourcesByModule = async (req, res) => {
       data: resources
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Error retrieving resources",
-      error: error.message
-    });
+    next(error);
   }
 };
 
@@ -62,6 +59,10 @@ const uploadResource = async (req, res, next) => {
     if (!result.success) {
       const error = new Error("Validation error");
       error.statusCode = 400;
+      error.errors = result.error.issues.map((issue) => ({
+        field: issue.path.join(".") || "body",
+        message: issue.message,
+      }));
       throw error;
     }
 
