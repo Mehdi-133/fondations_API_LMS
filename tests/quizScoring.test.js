@@ -11,3 +11,35 @@ test("calculating the score of quiz", () => {
         passed: true
     })
 }) 
+
+test("learner pass if score equal to passingScore", () => {
+  const quizWithFiveQuestions = {
+    ...privateQuiz,
+    passingScore: 60,
+    questions: [
+      ...privateQuiz.questions,
+      { id: "q4", correctChoiceId: "a" },
+      { id: "q5", correctChoiceId: "a" },
+    ],
+  };
+
+  const answersAtThreshold = [
+    { questionId: "q1", choiceId: "b" }, 
+    { questionId: "q2", choiceId: "a" }, 
+    { questionId: "q3", choiceId: "b" }, 
+    { questionId: "q4", choiceId: "b" },
+    { questionId: "q5", choiceId: "b" },
+  ];
+
+  const result = calculateQuizScore(
+    quizWithFiveQuestions,
+    answersAtThreshold
+  );
+
+  expect(result).toEqual({
+    correctCount: 3,
+    totalQuestions: 5,
+    scorePercent: 60,
+    passed: true,
+  });
+});
