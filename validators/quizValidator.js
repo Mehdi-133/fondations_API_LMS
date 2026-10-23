@@ -63,4 +63,32 @@ const createQuizSchema = z
     }
   );
 
-module.exports = { choiceSchema, questionSchema, createQuizSchema };
+const updateQuizSchema = z
+  .object({
+    title: createQuizSchema.shape.title.optional(),
+    passingScore: createQuizSchema.shape.passingScore.optional(),
+    questions: createQuizSchema.shape.questions.optional(),
+    isActive: createQuizSchema.shape.isActive,
+    isRequired: createQuizSchema.shape.isRequired,
+  })
+  .strict()
+  .refine((quiz) => Object.values(quiz).some((value) => value !== undefined), {
+    message: "At least one quiz field must be provided",
+  })
+  .refine(
+    (quiz) =>
+      quiz.questions === undefined ||
+      new Set(quiz.questions.map((question) => question.id)).size ===
+        quiz.questions.length,
+    {
+      message: "Question IDs must be unique within a quiz",
+      path: ["questions"],
+    },
+  );
+
+module.exports = {
+  choiceSchema,
+  questionSchema,
+  createQuizSchema,
+  updateQuizSchema,
+};
