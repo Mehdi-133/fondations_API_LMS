@@ -63,3 +63,19 @@ test("learner fails if score down of passingScore", () => {
     passed: false,
   });
 });
+
+test("consider the skipped question false", () => {
+  const incompleteAnswers = [
+    { questionId: "q1", choiceId: "b" },
+    { questionId: "q2", choiceId: "a" }, 
+  ];
+
+  const result = calculateQuizScore(privateQuiz, incompleteAnswers);
+
+  expect(result).toEqual({
+    correctCount: 2,
+    totalQuestions: 3,
+    scorePercent: 66.67,
+    passed: true,
+  });
+});
