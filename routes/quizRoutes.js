@@ -10,7 +10,13 @@ const {
 const { roles } = require("../consts/roles.js");
 const validate = require("../middlewares/validate.js");
 
-const { createQuiz, updateQuiz } = require("../controllers/quizController");
+const {
+  createQuiz,
+  updateQuiz,
+  getQuiz,
+} = require("../controllers/quizController");
+
+router.get("/:quizId", authenticate, authorize(roles.LEARNER), getQuiz);
 
 router.post(
   "/",

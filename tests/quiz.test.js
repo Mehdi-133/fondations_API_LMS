@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const app = require("../app");
 const Quiz = require("../models/Quiz");
+const Enrollment = require("../models/Enrollment");
+const ModuleProgress = require("../models/ModuleProgress");
 const { useTestAccounts } = require("./helpers/accounts");
 const { createLearningFixture } = require("./helpers/learning");
 
@@ -141,5 +143,87 @@ describe("Quiz creation and modification (FAL-173)", () => {
     const response = await patch(new mongoose.Types.ObjectId().toString(), { title: "Updated" });
     expect(response.statusCode).toBe(404);
     expect(response.body.message).toBe("Quiz not found");
+  });
+
+  describe("Learner quiz reads (FAL-42)", () => {
+    let quiz;
+
+    beforeEach(async () => {
+      quiz = await Quiz.create(payload());
+      await Enrollment.create({ learner: fixture.learner._id, course: fixture.course._id });
+    });
+
+    const get = (id, token = fixture.token) => {
+      const call = request(app).get(`/api/quizzes/${id}`);
+      if (token) call.set("Authorization", `Bearer ${token}`);
+      return call;
+    };
+
+    test("returns only allowed fields and keeps correct answers in MongoDB", async () => {
+      const response = await get(quiz.id);
+      expect(response.statusCode).toBe(200);
+      expect(Object.keys(response.body.data).sort()).toEqual(
+        ["_id", "moduleId", "title", "passingScore", "isRequired", "isActive", "questions"].sort(),
+      );
+      expect(response.body.data.questions).toEqual([{
+        id: "q1", text: payload().questions[0].text,
+        choices: [{ id: "a", text: "const" }, { id: "b", text: "let" }],
+      }]);
+      expect(JSON.stringify(response.body)).not.toContain("correctChoiceId");
+      expect((await Quiz.findById(quiz.id)).questions[0].correctChoiceId).toBe("a");
+    });
+
+    test.each(["anonymous", "trainer"])("rejects %s reads", async actor => {
+      const response = await get(quiz.id, actor === "anonymous" ? null : ownerToken);
+      expect(response.statusCode).toBe(actor === "anonymous" ? 401 : 403);
+      expect(response.body.data).toBeUndefined();
+    });
+
+    test.each(["missing", "cancelled", "completed"])("rejects %s enrollment", async status => {
+      if (status === "missing") {
+        await Enrollment.deleteOne({ learner: fixture.learner._id, course: fixture.course._id });
+      } else {
+        await Enrollment.updateOne({ learner: fixture.learner._id, course: fixture.course._id }, { status });
+      }
+      const response = await get(quiz.id);
+      expect(response.statusCode).toBe(403);
+      expect(response.body.data).toBeUndefined();
+    });
+
+    test.each(["course", "module", "quiz"])("rejects unavailable %s", async kind => {
+      if (kind === "course") {
+        fixture.course.status = "draft";
+        await fixture.course.save();
+      } else if (kind === "module") {
+        fixture.modules[0].status = "draft";
+        await fixture.modules[0].save();
+      } else {
+        quiz.isActive = false;
+        await quiz.save();
+      }
+      const response = await get(quiz.id);
+      expect(response.statusCode).toBe(403);
+      expect(response.body.data).toBeUndefined();
+    });
+
+    test("blocks a locked module and allows it after previous module completion", async () => {
+      quiz.moduleId = fixture.modules[1]._id;
+      await quiz.save();
+      expect((await get(quiz.id)).statusCode).toBe(403);
+      await ModuleProgress.create({
+        learner: fixture.learner._id, module: fixture.modules[0]._id, status: "completed",
+      });
+      const response = await get(quiz.id);
+      expect(response.statusCode).toBe(200);
+      expect(JSON.stringify(response.body)).not.toContain("correctChoiceId");
+    });
+
+    test("returns 404 for a missing quiz", async () => {
+      expect((await get(new mongoose.Types.ObjectId().toString())).statusCode).toBe(404);
+    });
+
+    test("returns 400 for an invalid quiz ID", async () => {
+      expect((await get("invalid-id")).statusCode).toBe(400);
+    });
   });
 });
