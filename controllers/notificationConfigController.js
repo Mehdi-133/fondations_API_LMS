@@ -1,6 +1,10 @@
 const NotificationConfig = require("../models/NotificationConfig");
 const JobExecution = require("../models/JobExecution");
 
+const {
+    refreshJobSchedules,
+} = require("../services/jobScheduler");
+
 const getNotificationConfig = async (req, res, next) => {
     try {
         const config = await NotificationConfig.findOne({ key: "global" });
@@ -50,6 +54,10 @@ const updateNotificationConfig = async (req, res, next) => {
                 message: "Notification configuration not found",
             });
         }
+
+        await refreshJobSchedules(
+            require("../services/jobHandlers")
+        );
 
         return res.status(200).json({ config });
     } catch (error) {
