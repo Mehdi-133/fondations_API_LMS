@@ -6,6 +6,7 @@ const enrollmentRoutes = require("./routes/enrollmentRoutes");
 const authRoutes = require("./routes/authRoutes");
 const moduleRoutes = require("./routes/moduleRoutes");
 const trainerProgressRoutes = require("./routes/trainerProgressRoutes");
+const notificationConfigRoutes = require("./routes/notificationConfigRoutes");
 const quizRoutes = require("./routes/quizRoutes");
 
 const notFound = require("./middlewares/notFound");
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
   });
 });
 
+app.use("/api/config", notificationConfigRoutes);
 app.use("/api/courses", courseRoutes);
 
 app.get("/api/modules/test", (req, res) => {
