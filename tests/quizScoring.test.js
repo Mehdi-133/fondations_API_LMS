@@ -43,3 +43,23 @@ test("learner pass if score equal to passingScore", () => {
     passed: true,
   });
 });
+
+test("learner fails if score down of passingScore", () => {
+  const answersBelowThreshold = [
+    { questionId: "q1", choiceId: "b" }, 
+    { questionId: "q2", choiceId: "b" }, 
+    { questionId: "q3", choiceId: "a" }, 
+  ];
+
+  const result = calculateQuizScore(
+    privateQuiz,
+    answersBelowThreshold
+  );
+
+  expect(result).toEqual({
+    correctCount: 1,
+    totalQuestions: 3,
+    scorePercent: 33.33,
+    passed: false,
+  });
+});
