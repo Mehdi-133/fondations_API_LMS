@@ -1,10 +1,15 @@
 const { useTestAccounts, learnerEmail, trainerEmail, domain } = require("./helpers/accounts");
 const request = require("supertest");
-const app = require("../app");
+
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+
+const emailService = require("../services/email/emailService");
+const sendEmailSpy = jest.spyOn(emailService, "sendEmail");
+
+const app = require("../app");
 
 
 
@@ -248,32 +253,59 @@ describe("Authentcation", () => {
 
 
     //verifier qu'un utilisateur suspendu ne peut pas se connecter.
-test("should return 403 when user is suspended", async () => {
-    const email = `suspended-${Date.now()}@${domain}`;
+    test("should return 403 when user is suspended", async () => {
+        const email = `suspended-${Date.now()}@${domain}`;
 
-    const password = "Password123";
-    const hashedPassword = await bcrypt.hash(password, 10);
+        const password = "Password123";
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await User.create({
-        name: "Suspended User",
-        email,
-        password: hashedPassword,
-        role: "learner",
-        status: "suspended"
-    });
-
-    const response = await request(app)
-        .post("/api/auth/login")
-        .send({
+        const user = await User.create({
+            name: "Suspended User",
             email,
-            password
+            password: hashedPassword,
+            role: "learner",
+            status: "suspended"
         });
 
-    expect(response.statusCode).toBe(403);
+        const response = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email,
+                password
+            });
 
-    await User.deleteOne({ _id: user._id });
-});
+        expect(response.statusCode).toBe(403);
 
+        await User.deleteOne({ _id: user._id });
+    });
+
+
+
+    test("should trigger a welcome email when a learner registers", async () => {
+        sendEmailSpy.mockClear();
+
+        const email = `email-test-${Date.now()}@${domain}`;
+
+        const response = await request(app)
+            .post("/api/auth/register")
+            .send({
+                name: "Email Test User",
+                email,
+                password: "Password123",
+            });
+
+        expect(response.statusCode).toBe(201);
+
+        expect(sendEmailSpy).toHaveBeenCalledWith(
+            expect.objectContaining({
+                to: email,
+                subject: "Bienvenue sur notre LMS",
+                template: "welcome",
+                data: { name: "email test user" },
+                event: "user_registered",
+            })
+        );
+    });
 
 
 });
