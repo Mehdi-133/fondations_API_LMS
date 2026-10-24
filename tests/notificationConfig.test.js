@@ -84,7 +84,7 @@ describe("Notification CONFIG Authorization", () => {
 
             
 
-            expect([200, 404]).toContain(getResponse.statusCode);
+            expect(getResponse.statusCode).toBe(200);
 
             const updateResponse = await request(app)
                 .patch("/api/config/notifications")
