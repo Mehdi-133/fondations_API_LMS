@@ -1,6 +1,7 @@
 
 const logDriver = require("./logDriver");
 const { renderTemplate } = require("./templateService");
+const { getNotificationConfig } = require("../notificationConfigService");
 
 const sendEmail = async ({
   to,
@@ -15,11 +16,22 @@ const sendEmail = async ({
     throw new Error("Le destinataire et le sujet sont obligatoires.");
   }
 
+  const config = await getNotificationConfig();
+  const notifications = config.notifications;
+
+  if (notifications?.enabled === false) {
+    return {
+      success: true,
+      skipped: true,
+      reason: "notifications_disabled",
+    };
+  }
+
   if (template) {
     html = renderTemplate(template, data);
   }
 
-  const driver = process.env.EMAIL_DRIVER || "log";
+  const driver = notifications?.emailDriver || "log";
 
   const email = {
     to,
