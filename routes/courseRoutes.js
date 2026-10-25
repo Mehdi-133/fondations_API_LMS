@@ -393,8 +393,7 @@ router.patch(
  *     description: >-
  *       Uses active or completed enrollment. Returns the first unfinished published module, the next
  *       module, courseCompleted and progress. Modules can be null. Recalculates and saves enrollment
- *       progress. Currently missing enrollment produces 500 because the service sets error.status,
- *       which the error handler does not read.
+ *       progress. Missing active or completed enrollment returns 403.
  *     tags:
  *       - Progress
  *     security:
@@ -415,6 +414,8 @@ router.patch(
  *         description: Invalid course ID.
  *       '401':
  *         description: Missing, invalid, or expired Bearer token.
+ *       '403':
+ *         description: Active or completed enrollment required.
  *       '500':
  *         description: Internal server error.
  */

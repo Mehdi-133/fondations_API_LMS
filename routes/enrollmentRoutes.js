@@ -84,7 +84,7 @@ router.get(
  *     description: >-
  *       Counts completed published modules and consulted resources equally. Saves the percentage to
  *       enrollment and marks it completed at 100 percent. Accepts active or completed enrollments.
- *       Currently missing enrollment produces 500 because error.status is not handled.
+ *       Missing active or completed enrollment returns 404.
  *     tags:
  *       - Progress
  *     security:
@@ -105,6 +105,8 @@ router.get(
  *         description: Invalid course ID.
  *       '401':
  *         description: Missing, invalid, or expired Bearer token.
+ *       '404':
+ *         description: Active or completed enrollment not found.
  *       '500':
  *         description: Internal server error.
  */

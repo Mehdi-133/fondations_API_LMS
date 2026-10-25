@@ -3,10 +3,13 @@ const emailService = require("../services/email/emailService");
 const logDriver = require("../services/email/logDriver");
 const sandboxDriver = require("../services/email/smtpDriver");
 
+
+
 describe("Email service", () => {
   const originalDriver = process.env.EMAIL_DRIVER;
 
-  afterEach(() => {
+
+  afterEach(async () => {
     jest.restoreAllMocks();
 
     if (originalDriver === undefined) {
@@ -14,10 +17,26 @@ describe("Email service", () => {
     } else {
       process.env.EMAIL_DRIVER = originalDriver;
     }
+
+    const NotificationConfig = require("../models/NotificationConfig");
+    await NotificationConfig.deleteMany({ key: "global" });
   });
 
+
+
   test("uses the log driver when configured", async () => {
-    process.env.EMAIL_DRIVER = "log";
+    const NotificationConfig = require("../models/NotificationConfig");
+
+    await NotificationConfig.findOneAndUpdate(
+      { key: "global" },
+      {
+        $set: {
+          "notifications.enabled": true,
+          "notifications.emailDriver": "log",
+        },
+      },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
 
     const sendSpy = jest
       .spyOn(logDriver, "send")
@@ -38,15 +57,29 @@ describe("Email service", () => {
     );
   });
 
+
   test("rejects an unsupported driver", async () => {
-    process.env.EMAIL_DRIVER = "unknown";
+    const NotificationConfig = require("../models/NotificationConfig");
+
+    await NotificationConfig.findOneAndUpdate(
+      { key: "global" },
+      {
+        $set: {
+          "notifications.enabled": true,
+          "notifications.emailDriver": "unknown",
+        },
+      },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
 
     await expect(
       emailService.sendEmail({
         to: "test@example.com",
         subject: "Test email",
       })
-    ).rejects.toThrow("EMAIL_DRIVER non pris en charge : unknown");
+    ).rejects.toThrow(
+      "EMAIL_DRIVER non pris en charge : unknown"
+    );
   });
 
 
@@ -76,6 +109,33 @@ describe("Email service", () => {
         event: "user_registered",
       })
     );
+  test("does not send email when notifications are disabled", async () => {
+    const NotificationConfig = require("../models/NotificationConfig");
+
+    await NotificationConfig.findOneAndUpdate(
+      { key: "global" },
+      {
+        $set: {
+          "notifications.enabled": false,
+          "notifications.emailDriver": "log",
+        },
+      },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
+
+    const sendSpy = jest.spyOn(logDriver, "send");
+
+    const result = await emailService.sendEmail({
+      to: "test@example.com",
+      subject: "Test email",
+    });
+
+    expect(sendSpy).not.toHaveBeenCalled();
+    expect(result).toEqual({
+      success: true,
+      skipped: true,
+      reason: "notifications_disabled",
+    });
   });
 
 });

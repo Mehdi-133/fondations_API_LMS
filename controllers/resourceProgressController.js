@@ -14,6 +14,7 @@ const markResourceAsConsulted = async (req, res, next) => {
 
         if (!resource) {
             return res.status(404).json({
+                status: 404,
                 message: "Ressource introuvable"
             });
         }
@@ -23,6 +24,7 @@ const markResourceAsConsulted = async (req, res, next) => {
 
         if (!module) {
             return res.status(404).json({
+                status: 404,
                 message: "Module introuvable"
             });
         }
@@ -36,6 +38,7 @@ const markResourceAsConsulted = async (req, res, next) => {
 
         if (!enrollment) {
             return res.status(403).json({
+                status: 403,
                 message: "Vous n'êtes pas inscrit à ce cours"
             });
         }

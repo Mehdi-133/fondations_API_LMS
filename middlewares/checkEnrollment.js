@@ -10,6 +10,7 @@ const checkEnrollment = async (req, res, next) => {
 
         if (!enrollment) {
             return res.status(403).json({
+                status: 403,
                 message: "Vous n'êtes pas inscrit à ce cours"
             });
         }

@@ -12,6 +12,7 @@ const completeModule = async (req, res, next) => {
 
         if (!module) {
             return res.status(404).json({
+                status: 404,
                 message: "Module introuvable"
             });
         }
@@ -24,6 +25,7 @@ const completeModule = async (req, res, next) => {
 
         if (!enrollment) {
             return res.status(403).json({
+                status: 403,
                 message: "Vous n'êtes pas inscrit à ce cours"
             });
         }
@@ -43,6 +45,7 @@ const completeModule = async (req, res, next) => {
 
             if (!previousProgress) {
                 return res.status(403).json({
+                    status: 403,
                     message: "Vous devez terminer le module précédent"
                 });
             }
@@ -63,6 +66,7 @@ const completeModule = async (req, res, next) => {
 
         if (consultedResources !== resources.length) {
             return res.status(400).json({
+                status: 400,
                 message: "Vous devez consulter toutes les ressources avant de terminer ce module"
             });
         }
