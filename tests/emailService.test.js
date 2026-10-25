@@ -1,6 +1,7 @@
 
 const emailService = require("../services/email/emailService");
 const logDriver = require("../services/email/logDriver");
+const sandboxDriver = require("../services/email/smtpDriver");
 
 describe("Email service", () => {
   const originalDriver = process.env.EMAIL_DRIVER;
@@ -47,4 +48,34 @@ describe("Email service", () => {
       })
     ).rejects.toThrow("EMAIL_DRIVER non pris en charge : unknown");
   });
+
+
+
+
+  test("uses the sandbox driver when configured", async () => {
+    process.env.EMAIL_DRIVER = "sandbox";
+
+    const sendSpy = jest
+      .spyOn(sandboxDriver, "send")
+      .mockResolvedValue({
+        success: true,
+        driver: "sandbox",
+        event: "user_registered",
+      });
+
+    await emailService.sendEmail({
+      to: "test@example.com",
+      subject: "Test email",
+      event: "user_registered",
+    });
+
+    expect(sendSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        to: "test@example.com",
+        subject: "Test email",
+        event: "user_registered",
+      })
+    );
+  });
+
 });
