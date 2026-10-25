@@ -72,8 +72,18 @@ describe("Email service", () => {
     );
   });
 
+
   test("uses the sandbox driver when configured", async () => {
-    process.env.EMAIL_DRIVER = "sandbox";
+    await NotificationConfig.findOneAndUpdate(
+      { key: "global" },
+      {
+        $set: {
+          "notifications.enabled": true,
+          "notifications.emailDriver": "sandbox",
+        },
+      },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
 
     const sendSpy = jest
       .spyOn(sandboxDriver, "send")
@@ -97,6 +107,7 @@ describe("Email service", () => {
       })
     );
   });
+
 
   test("does not send email when notifications are disabled", async () => {
     await NotificationConfig.findOneAndUpdate(
