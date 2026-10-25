@@ -3,6 +3,8 @@ const logDriver = require("./logDriver");
 const { renderTemplate } = require("./templateService");
 const { getNotificationConfig } = require("../notificationConfigService");
 
+const sandboxDriver = require("./smtpDriver");
+
 const sendEmail = async ({
   to,
   subject,
@@ -44,6 +46,10 @@ const sendEmail = async ({
   if (driver === "log") {
     return logDriver.send(email);
   }
+
+  if (driver === "sandbox") {
+  return sandboxDriver.send(email);
+}
 
   throw new Error(`EMAIL_DRIVER non pris en charge : ${driver}`);
 };
