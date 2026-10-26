@@ -1,4 +1,6 @@
 const mongoose = require("mongoose")
+const { string } = require("zod")
+const { required } = require("zod/mini")
 
 const quizAttempt = new mongoose.Schema(
 {
@@ -37,6 +39,23 @@ const quizAttempt = new mongoose.Schema(
         type: Boolean,
         required: true
     },
+
+    answers: {
+        type: [
+            {
+                questionId: {
+                    type: string,
+                    required: true
+                },
+                choiceId: {
+                    type: string,
+                    required: true
+                }
+            }
+        ],
+        required: true,
+        default: []
+    }
 },
     {
         timestamps: true
