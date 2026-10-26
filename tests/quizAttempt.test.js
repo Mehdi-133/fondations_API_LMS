@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 const Quiz = require("../models/Quiz");
 const QuizAttempt = require("../models/QuizAttempt");
+const { submitQuizAttempt } = require("../services/quizAttemptService");
 const { useTestAccounts } = require("./helpers/accounts");
 const { createLearningFixture } = require("./helpers/learning");
 
-describe("QuizAttempt model", () => {
+describe("QuizAttempt persistence", () => {
   let fixture;
   let quiz;
 
@@ -24,21 +25,21 @@ describe("QuizAttempt model", () => {
 
     quiz = await Quiz.create({
       moduleId: fixture.modules[0]._id,
-      title: "Quiz dyal test",
+      title: "Test quiz",
       passingScore: 60,
       questions: [{
         id: "q1",
-        text: "So2al test",
+        text: "Test question",
         choices: [
-          { id: "a", text: "Jawab A" },
-          { id: "b", text: "Jawab B" },
+          { id: "a", text: "Answer A" },
+          { id: "b", text: "Answer B" },
         ],
         correctChoiceId: "a",
       }],
     });
   });
 
-  test("kay7fed tentative mربوطة b learner w quiz", async () => {
+  test("saves an attempt linked to the learner and quiz", async () => {
     const savedAttempt = await QuizAttempt.create({
       learner: fixture.learner._id,
       quiz: quiz._id,
@@ -55,5 +56,18 @@ describe("QuizAttempt model", () => {
     expect(foundAttempt.scorePercent).toBe(100);
     expect(foundAttempt.passed).toBe(true);
     expect(foundAttempt.createdAt).toBeInstanceOf(Date);
+  });
+
+  test("calculates the score from answers and saves the attempt", async () => {
+    const attempt = await submitQuizAttempt({
+      quizId: quiz._id,
+      learnerId: fixture.learner._id,
+      answers: [{ questionId: "q1", choiceId: "a" }],
+    });
+
+    expect(attempt.correctCount).toBe(1);
+    expect(attempt.totalQuestions).toBe(1);
+    expect(attempt.scorePercent).toBe(100);
+    expect(attempt.passed).toBe(true);
   });
 });
