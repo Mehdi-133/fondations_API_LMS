@@ -28,4 +28,19 @@ const submitQuizAttempt = async ({ quizId, learnerId, answers}) => {
     return attempt
 }
 
-module.exports = { submitQuizAttempt }
+const getQuizAttempts = async ({ quizId, learnerId}) => {
+    const quiz = await Quiz.findById(quizId)
+
+    if(!quiz) {
+        const error = new Error("quiz not found")
+        error.statusCode = 404
+        throw error
+    }
+
+    return QuizAttempt.find({
+        quiz: quiz._id,
+        learner: learnerId
+    }).sort({createdAt: -1}).lean()
+}
+
+module.exports = { submitQuizAttempt, getQuizAttempts }
