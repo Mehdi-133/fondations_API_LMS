@@ -12,13 +12,22 @@ const registeredJobs = new Map();
 const runJob = async (jobName, handler) => {
     const execution = await startJobExecution(jobName);
 
+    console.log(`[JOB START] ${jobName} (${execution._id})`);
+
     try {
         const result = await handler();
+        const completed = await completeJobExecution(
+            execution._id,
+            result ?? null
+        );
 
-        await completeJobExecution(execution._id, result ?? null);
+        console.log(`[JOB SUCCESS] ${jobName} (${execution._id})`);
+
+        return completed;
     } catch (error) {
         await failJobExecution(execution._id, error);
-        console.error(`[JOB FAILED] ${jobName}:`, error);
+        console.error(`[JOB FAILED] ${jobName} (${execution._id}):`, error.message);
+        throw error;
     }
 };
 
@@ -51,10 +60,13 @@ const refreshJobSchedules = async (jobHandlers) => {
         }
 
         const task = cron.schedule(settings.frequency, () => {
-            void runJob(jobName, handler);
+            void runJob(jobName, handler).catch(() => {
+                //erreur a déjà enregistré et journalisée par runJob
+            });
         });
 
         registeredJobs.set(jobName, task);
+        console.log(`[JOB REGISTERED] ${jobName}: ${settings.frequency}`);
     }
 };
 
@@ -67,6 +79,7 @@ const stopJobSchedules = () => {
 };
 
 module.exports = {
+    runJob,
     refreshJobSchedules,
     stopJobSchedules,
 };
