@@ -7,6 +7,7 @@ const authRoutes = require("./routes/authRoutes");
 const moduleRoutes = require("./routes/moduleRoutes");
 const trainerProgressRoutes = require("./routes/trainerProgressRoutes");
 const quizRoutes = require("./routes/quizRoutes");
+const quizAttemptRoutes = require("./routes/quizAttemptRoutes")
 
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
@@ -38,6 +39,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/modules", moduleRoutes);
 app.use("/api/trainer", trainerProgressRoutes);
 app.use("/api/quizzes", quizRoutes);
+app.use("/api/quizzes", quizAttemptRoutes)
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
