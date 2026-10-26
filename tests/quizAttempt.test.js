@@ -115,4 +115,18 @@ test("saves a failed attempt when the score is below the passing threshold", asy
   expect(savedAttempt.passed).toBe(false);
 });
 
+test("rejects a client-supplied score", async () => {
+  const response = await request(app)
+    .post(`/api/quizzes/${quiz._id}/attempts`)
+    .set("Authorization", `Bearer ${fixture.token}`)
+    .send({
+      answers: [{ questionId: "q1", choiceId: "b" }],
+      scorePercent: 100,
+      passed: true,
+    });
+
+  expect(response.statusCode).toBe(400);
+  expect(await QuizAttempt.countDocuments({ quiz: quiz._id })).toBe(0);
+});
+
 });
