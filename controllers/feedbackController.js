@@ -37,6 +37,7 @@ const createFeedback = async (req, res, next) => {
     const enrollment = await Enrollment.findOne({
       learner: req.body.learner,
       course: course._id,
+      status: { $in: ["active", "completed"] },
     });
 
     if (!enrollment) {
