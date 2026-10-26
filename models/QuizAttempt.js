@@ -1,6 +1,4 @@
 const mongoose = require("mongoose")
-const { string } = require("zod")
-const { required } = require("zod/mini")
 
 const quizAttempt = new mongoose.Schema(
 {
