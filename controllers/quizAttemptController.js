@@ -1,4 +1,8 @@
-const { submitQuizAttempt: createQuizAttempt } = require("../services/quizAttemptService")
+const { 
+    submitQuizAttempt: createQuizAttempt,
+    getQuizAttempts: fetchQuizAttempts
+
+} = require("../services/quizAttemptService")
 
 const submitQuizAttempt = async(req, res, next) => {
     try {
@@ -18,4 +22,21 @@ const submitQuizAttempt = async(req, res, next) => {
     }
 }
 
-module.exports = { submitQuizAttempt }
+const getQuizAttempts = async (req, res, next) => {
+    try {
+        const attempts = await fetchQuizAttempts({
+            quizId: req.params.quizId,
+            learnerId: req.user.id
+        })
+
+        res.status(200).json({
+            status: 200,
+            message: "quiz attempts retrieved successfully",
+            data: attempts
+        })
+    } catch(error) {
+        next(error)
+    }
+}
+
+module.exports = { submitQuizAttempt, getQuizAttempts }
