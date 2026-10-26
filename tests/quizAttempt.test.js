@@ -95,4 +95,24 @@ describe("QuizAttempt persistence", () => {
   expect(savedAttempt).not.toBeNull();
 });
 
+test("saves a failed attempt when the score is below the passing threshold", async () => {
+  const response = await request(app)
+    .post(`/api/quizzes/${quiz._id}/attempts`)
+    .set("Authorization", `Bearer ${fixture.token}`)
+    .send({
+      answers: [{ questionId: "q1", choiceId: "b" }],
+    });
+
+  expect(response.statusCode).toBe(201);
+  expect(response.body.data).toMatchObject({
+    correctCount: 0,
+    totalQuestions: 1,
+    scorePercent: 0,
+    passed: false,
+  });
+
+  const savedAttempt = await QuizAttempt.findById(response.body.data._id);
+  expect(savedAttempt.passed).toBe(false);
+});
+
 });
