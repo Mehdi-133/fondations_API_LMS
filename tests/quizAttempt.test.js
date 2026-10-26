@@ -4,6 +4,8 @@ const QuizAttempt = require("../models/QuizAttempt");
 const { submitQuizAttempt } = require("../services/quizAttemptService");
 const { useTestAccounts } = require("./helpers/accounts");
 const { createLearningFixture } = require("./helpers/learning");
+const request = require("supertest");
+const app = require("../app");
 
 describe("QuizAttempt persistence", () => {
   let fixture;
@@ -70,4 +72,27 @@ describe("QuizAttempt persistence", () => {
     expect(attempt.scorePercent).toBe(100);
     expect(attempt.passed).toBe(true);
   });
+
+  test("submits answers and saves the calculated attempt", async () => {
+  const response = await request(app)
+    .post(`/api/quizzes/${quiz._id}/attempts`)
+    .set("Authorization", `Bearer ${fixture.token}`)
+    .send({
+      answers: [{ questionId: "q1", choiceId: "a" }],
+    });
+
+  expect(response.statusCode).toBe(201);
+  expect(response.body.data).toMatchObject({
+    learner: fixture.learner._id.toString(),
+    quiz: quiz._id.toString(),
+    correctCount: 1,
+    totalQuestions: 1,
+    scorePercent: 100,
+    passed: true,
+  });
+
+  const savedAttempt = await QuizAttempt.findById(response.body.data._id);
+  expect(savedAttempt).not.toBeNull();
+});
+
 });
