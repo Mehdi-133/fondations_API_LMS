@@ -6,7 +6,7 @@ const { authorize } = require("../middlewares/authorize")
 const { roles } = require("../consts/roles")
 const validate = require("../middlewares/validate")
 const { submitQuizAttemptSchema } = require("../validators/quizAttemptValidator")
-const { submitQuizAttempt } = require("../controllers/quizAttemptController")
+const { submitQuizAttempt, getQuizAttempts } = require("../controllers/quizAttemptController")
 
 router.post(
     "/:quizId/attempts", 
@@ -14,6 +14,13 @@ router.post(
     authorize(roles.LEARNER),
     validate(submitQuizAttemptSchema),
     submitQuizAttempt
+);
+
+router.get(
+    "/:quizId/attempts",
+    authenticate,
+    authorize(roles.LEARNER),
+    getQuizAttempts
 );
 
 module.exports = router;
