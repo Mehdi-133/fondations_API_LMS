@@ -42,11 +42,11 @@ const quizAttempt = new mongoose.Schema(
         type: [
             {
                 questionId: {
-                    type: string,
+                    type: String,
                     required: true
                 },
                 choiceId: {
-                    type: string,
+                    type: String,
                     required: true
                 }
             }

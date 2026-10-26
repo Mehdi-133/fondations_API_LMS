@@ -26,7 +26,8 @@ const getQuizAttempts = async (req, res, next) => {
     try {
         const attempts = await fetchQuizAttempts({
             quizId: req.params.quizId,
-            learnerId: req.user.id
+            learnerId: req.user.id,
+            role: req.user.role
         })
 
         res.status(200).json({

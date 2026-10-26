@@ -6,7 +6,7 @@ const { useTestAccounts } = require("./helpers/accounts");
 const { createLearningFixture } = require("./helpers/learning");
 const request = require("supertest");
 const app = require("../app");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 describe("QuizAttempt persistence", () => {
   let fixture;
@@ -30,15 +30,17 @@ describe("QuizAttempt persistence", () => {
       moduleId: fixture.modules[0]._id,
       title: "Test quiz",
       passingScore: 60,
-      questions: [{
-        id: "q1",
-        text: "Test question",
-        choices: [
-          { id: "a", text: "Answer A" },
-          { id: "b", text: "Answer B" },
-        ],
-        correctChoiceId: "a",
-      }],
+      questions: [
+        {
+          id: "q1",
+          text: "Test question",
+          choices: [
+            { id: "a", text: "Answer A" },
+            { id: "b", text: "Answer B" },
+          ],
+          correctChoiceId: "a",
+        },
+      ],
     });
   });
 
@@ -75,112 +77,158 @@ describe("QuizAttempt persistence", () => {
   });
 
   test("submits answers and saves the calculated attempt", async () => {
-  const response = await request(app)
-    .post(`/api/quizzes/${quiz._id}/attempts`)
-    .set("Authorization", `Bearer ${fixture.token}`)
-    .send({
-      answers: [{ questionId: "q1", choiceId: "a" }],
-    });
+    const response = await request(app)
+      .post(`/api/quizzes/${quiz._id}/attempts`)
+      .set("Authorization", `Bearer ${fixture.token}`)
+      .send({
+        answers: [{ questionId: "q1", choiceId: "a" }],
+      });
 
-  expect(response.statusCode).toBe(201);
-  expect(response.body.data).toMatchObject({
-    learner: fixture.learner._id.toString(),
-    quiz: quiz._id.toString(),
-    correctCount: 1,
-    totalQuestions: 1,
-    scorePercent: 100,
-    passed: true,
-  });
-
-  const savedAttempt = await QuizAttempt.findById(response.body.data._id);
-  expect(savedAttempt).not.toBeNull();
-});
-
-test("saves a failed attempt when the score is below the passing threshold", async () => {
-  const response = await request(app)
-    .post(`/api/quizzes/${quiz._id}/attempts`)
-    .set("Authorization", `Bearer ${fixture.token}`)
-    .send({
-      answers: [{ questionId: "q1", choiceId: "b" }],
-    });
-
-  expect(response.statusCode).toBe(201);
-  expect(response.body.data).toMatchObject({
-    correctCount: 0,
-    totalQuestions: 1,
-    scorePercent: 0,
-    passed: false,
-  });
-
-  const savedAttempt = await QuizAttempt.findById(response.body.data._id);
-  expect(savedAttempt.passed).toBe(false);
-});
-
-test("rejects a client-supplied score", async () => {
-  const response = await request(app)
-    .post(`/api/quizzes/${quiz._id}/attempts`)
-    .set("Authorization", `Bearer ${fixture.token}`)
-    .send({
-      answers: [{ questionId: "q1", choiceId: "b" }],
+    expect(response.statusCode).toBe(201);
+    expect(response.body.data).toMatchObject({
+      learner: fixture.learner._id.toString(),
+      quiz: quiz._id.toString(),
+      correctCount: 1,
+      totalQuestions: 1,
       scorePercent: 100,
       passed: true,
     });
 
-  expect(response.statusCode).toBe(400);
-  expect(await QuizAttempt.countDocuments({ quiz: quiz._id })).toBe(0);
-});
+    const savedAttempt = await QuizAttempt.findById(response.body.data._id);
 
-test("returns only the authenticated learner's attempts", async () => {
-  await QuizAttempt.create([
-    {
+    expect(savedAttempt).not.toBeNull();
+  });
+
+  test("saves a failed attempt when the score is below the passing threshold", async () => {
+    const response = await request(app)
+      .post(`/api/quizzes/${quiz._id}/attempts`)
+      .set("Authorization", `Bearer ${fixture.token}`)
+      .send({
+        answers: [{ questionId: "q1", choiceId: "b" }],
+      });
+
+    expect(response.statusCode).toBe(201);
+    expect(response.body.data).toMatchObject({
+      answers: [{ questionId: "q1", choiceId: "b" }],
+      correctCount: 0,
+      totalQuestions: 1,
+      scorePercent: 0,
+      passed: false,
+    });
+
+    const savedAttempt = await QuizAttempt.findById(response.body.data._id);
+
+    expect(savedAttempt).not.toBeNull();
+    expect(savedAttempt.passed).toBe(false);
+    expect(savedAttempt.answers[0]).toMatchObject({
+      questionId: "q1",
+      choiceId: "b",
+    });
+  });
+
+  test("rejects a client-supplied score", async () => {
+    const response = await request(app)
+      .post(`/api/quizzes/${quiz._id}/attempts`)
+      .set("Authorization", `Bearer ${fixture.token}`)
+      .send({
+        answers: [{ questionId: "q1", choiceId: "b" }],
+        scorePercent: 100,
+        passed: true,
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(await QuizAttempt.countDocuments({ quiz: quiz._id })).toBe(0);
+  });
+
+  test("returns only the authenticated learner's attempts", async () => {
+    await QuizAttempt.create([
+      {
+        learner: fixture.learner._id,
+        quiz: quiz._id,
+        correctCount: 1,
+        totalQuestions: 1,
+        scorePercent: 100,
+        passed: true,
+      },
+      {
+        learner: fixture.course.trainer,
+        quiz: quiz._id,
+        correctCount: 0,
+        totalQuestions: 1,
+        scorePercent: 0,
+        passed: false,
+      },
+    ]);
+
+    const response = await request(app)
+      .get(`/api/quizzes/${quiz._id}/attempts`)
+      .set("Authorization", `Bearer ${fixture.token}`);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body.data).toHaveLength(1);
+    expect(response.body.data[0].learner).toBe(fixture.learner._id.toString());
+  });
+
+  test("allows the course trainer to view learner attempts", async () => {
+    await QuizAttempt.create({
       learner: fixture.learner._id,
       quiz: quiz._id,
       correctCount: 1,
       totalQuestions: 1,
       scorePercent: 100,
       passed: true,
-    },
-    {
-      learner: fixture.course.trainer,
+    });
+
+    const trainerToken = jwt.sign(
+      { role: "trainer" },
+      process.env.JWT_SECRET,
+      {
+        subject: fixture.course.trainer.toString(),
+        expiresIn: "5m",
+      },
+    );
+
+    const response = await request(app)
+      .get(`/api/quizzes/${quiz._id}/attempts`)
+      .set("Authorization", `Bearer ${trainerToken}`);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body.data).toHaveLength(1);
+    expect(response.body.data[0].learner).toBe(fixture.learner._id.toString());
+  });
+
+  test("rejects another trainer from viewing learner attempts", async () => {
+    await QuizAttempt.create({
+      learner: fixture.learner._id,
       quiz: quiz._id,
-      correctCount: 0,
+      correctCount: 1,
       totalQuestions: 1,
-      scorePercent: 0,
-      passed: false,
-    },
-  ]);
+      scorePercent: 100,
+      passed: true,
+    });
 
-  const response = await request(app)
-    .get(`/api/quizzes/${quiz._id}/attempts`)
-    .set("Authorization", `Bearer ${fixture.token}`);
+    const otherTrainerId = new mongoose.Types.ObjectId();
 
-  expect(response.statusCode).toBe(200);
-  expect(response.body.data).toHaveLength(1);
-  expect(response.body.data[0].learner).toBe(fixture.learner._id.toString());
-});
+    const otherTrainerToken = jwt.sign(
+      { role: "trainer" },
+      process.env.JWT_SECRET,
+      {
+        subject: otherTrainerId.toString(),
+        expiresIn: "5m",
+      },
+    );
 
-test("rejects unauthenticated attempt history requests", async () => {
-  const response = await request(app)
-    .get(`/api/quizzes/${quiz._id}/attempts`);
+    const response = await request(app)
+      .get(`/api/quizzes/${quiz._id}/attempts`)
+      .set("Authorization", `Bearer ${otherTrainerToken}`);
 
-  expect(response.statusCode).toBe(401);
-});
+    expect(response.statusCode).toBe(403);
+  });
 
-test("rejects trainer access to learner attempt history", async () => {
-  const trainerToken = jwt.sign(
-    { role: "trainer" },
-    process.env.JWT_SECRET,
-    {
-      subject: fixture.course.trainer.toString(),
-      expiresIn: "5m",
-    },
-  );
+  test("rejects unauthenticated attempt history requests", async () => {
+    const response = await request(app)
+      .get(`/api/quizzes/${quiz._id}/attempts`);
 
-  const response = await request(app)
-    .get(`/api/quizzes/${quiz._id}/attempts`)
-    .set("Authorization", `Bearer ${trainerToken}`);
-
-  expect(response.statusCode).toBe(403);
-});
-
+    expect(response.statusCode).toBe(401);
+  });
 });

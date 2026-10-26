@@ -19,7 +19,7 @@ router.post(
 router.get(
     "/:quizId/attempts",
     authenticate,
-    authorize(roles.LEARNER),
+    authorize(roles.LEARNER, roles.TRAINER),
     getQuizAttempts
 );
 
