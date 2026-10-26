@@ -6,6 +6,7 @@ const { useTestAccounts } = require("./helpers/accounts");
 const { createLearningFixture } = require("./helpers/learning");
 const request = require("supertest");
 const app = require("../app");
+const jwt = require("jsonwebtoken")
 
 describe("QuizAttempt persistence", () => {
   let fixture;
@@ -156,6 +157,30 @@ test("returns only the authenticated learner's attempts", async () => {
   expect(response.statusCode).toBe(200);
   expect(response.body.data).toHaveLength(1);
   expect(response.body.data[0].learner).toBe(fixture.learner._id.toString());
+});
+
+test("rejects unauthenticated attempt history requests", async () => {
+  const response = await request(app)
+    .get(`/api/quizzes/${quiz._id}/attempts`);
+
+  expect(response.statusCode).toBe(401);
+});
+
+test("rejects trainer access to learner attempt history", async () => {
+  const trainerToken = jwt.sign(
+    { role: "trainer" },
+    process.env.JWT_SECRET,
+    {
+      subject: fixture.course.trainer.toString(),
+      expiresIn: "5m",
+    },
+  );
+
+  const response = await request(app)
+    .get(`/api/quizzes/${quiz._id}/attempts`)
+    .set("Authorization", `Bearer ${trainerToken}`);
+
+  expect(response.statusCode).toBe(403);
 });
 
 });
