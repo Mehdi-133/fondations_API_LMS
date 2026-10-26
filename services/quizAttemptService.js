@@ -22,6 +22,7 @@ const submitQuizAttempt = async ({ quizId, learnerId, answers}) => {
     const attempt = await QuizAttempt.create({
         learner: learnerId,
         quiz: quiz._id,
+        answers,
         ...score
     })
 
