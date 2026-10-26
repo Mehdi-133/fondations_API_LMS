@@ -6,6 +6,7 @@ const enrollmentRoutes = require("./routes/enrollmentRoutes");
 const authRoutes = require("./routes/authRoutes");
 const moduleRoutes = require("./routes/moduleRoutes");
 const trainerProgressRoutes = require("./routes/trainerProgressRoutes");
+const trainerSummaryPreferenceRoutes = require("./routes/trainerSummaryPreferenceRoutes");
 const notificationConfigRoutes = require("./routes/notificationConfigRoutes");
 const quizRoutes = require("./routes/quizRoutes");
 
@@ -39,6 +40,7 @@ app.use("/api", enrollmentRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/modules", moduleRoutes);
 app.use("/api/trainer", trainerProgressRoutes);
+app.use("/api/trainer/summary-preferences", trainerSummaryPreferenceRoutes);
 app.use("/api/quizzes", quizRoutes);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
