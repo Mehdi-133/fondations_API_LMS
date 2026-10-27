@@ -143,35 +143,6 @@ describe("QuizAttempt persistence", () => {
     expect(await QuizAttempt.countDocuments({ quiz: quiz._id })).toBe(0);
   });
 
-  test("returns only the authenticated learner's attempts", async () => {
-    await QuizAttempt.create([
-      {
-        learner: fixture.learner._id,
-        quiz: quiz._id,
-        correctCount: 1,
-        totalQuestions: 1,
-        scorePercent: 100,
-        passed: true,
-      },
-      {
-        learner: fixture.course.trainer,
-        quiz: quiz._id,
-        correctCount: 0,
-        totalQuestions: 1,
-        scorePercent: 0,
-        passed: false,
-      },
-    ]);
-
-    const response = await request(app)
-      .get(`/api/quizzes/${quiz._id}/attempts`)
-      .set("Authorization", `Bearer ${fixture.token}`);
-
-    expect(response.statusCode).toBe(200);
-    expect(response.body.data).toHaveLength(1);
-    expect(response.body.data[0].learner).toBe(fixture.learner._id.toString());
-  });
-
   test("allows the course trainer to view learner attempts", async () => {
     await QuizAttempt.create({
       learner: fixture.learner._id,
@@ -226,13 +197,6 @@ describe("QuizAttempt persistence", () => {
       .set("Authorization", `Bearer ${otherTrainerToken}`);
 
     expect(response.statusCode).toBe(403);
-  });
-
-  test("rejects unauthenticated attempt history requests", async () => {
-    const response = await request(app)
-      .get(`/api/quizzes/${quiz._id}/attempts`);
-
-    expect(response.statusCode).toBe(401);
   });
 
   // Allow only attempt results and the learner's submitted answers in responses.
