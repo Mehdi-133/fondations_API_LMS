@@ -35,11 +35,31 @@ npm test
 The existing environment supplies `JWT_SECRET`. Tests clean up their own data;
 no application database reset is used.
 
-## Remaining FAL-42 acceptance work
+## FAL-42 attempt privacy verification — 27 October 2026
 
-This verifies quiz reading, not attempt/result responses after submission.
-No QuizAttempt model or attempt route was found in this checkout during this
-check. Integrate with FAL-41/FAL-43 and prove their learner responses never
-expose correct answers before closing the whole story. PR review/merge and
-team acceptance remain separate. Docker rebuild and container checks were not
-performed in this checkpoint.
+The October 23 check covered quiz reading only. Chahd's attempt implementation
+is now integrated into team main through PR #48. The remaining privacy checks
+are implemented in `tests/quizAttempt.test.js` using real HTTP requests through
+Supertest, real login tokens, and the isolated `lms_test` database.
+
+- Successful and failed submissions return scores and the learner's submitted
+  choices, without `correctChoiceId`, private quiz questions, or a populated quiz.
+- Explicit response-field allowlists reject unexpected fields on attempts and
+  their answers, in both submission responses and history responses.
+- Two real enrolled learners submit different choices to the same quiz. Each
+  receives only their own attempt in history, including when query parameters
+  contain the other learner's ID.
+- Anonymous submission and history requests return 401 with no attempt data;
+  anonymous submission creates no record.
+- MongoDB retains `correctChoiceId` on the quiz for backend scoring. Submitted
+  attempts are persisted, and tests clean up their own records.
+
+Focused result: **14 attempt tests passed**, including five new privacy cases.
+Full regression result: **204 tests passed across 17 suites**, exit code 0.
+
+```powershell
+npm test -- --runTestsByPath tests/quizAttempt.test.js
+```
+
+These results verify local behavior. Review, commit, PR merge, Jira completion,
+and team acceptance remain separate. Docker/container checks were not performed.

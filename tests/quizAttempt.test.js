@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 const Quiz = require("../models/Quiz");
 const QuizAttempt = require("../models/QuizAttempt");
 const { submitQuizAttempt } = require("../services/quizAttemptService");
-const { useTestAccounts } = require("./helpers/accounts");
+const { useTestAccounts, domain } = require("./helpers/accounts");
+const User = require("../models/User");
+const Enrollment = require("../models/Enrollment");
+const bcrypt = require("bcrypt");
 const { createLearningFixture } = require("./helpers/learning");
 const request = require("supertest");
 const app = require("../app");
@@ -230,5 +233,114 @@ describe("QuizAttempt persistence", () => {
       .get(`/api/quizzes/${quiz._id}/attempts`);
 
     expect(response.statusCode).toBe(401);
+  });
+
+  // Allow only attempt results and the learner's submitted answers in responses.
+  const expectPrivateAttempt = (attempt) => {
+    expect(Object.keys(attempt).sort()).toEqual([
+      "_id", "__v", "learner", "quiz", "answers", "correctCount",
+      "totalQuestions", "scorePercent", "passed", "createdAt", "updatedAt",
+    ].sort());
+    expect(attempt.quiz).toBe(quiz.id);
+    for (const answer of attempt.answers) {
+      expect(Object.keys(answer).sort()).toEqual(["_id", "questionId", "choiceId"].sort());
+    }
+    expect(JSON.stringify(attempt)).not.toContain("correctChoiceId");
+    expect(attempt).not.toHaveProperty("questions");
+  };
+
+  test.each([
+    ["a", 100, true],
+    ["b", 0, false],
+  ])("keeps answer keys private after submitting choice %s", async (choiceId, scorePercent, passed) => {
+    await Enrollment.create({ learner: fixture.learner._id, course: fixture.course._id });
+    const response = await request(app)
+      .post(`/api/quizzes/${quiz.id}/attempts`)
+      .set("Authorization", `Bearer ${fixture.token}`)
+      .send({ answers: [{ questionId: "q1", choiceId }] });
+
+    expect(response.statusCode).toBe(201);
+    expect(Object.keys(response.body).sort()).toEqual(["data", "message", "status"]);
+    expect(response.body.data).toMatchObject({
+      learner: fixture.learner.id, scorePercent, passed,
+      answers: [{ questionId: "q1", choiceId }],
+    });
+    expectPrivateAttempt(response.body.data);
+    const saved = await QuizAttempt.findById(response.body.data._id);
+    expect(saved.learner.toString()).toBe(fixture.learner.id);
+    expect(saved.scorePercent).toBe(scorePercent);
+
+    const history = await request(app)
+      .get(`/api/quizzes/${quiz.id}/attempts`)
+      .set("Authorization", `Bearer ${fixture.token}`);
+    expect(history.statusCode).toBe(200);
+    expect(history.body.data).toHaveLength(1);
+    expectPrivateAttempt(history.body.data[0]);
+    expect(history.body.data[0]._id).toBe(saved.id);
+    expect(history.body.data[0].answers[0].choiceId).toBe(choiceId);
+
+    // Backend scoring must retain the private answer even after serialization.
+    const privateQuiz = await Quiz.findById(quiz._id);
+    expect(privateQuiz.questions[0].correctChoiceId).toBe("a");
+  });
+
+  test("isolates two real learners' histories even with a forged learner query", async () => {
+    const secondLearner = await User.create({
+      name: "Second privacy learner",
+      email: `privacy-learner@${domain}`,
+      password: await bcrypt.hash("Password123", 10),
+      role: "learner",
+    });
+    const login = await request(app).post("/api/auth/login").send({
+      email: secondLearner.email, password: "Password123",
+    });
+    expect(login.statusCode).toBe(200);
+    await Enrollment.create([fixture.learner, secondLearner].map(learner => ({
+      learner: learner._id, course: fixture.course._id,
+    })));
+    const identities = [
+      { user: fixture.learner, token: fixture.token, choiceId: "a" },
+      { user: secondLearner, token: login.body.data.token, choiceId: "b" },
+    ];
+    const attemptIds = [];
+    for (const identity of identities) {
+      const submission = await request(app)
+        .post(`/api/quizzes/${quiz.id}/attempts`)
+        .set("Authorization", `Bearer ${identity.token}`)
+        .send({ answers: [{ questionId: "q1", choiceId: identity.choiceId }] });
+      expect(submission.statusCode).toBe(201);
+      expect(submission.body.data.learner).toBe(identity.user.id);
+      expectPrivateAttempt(submission.body.data);
+      attemptIds.push(submission.body.data._id);
+    }
+
+    for (const [index, identity] of identities.entries()) {
+      const other = identities[1 - index];
+      const history = await request(app)
+        .get(`/api/quizzes/${quiz.id}/attempts`)
+        .query({ learner: other.user.id, learnerId: other.user.id })
+        .set("Authorization", `Bearer ${identity.token}`);
+      expect(history.statusCode).toBe(200);
+      expect(Object.keys(history.body).sort()).toEqual(["data", "message", "status"]);
+      expect(history.body.data).toHaveLength(1);
+      expect(history.body.data[0]._id).toBe(attemptIds[index]);
+      expect(history.body.data[0].learner).toBe(identity.user.id);
+      expect(history.body.data[0].answers[0].choiceId).toBe(identity.choiceId);
+      expectPrivateAttempt(history.body.data[0]);
+      expect(JSON.stringify(history.body)).not.toContain(attemptIds[1 - index]);
+      expect(JSON.stringify(history.body)).not.toContain(other.user.id);
+    }
+    expect(await QuizAttempt.countDocuments({ quiz: quiz._id })).toBe(2);
+    expect((await Quiz.findById(quiz._id)).questions[0].correctChoiceId).toBe("a");
+  });
+
+  test.each(["post", "get"])("anonymous %s exposes no attempts and writes nothing", async method => {
+    const call = request(app)[method](`/api/quizzes/${quiz.id}/attempts`);
+    if (method === "post") call.send({ answers: [{ questionId: "q1", choiceId: "a" }] });
+    const response = await call;
+    expect(response.statusCode).toBe(401);
+    expect(response.body.status).toBe(401);
+    expect(Object.keys(response.body).sort()).toEqual(["message", "status"]);
+    expect(await QuizAttempt.countDocuments({ quiz: quiz._id })).toBe(0);
   });
 });
