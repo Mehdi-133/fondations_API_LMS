@@ -21,6 +21,9 @@ const createFeedbackSchema = z
   })
   .strict();
 
+const updateFeedbackSchema = createFeedbackSchema.pick({ comment: true });
+
 module.exports = {
   createFeedbackSchema,
+  updateFeedbackSchema,
 };

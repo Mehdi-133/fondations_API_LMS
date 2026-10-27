@@ -114,9 +114,49 @@ const getFeedback = async (req, res, next) => {
   }
 };
 
+const updateFeedback = async (req, res, next) => {
+  try {
+    const feedback = await Feedback.findById(req.params.feedbackId);
+
+    if (!feedback) {
+      const error = new Error("Feedback not found");
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    if (req.user.role === roles.TRAINER) {
+      const course = await Course.findById(feedback.course);
+
+      if (!course) {
+        const error = new Error("Course not found");
+        error.statusCode = 404;
+        return next(error);
+      }
+
+      if (course.trainer.toString() !== req.user.id) {
+        const error = new Error("You are not authorized to update this feedback");
+        error.statusCode = 403;
+        return next(error);
+      }
+    }
+
+    feedback.comment = req.body.comment;
+    await feedback.save();
+
+    return res.status(200).json({
+      status: 200,
+      message: "Feedback updated successfully",
+      data: feedback,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createFeedback,
   getFeedback,
+  updateFeedback,
 };
 
 
