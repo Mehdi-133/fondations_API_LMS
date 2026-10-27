@@ -10,6 +10,8 @@ const trainerSummaryPreferenceRoutes = require("./routes/trainerSummaryPreferenc
 const notificationConfigRoutes = require("./routes/notificationConfigRoutes");
 const quizRoutes = require("./routes/quizRoutes");
 const jobRoutes = require("./routes/jobRoutes");
+const feedbackRouter = require("./routes/feedbackRouter");
+const quizAttemptRoutes = require("./routes/quizAttemptRoutes")
 
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
@@ -45,6 +47,8 @@ app.use("/api/trainer/summary-preferences", trainerSummaryPreferenceRoutes);
 app.use("/api/quizzes", quizRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/admin/jobs", jobRoutes);
+app.use("/api/feedback", feedbackRouter);
+app.use("/api/quizzes", quizAttemptRoutes)
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
