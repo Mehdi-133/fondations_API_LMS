@@ -1,131 +1,279 @@
 const User = require("../models/User");
 const Course = require("../models/Course");
 const Enrollment = require("../models/Enrollment");
+const ModuleProgress = require("../models/ModuleProgress");
+const ResourceProgress = require("../models/ResourceProgress");
+const Quiz = require("../models/Quiz");
+const { getNotificationConfig } = require("./notificationConfigService");
+const { sendEmail } = require("./email/emailService");
+
+
 const {
-  getPreferences,
+    getPreferences,
 } = require("./trainerSummaryPreferenceService");
 
 const jobHandlers = {
-  inactiveLearnerReminder: async () => {
-    console.log("[JOB] inactiveLearnerReminder executed");
+    inactiveLearnerReminder: async () => {
+        console.log("[JOB] inactiveLearnerReminder executed");
 
-    return {
-      message: "Handler executed; reminder logic pending",
-    };
-  },
+        const config = await getNotificationConfig();
+        const jobConfig = config.jobs?.inactiveLearnerReminder;
 
-  trainerSummary: async () => {
-    console.log("[JOB] trainerSummary executed");
+        if (!jobConfig?.enabled) {
+            return {
+                message: "Inactive learner reminders are disabled",
+                sent: 0,
+            };
+        }
 
-    const trainers = await User.find({
-      role: "trainer",
-      status: "active",
-    }).select("_id name email");
+        const inactiveDays = jobConfig.inactiveDays || 7;
+        const cutoffDate = new Date();
+        cutoffDate.setDate(cutoffDate.getDate() - inactiveDays);
 
-    const summaries = [];
+        const enrollments = await Enrollment.find({
+            status: "active",
+        }).populate("learner", "name email status");
 
-    for (const trainer of trainers) {
-      const preferences = await getPreferences(trainer._id);
+        let sent = 0;
+        let skipped = 0;
+        const errors = [];
 
-      const courseFilter = {
-        trainer: trainer._id,
-      };
+        for (const enrollment of enrollments) {
+            const learner = enrollment.learner;
 
-      const excludedStatuses = [];
+            if (!learner || learner.status !== "active") {
+                skipped++;
+                continue;
+            }
 
-      if (!preferences.includeDraftCourses) {
-        excludedStatuses.push("draft");
-      }
+            const [moduleActivity, resourceActivity] = await Promise.all([
+                ModuleProgress.findOne({
+                    learner: learner._id,
+                    updatedAt: { $gte: cutoffDate },
+                }).select("_id"),
+                ResourceProgress.findOne({
+                    learner: learner._id,
+                    $or: [
+                        { consultedAt: { $gte: cutoffDate } },
+                        { updatedAt: { $gte: cutoffDate } },
+                    ],
+                }).select("_id"),
+            ]);
 
-      if (!preferences.includeArchivedCourses) {
-        excludedStatuses.push("archived");
-      }
+            if (moduleActivity || resourceActivity) {
+                skipped++;
+                continue;
+            }
 
-      if (excludedStatuses.length > 0) {
-        courseFilter.status = {
-          $nin: excludedStatuses,
+            try {
+                const result = await sendEmail({
+                    to: learner.email,
+                    subject: "Reprenez votre apprentissage !",
+                    template: "inactiveLearnerReminder",
+                    data: {
+                        name: learner.name,
+                        inactiveDays,
+                    },
+                    event: "inactive_learner_reminder",
+                });
+
+                if (result?.skipped) {
+                    skipped++;
+                } else {
+                    sent++;
+                }
+            } catch (error) {
+                errors.push({
+                    learnerId: learner._id.toString(),
+                    message: error.message,
+                });
+            }
+        }
+
+        console.log(
+            `[JOB] inactiveLearnerReminder completed: ${sent} sent, ${skipped} skipped`
+        );
+
+        return {
+            message: "Inactive learner reminders processed",
+            inactiveDays,
+            sent,
+            skipped,
+            errors,
         };
-      }
+    },
+    trainerSummary: async () => {
+        console.log("[JOB] trainerSummary executed");
 
-      const courses = await Course.find(courseFilter)
-        .select("_id title status");
+        const trainers = await User.find({
+            role: "trainer",
+            status: "active",
+        }).select("_id name email");
 
-      const courseIds = courses.map((course) => course._id);
+        const summaries = [];
 
-      const summary = {
-        trainerId: trainer._id,
-        trainerName: trainer.name,
-        trainerEmail: trainer.email,
-        courses: courses.map((course) => ({
-          id: course._id,
-          title: course.title,
-          status: course.status,
-        })),
-      };
+        for (const trainer of trainers) {
+            const preferences = await getPreferences(trainer._id);
 
-      if (
-        preferences.includeEnrollmentStats &&
-        courseIds.length > 0
-      ) {
-        const enrollmentStats = await Enrollment.aggregate([
-          {
-            $match: {
-              course: { $in: courseIds },
-            },
-          },
-          {
-            $group: {
-              _id: "$course",
-              totalEnrollments: { $sum: 1 },
-            },
-          },
+            const courseFilter = {
+                trainer: trainer._id,
+            };
+
+            const excludedStatuses = [];
+
+            if (!preferences.includeDraftCourses) {
+                excludedStatuses.push("draft");
+            }
+
+            if (!preferences.includeArchivedCourses) {
+                excludedStatuses.push("archived");
+            }
+
+            if (excludedStatuses.length > 0) {
+                courseFilter.status = {
+                    $nin: excludedStatuses,
+                };
+            }
+
+            const courses = await Course.find(courseFilter)
+                .select("_id title status");
+
+            const courseIds = courses.map((course) => course._id);
+
+            const summary = {
+                trainerId: trainer._id,
+                trainerName: trainer.name,
+                trainerEmail: trainer.email,
+                courses: courses.map((course) => ({
+                    id: course._id,
+                    title: course.title,
+                    status: course.status,
+                })),
+            };
+
+            if (
+                preferences.includeEnrollmentStats &&
+                courseIds.length > 0
+            ) {
+                const enrollmentStats = await Enrollment.aggregate([
+                    {
+                        $match: {
+                            course: { $in: courseIds },
+                        },
+                    },
+                    {
+                        $group: {
+                            _id: "$course",
+                            totalEnrollments: { $sum: 1 },
+                        },
+                    },
+                ]);
+
+                summary.enrollmentStats = enrollmentStats;
+            }
+
+            if (
+                preferences.includeProgressStats &&
+                courseIds.length > 0
+            ) {
+                const progressStats = await Enrollment.aggregate([
+                    {
+                        $match: {
+                            course: { $in: courseIds },
+                        },
+                    },
+                    {
+                        $group: {
+                            _id: "$course",
+                            averageProgress: { $avg: "$progress" },
+                        },
+                    },
+                ]);
+
+                summary.progressStats = progressStats;
+            }
+
+            summaries.push(summary);
+
+            try {
+                await sendEmail({
+                    to: trainer.email,
+                    subject: "Votre résumé formateur",
+                    template: "trainerSummary",
+                    data: {
+                        name: trainer.name,
+                        courseCount: courses.length,
+                    },
+                    event: "trainer_summary",
+                });
+            } catch (error) {
+                console.error(
+                    `[JOB EMAIL FAILED] trainerSummary for ${trainer.email}:`,
+                    error.message
+                );
+            }
+        }
+
+        console.log(
+            `[JOB] trainerSummary completed for ${summaries.length} trainers`
+        );
+
+        return {
+            message: "Trainer summaries generated successfully",
+            count: summaries.length,
+            summaries,
+        };
+    },
+
+
+    statsRefresh: async () => {
+        console.log("[JOB] statsRefresh executed");
+
+        const [
+            enrollmentsPerCourse,
+            progressPerCourse,
+            totalQuizzes,
+            activeQuizzes,
+        ] = await Promise.all([
+            Enrollment.aggregate([
+                {
+                    $group: {
+                        _id: "$course",
+                        totalEnrollments: { $sum: 1 },
+                    },
+                },
+            ]),
+
+            Enrollment.aggregate([
+                {
+                    $group: {
+                        _id: "$course",
+                        averageProgress: { $avg: "$progress" },
+                    },
+                },
+            ]),
+
+            Quiz.countDocuments(),
+
+            Quiz.countDocuments({ isActive: true }),
         ]);
 
-        summary.enrollmentStats = enrollmentStats;
-      }
-
-      if (
-        preferences.includeProgressStats &&
-        courseIds.length > 0
-      ) {
-        const progressStats = await Enrollment.aggregate([
-          {
-            $match: {
-              course: { $in: courseIds },
+        const result = {
+            message: "Statistics refreshed successfully",
+            generatedAt: new Date().toISOString(),
+            enrollmentsPerCourse,
+            progressPerCourse,
+            quizzes: {
+                total: totalQuizzes,
+                active: activeQuizzes,
             },
-          },
-          {
-            $group: {
-              _id: "$course",
-              averageProgress: { $avg: "$progress" },
-            },
-          },
-        ]);
+        };
 
-        summary.progressStats = progressStats;
-      }
+        console.log("[JOB] statsRefresh completed");
 
-      summaries.push(summary);
-    }
+        return result;
+    },
 
-    console.log(
-      `[JOB] trainerSummary completed for ${summaries.length} trainers`
-    );
-
-    return {
-      message: "Trainer summaries generated successfully",
-      count: summaries.length,
-      summaries,
-    };
-  },
-
-  statsRefresh: async () => {
-    console.log("[JOB] statsRefresh executed");
-
-    return {
-      message: "Handler executed; statistics logic pending",
-    };
-  },
 };
 
 module.exports = jobHandlers;
