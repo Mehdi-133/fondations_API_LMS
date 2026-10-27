@@ -1,13 +1,9 @@
-
 const emailService = require("../services/email/emailService");
 const logDriver = require("../services/email/logDriver");
 const sandboxDriver = require("../services/email/smtpDriver");
 
-
-
 describe("Email service", () => {
   const originalDriver = process.env.EMAIL_DRIVER;
-
 
   afterEach(async () => {
     jest.restoreAllMocks();
@@ -21,8 +17,6 @@ describe("Email service", () => {
     const NotificationConfig = require("../models/NotificationConfig");
     await NotificationConfig.deleteMany({ key: "global" });
   });
-
-
 
   test("uses the log driver when configured", async () => {
     const NotificationConfig = require("../models/NotificationConfig");
@@ -57,7 +51,6 @@ describe("Email service", () => {
     );
   });
 
-
   test("rejects an unsupported driver", async () => {
     const NotificationConfig = require("../models/NotificationConfig");
 
@@ -77,16 +70,24 @@ describe("Email service", () => {
         to: "test@example.com",
         subject: "Test email",
       })
-    ).rejects.toThrow(
-      "EMAIL_DRIVER non pris en charge : unknown"
-    );
+    ).rejects.toThrow("EMAIL_DRIVER non pris en charge : unknown");
   });
-
-
-
 
   test("uses the sandbox driver when configured", async () => {
     process.env.EMAIL_DRIVER = "sandbox";
+
+    const NotificationConfig = require("../models/NotificationConfig");
+
+    await NotificationConfig.findOneAndUpdate(
+      { key: "global" },
+      {
+        $set: {
+          "notifications.enabled": true,
+          "notifications.emailDriver": "sandbox",
+        },
+      },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
 
     const sendSpy = jest
       .spyOn(sandboxDriver, "send")
@@ -109,6 +110,8 @@ describe("Email service", () => {
         event: "user_registered",
       })
     );
+  });
+
   test("does not send email when notifications are disabled", async () => {
     const NotificationConfig = require("../models/NotificationConfig");
 
@@ -137,5 +140,4 @@ describe("Email service", () => {
       reason: "notifications_disabled",
     });
   });
-
 });
