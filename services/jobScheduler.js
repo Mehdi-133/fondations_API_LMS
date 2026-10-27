@@ -59,11 +59,19 @@ const refreshJobSchedules = async (jobHandlers) => {
             continue;
         }
 
-        const task = cron.schedule(settings.frequency, () => {
-            void runJob(jobName, handler).catch(() => {
-                //erreur a déjà enregistré et journalisée par runJob
-            });
-        });
+
+        const task = cron.schedule(
+            settings.frequency,
+            () => {
+                void runJob(jobName, handler).catch(() => {
+                    //erreur deja enregistrée et journalisée par runJob
+                });
+            },
+            {
+                timezone: "Africa/Casablanca",
+            }
+        );
+
 
         registeredJobs.set(jobName, task);
         console.log(`[JOB REGISTERED] ${jobName}: ${settings.frequency}`);

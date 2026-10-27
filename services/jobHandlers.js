@@ -3,6 +3,7 @@ const Course = require("../models/Course");
 const Enrollment = require("../models/Enrollment");
 const ModuleProgress = require("../models/ModuleProgress");
 const ResourceProgress = require("../models/ResourceProgress");
+const Quiz = require("../models/Quiz");
 const { getNotificationConfig } = require("./notificationConfigService");
 const { sendEmail } = require("./email/emailService");
 
@@ -195,22 +196,22 @@ const jobHandlers = {
             summaries.push(summary);
 
             try {
-    await sendEmail({
-        to: trainer.email,
-        subject: "Votre résumé formateur",
-        template: "trainerSummary",
-        data: {
-            name: trainer.name,
-            courseCount: courses.length,
-        },
-        event: "trainer_summary",
-    });
-} catch (error) {
-    console.error(
-        `[JOB EMAIL FAILED] trainerSummary for ${trainer.email}:`,
-        error.message
-    );
-}
+                await sendEmail({
+                    to: trainer.email,
+                    subject: "Votre résumé formateur",
+                    template: "trainerSummary",
+                    data: {
+                        name: trainer.name,
+                        courseCount: courses.length,
+                    },
+                    event: "trainer_summary",
+                });
+            } catch (error) {
+                console.error(
+                    `[JOB EMAIL FAILED] trainerSummary for ${trainer.email}:`,
+                    error.message
+                );
+            }
         }
 
         console.log(
@@ -224,13 +225,55 @@ const jobHandlers = {
         };
     },
 
+
     statsRefresh: async () => {
         console.log("[JOB] statsRefresh executed");
 
-        return {
-            message: "Handler executed; statistics logic pending",
+        const [
+            enrollmentsPerCourse,
+            progressPerCourse,
+            totalQuizzes,
+            activeQuizzes,
+        ] = await Promise.all([
+            Enrollment.aggregate([
+                {
+                    $group: {
+                        _id: "$course",
+                        totalEnrollments: { $sum: 1 },
+                    },
+                },
+            ]),
+
+            Enrollment.aggregate([
+                {
+                    $group: {
+                        _id: "$course",
+                        averageProgress: { $avg: "$progress" },
+                    },
+                },
+            ]),
+
+            Quiz.countDocuments(),
+
+            Quiz.countDocuments({ isActive: true }),
+        ]);
+
+        const result = {
+            message: "Statistics refreshed successfully",
+            generatedAt: new Date().toISOString(),
+            enrollmentsPerCourse,
+            progressPerCourse,
+            quizzes: {
+                total: totalQuizzes,
+                active: activeQuizzes,
+            },
         };
+
+        console.log("[JOB] statsRefresh completed");
+
+        return result;
     },
+
 };
 
 module.exports = jobHandlers;
