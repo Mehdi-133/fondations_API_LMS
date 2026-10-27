@@ -1,11 +1,14 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const { sendEmail } = require("../services/email/emailService");
 
 const SALT_ROUNDS = 10;
 
 const register = async (req, res, next) => {
+  //  console.log("registred");
   try {
+    
     const { email, password, name } = req.body;
 
     const existingUser = await User.findOne({ email });
@@ -24,6 +27,23 @@ const register = async (req, res, next) => {
       password: hashedPassword,
       role: "learner",
     });
+
+    try {
+      
+
+      await sendEmail({
+        to: user.email,
+        subject: "Bienvenue sur notre LMS",
+        template: "welcome",
+        data: { name: user.name },
+        event: "user_registered",
+      });
+
+      
+    } catch (emailError) {
+      console.error("Erreur lors de l'envoi de l'e-mail :", emailError.message);
+    }
+
 
     return res.status(201).json({
       status: 201,
