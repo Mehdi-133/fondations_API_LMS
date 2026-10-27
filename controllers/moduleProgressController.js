@@ -3,6 +3,8 @@ const Enrollment = require("../models/Enrollment");
 const ModuleProgress = require("../models/ModuleProgress");
 const Resource = require("../models/Resource");
 const ResourceProgress = require("../models/ResourceProgress");
+const Quiz = require("../models/Quiz")
+const QuizAttempt = require("../models/QuizAttempt")
 
 const completeModule = async (req, res, next) => {
     try {
@@ -69,6 +71,27 @@ const completeModule = async (req, res, next) => {
                 status: 400,
                 message: "Vous devez consulter toutes les ressources avant de terminer ce module"
             });
+        }
+
+        const requireQuiz = await Quiz.findOne({
+            moduleId: module._id,
+            isActive: true,
+            isRequired: true
+        })
+
+        if(requireQuiz) {
+            const passAttempt = await QuizAttempt.exists({
+                learner: req.user.id,
+                quiz: requireQuiz._id,
+                passed: true
+            })
+
+            if(!passAttempt) {
+                return res.status(400).json({
+                    status: 400,
+                    message: "You must pass the mandatory quiz before completing this module."
+                })
+            }
         }
 
         const progress = await ModuleProgress.findOneAndUpdate(

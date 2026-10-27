@@ -1,6 +1,8 @@
+
 const emailService = require("../services/email/emailService");
 const logDriver = require("../services/email/logDriver");
 const sandboxDriver = require("../services/email/smtpDriver");
+const NotificationConfig = require("../models/NotificationConfig");
 
 describe("Email service", () => {
   const originalDriver = process.env.EMAIL_DRIVER;
@@ -14,13 +16,10 @@ describe("Email service", () => {
       process.env.EMAIL_DRIVER = originalDriver;
     }
 
-    const NotificationConfig = require("../models/NotificationConfig");
     await NotificationConfig.deleteMany({ key: "global" });
   });
 
   test("uses the log driver when configured", async () => {
-    const NotificationConfig = require("../models/NotificationConfig");
-
     await NotificationConfig.findOneAndUpdate(
       { key: "global" },
       {
@@ -52,8 +51,6 @@ describe("Email service", () => {
   });
 
   test("rejects an unsupported driver", async () => {
-    const NotificationConfig = require("../models/NotificationConfig");
-
     await NotificationConfig.findOneAndUpdate(
       { key: "global" },
       {
@@ -74,10 +71,6 @@ describe("Email service", () => {
   });
 
   test("uses the sandbox driver when configured", async () => {
-    process.env.EMAIL_DRIVER = "sandbox";
-
-    const NotificationConfig = require("../models/NotificationConfig");
-
     await NotificationConfig.findOneAndUpdate(
       { key: "global" },
       {
@@ -113,8 +106,6 @@ describe("Email service", () => {
   });
 
   test("does not send email when notifications are disabled", async () => {
-    const NotificationConfig = require("../models/NotificationConfig");
-
     await NotificationConfig.findOneAndUpdate(
       { key: "global" },
       {
