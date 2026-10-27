@@ -3,6 +3,8 @@ const connectDB = require("../config/db");
 const Course = require("../models/Course");
 const Module = require("../models/Module");
 const Resource = require("../models/Resource");
+const bcrypt = require("bcrypt")
+const User = require("../models/User")
 
 dotenv.config();
 
@@ -51,6 +53,57 @@ const courses = [
         status: "draft"
     }
 ];
+
+const demoAccounts = [
+    {
+        key: "admin",
+        name: "Demo Admin",
+        email: "admin@example.test",
+        role: "admin",
+    },
+    {
+        key: "trainer",
+        name: "Demo Trainer",
+        email: "trainer@example.test",
+        role: "trainer",
+    },
+    {
+        key: "learner",
+        name: "Demo Learner",
+        email: "learner@example.test",
+        role: "learner",
+    },
+];
+
+const seedDemoUsers = async () => {
+    const password = process.env.SEED_DEMO_PASSWORD;
+
+    if (!password || password.length < 8) {
+        throw new Error("SEED_DEMO_PASSWORD must contain at least 8 characters");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const users = {};
+
+    for (const account of demoAccounts) {
+        let user = await User.findOne({ email: account.email });
+
+        if (!user) {
+            user = await User.create({
+                name: account.name,
+                email: account.email,
+                role: account.role,
+                password: hashedPassword,
+            });
+        } else if (user.role !== account.role) {
+            throw new Error(`Demo account ${account.email} has an unexpected role`);
+        }
+
+        users[account.key] = user;
+    }
+
+    return users;
+};
 
 const seed = async () => {
     try {
