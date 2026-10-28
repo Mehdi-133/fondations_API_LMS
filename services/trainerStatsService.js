@@ -2,7 +2,7 @@ const Course = require("../models/Course")
 const JobExecution = require("../models/JobExecution")
 
 const getTrainerStats = async (trainerId) => {
-    const courses = (await Course.find({ trainer: trainerId })).select("_id title").lean()
+    const courses = await Course.find({ trainer: trainerId }).select("_id title").lean()
     
     const latestRefresh = await JobExecution.findOne({
         jobName: "statsRefresh",
@@ -21,6 +21,13 @@ const getTrainerStats = async (trainerId) => {
 
     const enrollmentsByCourse = new Map(
         (result.enrollmentsPerCourse || []).map((item) => [
+            String(item._id),
+            item.totalEnrollments
+        ])
+    )
+
+    const ProgressByCourse = new Map(
+        (result.progressPerCourse || []).map((item) => [
             String(item._id),
             item.averageProgress
         ])
