@@ -14,7 +14,9 @@ const {
  *     summary: Complete a module
  *     description: >-
  *       Requires active enrollment, all module resources consulted, and completion of the published
- *       module at order minus one if it exists. Upserts completion progress. No request body required.
+ *       module at order minus one if it exists. If an active mandatory quiz exists, the learner must
+ *       also have a passed attempt for that quiz. Optional quizzes do not block completion.
+ *       Upserts completion progress. No request body required.
  *     tags:
  *       - Progress
  *     security:
@@ -30,7 +32,7 @@ const {
  *       '200':
  *         description: Returns message and module progress in data.
  *       '400':
- *         description: Invalid ID or resources remain unconsulted.
+ *         description: Invalid ID, resources remain unconsulted, or the active mandatory quiz has not been passed.
  *       '401':
  *         description: Missing, invalid, or expired Bearer token.
  *       '403':

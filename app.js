@@ -1,3 +1,46 @@
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: API health message
+ *     tags:
+ *       - Health
+ *     security: []
+ *     responses:
+ *       '200':
+ *         description: API responds.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *               required:
+ *                 - message
+ *             example:
+ *               message: LMS API is working
+ * /api/modules/test:
+ *   get:
+ *     summary: Module route diagnostic
+ *     tags:
+ *       - Health
+ *     security: []
+ *     responses:
+ *       '200':
+ *         description: Diagnostic route responds.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *               required:
+ *                 - message
+ *             example:
+ *               message: modules route works
+ */
 const express = require("express");
 
 const courseRoutes = require("./routes/courseRoutes");

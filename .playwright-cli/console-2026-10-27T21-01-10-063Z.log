@@ -1,0 +1,5 @@
+[     826ms] [ERROR] Failed to load resource: net::ERR_QUIC_PROTOCOL_ERROR @ https://intranet.youcode.ma/assets/js/vendor.min.js:0
+[     846ms] ReferenceError: $ is not defined
+    at https://intranet.youcode.ma/assets/js/app.min.js:1:56904
+[     856ms] ReferenceError: $ is not defined
+    at https://intranet.youcode.ma/assets/js/demo/login-v2.demo.js:34:1
