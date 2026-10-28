@@ -18,7 +18,7 @@ If `.env` exists, keep it and update the needed values.
 | Variable | Purpose |
 | --- | --- |
 | `PORT` | HTTP port; defaults to `3000` |
-| `MONGO_URI` | Application database, e.g. `mongodb://localhost:27017/lms` |
+| `MONGO_URI` | Application database, e.g. `mongodb://localhost:27018/lms` |
 | `JWT_SECRET` | Your own long random signing secret |
 | `JWT_EXPIRES_IN` | Token lifetime, e.g. `1h` |
 | `MONGO_TEST_URI` | Test database connection; test setup selects `lms_test` |
@@ -131,6 +131,19 @@ npm test -- tests/enrollment.test.js
 ## Legacy seed script
 
 `npm run seed` is not a required setup step. It deletes all courses, modules and resources in `MONGO_URI` before inserting samples. The samples currently omit the required course `trainer`, so insertion fails against the current schema. Update the script before using it; it also does not reset enrollment or progress records.
+
+### Notification et jobs
+
+La configuration des notifications et des tâches planifiées
+est stockée dans MongoDB dans le document `NotificationConfig`
+dont la clé est `global`.
+
+Le driver email est configuré par `notifications.emailDriver`
+avec les valeurs `log`, `sandbox` ou `smtp`.
+
+Les tâches sont configurées individuellement avec `enabled`
+et `frequency`. Le rappel des apprenants inactifs utilise
+également `inactiveDays`.
 
 ## Project structure
 
