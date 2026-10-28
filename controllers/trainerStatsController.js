@@ -1,10 +1,10 @@
-const { getTrainerStats } = require("../services/trainerStatsService")
+const { getTrainerStats: fetchTrainerStats } = require("../services/trainerStatsService")
 
-const getTrainerStats = async (req, resizeBy, next) => {
+const getTrainerStats = async (req, res, next) => {
     try {
         const stats = await fetchTrainerStats(req.user.id)
 
-        return resizeBy.status(200).json({
+        return res.status(200).json({
             message: "trainer statistics retrieved successfully",
             data: stats
         })
