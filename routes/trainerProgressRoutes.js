@@ -3,6 +3,7 @@ const express = require("express");
 const authenticate = require("../middlewares/authenticate");
 const { authorize } = require("../middlewares/authorize");
 const { roles } = require("../consts/roles");
+const { getTrainerStats } = require("../controllers/trainerStatsController")
 
 
 const {
@@ -137,6 +138,13 @@ router.get(
     authenticate,
     authorize(roles.TRAINER),
     getLearnerProgress
+);
+
+router.get(
+    "/stats",
+    authenticate,
+    authorize(roles.TRAINER),
+    getTrainerStats
 );
 
 module.exports = router;
