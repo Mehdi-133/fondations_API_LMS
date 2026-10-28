@@ -4,6 +4,9 @@ A REST API for a learning management system. Trainers manage courses, modules an
 
 Built with Node.js, Express, MongoDB/Mongoose, JWT, bcrypt, Zod and Multer. Swagger UI provides interactive documentation. Jest and Supertest cover authentication, roles, enrollment and progress.
 
+Frontend developers: start with the [React API contract](docs/react-api-contract.md)
+for endpoint cards, authentication, response formats, demo setup and integration gaps.
+
 ## Local setup
 
 Use Node.js 20 (the Dockerfile version), npm and MongoDB.
@@ -128,9 +131,15 @@ For standard local MongoDB use port `27017`. Run only enrollment tests with:
 npm test -- tests/enrollment.test.js
 ```
 
-## Legacy seed script
+## Demo seed
 
-`npm run seed` is not a required setup step. It deletes all courses, modules and resources in `MONGO_URI` before inserting samples. The samples currently omit the required course `trainer`, so insertion fails against the current schema. Update the script before using it; it also does not reset enrollment or progress records.
+`npm run seed` requires `SEED_DEMO_PASSWORD` (at least eight characters) and a
+deliberately selected development `MONGO_URI`. It upserts demo learner, trainer
+and admin accounts, resets their passwords, and replaces the matching demo
+trainer's sample courses and related learning records. Course IDs can change
+after a reset. It is not a required startup step and is not run automatically.
+See [demo setup and replay](docs/react-api-contract.md#5-demo-setup-and-replay)
+for account names, setup impact and current integration dependencies.
 
 ### Notification et jobs
 
@@ -159,7 +168,7 @@ validators/     Zod request body schemas
 middlewares/    Authentication, roles, enrollment, uploads and errors
 docs/           Swagger setup, diagrams and workshop notes
 tests/          Integration tests and helpers
-seed/           Legacy sample-data script
+seed/           Demo accounts and sample learning data
 uploads/        Local uploaded files
 ```
 
