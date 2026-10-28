@@ -895,5 +895,99 @@ module.exports = {
       "status",
       "startedAt"
     ]
+  },
+  "TrainerCourseStats": {
+    "type": "object",
+    "properties": {
+      "courseId": {
+        "$ref": "#/components/schemas/ObjectId"
+      },
+      "courseTitle": {
+        "type": "string"
+      },
+      "totalEnrollments": {
+        "type": "integer",
+        "minimum": 0,
+        "description": "All enrollment statuses."
+      },
+      "averageProgress": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100,
+        "description": "Average enrollment progress, rounded to two decimals."
+      },
+      "totalAttempts": {
+        "type": "integer",
+        "minimum": 0,
+        "description": "All quiz attempts across the course modules."
+      },
+      "passedAttempts": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "averageScore": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100,
+        "description": "Average scorePercent across all attempts, rounded to two decimals."
+      },
+      "feedbackCount": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "required": [
+      "courseId",
+      "courseTitle",
+      "totalEnrollments",
+      "averageProgress",
+      "totalAttempts",
+      "passedAttempts",
+      "averageScore",
+      "feedbackCount"
+    ],
+    "additionalProperties": false
+  },
+  "TrainerStatsResponse": {
+    "type": "object",
+    "properties": {
+      "message": {
+        "type": "string",
+        "enum": [
+          "trainer statistics retrieved successfully"
+        ]
+      },
+      "data": {
+        "type": "object",
+        "properties": {
+          "dataAvailable": {
+            "type": "boolean"
+          },
+          "refreshedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Latest successful global statsRefresh finishedAt; null without a snapshot."
+          },
+          "courses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrainerCourseStats"
+            }
+          }
+        },
+        "required": [
+          "dataAvailable",
+          "refreshedAt",
+          "courses"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "message",
+      "data"
+    ],
+    "additionalProperties": false
   }
 };

@@ -140,6 +140,82 @@ router.get(
     getLearnerProgress
 );
 
+/**
+ * @swagger
+ * /api/trainer/stats:
+ *   get:
+ *     summary: Read my cached course statistics
+ *     description: >-
+ *       Trainer only; admins and learners receive 403. Reads the latest successful global
+ *       statsRefresh execution by finishedAt, without running a refresh. Check refreshedAt for
+ *       staleness. Includes all current owned courses regardless of publication status; courses
+ *       absent from the snapshot receive zero metrics. Enrollment metrics include every enrollment
+ *       status. Attempt metrics include all attempts, not just one per learner. Progress and score
+ *       averages are rounded to two decimals. Without a successful snapshot, returns HTTP 200
+ *       with dataAvailable false, refreshedAt null and an empty courses array.
+ *     tags: [Trainer]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: Cached statistics or no-snapshot response. No top-level status field.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/TrainerStatsResponse'
+ *             examples:
+ *               available:
+ *                 summary: Successful snapshot with one owned course
+ *                 value:
+ *                   message: trainer statistics retrieved successfully
+ *                   data:
+ *                     dataAvailable: true
+ *                     refreshedAt: '2026-10-28T09:00:00.000Z'
+ *                     courses:
+ *                       - courseId: '507f1f77bcf86cd799439011'
+ *                         courseTitle: JavaScript basics
+ *                         totalEnrollments: 3
+ *                         averageProgress: 40
+ *                         totalAttempts: 3
+ *                         passedAttempts: 2
+ *                         averageScore: 60
+ *                         feedbackCount: 2
+ *               unavailable:
+ *                 summary: No successful statsRefresh execution yet
+ *                 value:
+ *                   message: trainer statistics retrieved successfully
+ *                   data:
+ *                     dataAvailable: false
+ *                     refreshedAt: null
+ *                     courses: []
+ *       '401':
+ *         description: Missing, malformed, invalid or expired Bearer token.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiError'
+ *             example:
+ *               status: 401
+ *               message: Authorization header missing
+ *       '403':
+ *         description: Trainer role required; admins are also refused.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiError'
+ *             example:
+ *               status: 403
+ *               message: Forbidden
+ *       '500':
+ *         description: Unexpected server or database error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiError'
+ *             example:
+ *               status: 500
+ *               message: Internal server error
+ */
 router.get(
     "/stats",
     authenticate,
