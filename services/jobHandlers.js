@@ -6,7 +6,9 @@ const ResourceProgress = require("../models/ResourceProgress");
 const Quiz = require("../models/Quiz");
 const { getNotificationConfig } = require("./notificationConfigService");
 const { sendEmail } = require("./email/emailService");
-
+const Module = require("../models/Module")
+const QuizAttempt = require("../models/QuizAttempt")
+const { Feedback } = require("../models/Feedback")
 
 const {
     getPreferences,
@@ -227,52 +229,96 @@ const jobHandlers = {
 
 
     statsRefresh: async () => {
-        console.log("[JOB] statsRefresh executed");
+    console.log("[JOB] statsRefresh executed");
 
-        const [
-            enrollmentsPerCourse,
-            progressPerCourse,
-            totalQuizzes,
-            activeQuizzes,
-        ] = await Promise.all([
-            Enrollment.aggregate([
-                {
-                    $group: {
-                        _id: "$course",
-                        totalEnrollments: { $sum: 1 },
-                    },
+    const [
+        enrollmentsPerCourse,
+        progressPerCourse,
+        quizAttemptsPerCourse,
+        feedbackPerCourse,
+        totalQuizzes,
+        activeQuizzes,
+    ] = await Promise.all([
+        Enrollment.aggregate([
+            {
+                $group: {
+                    _id: "$course",
+                    totalEnrollments: { $sum: 1 },
                 },
-            ]),
-
-            Enrollment.aggregate([
-                {
-                    $group: {
-                        _id: "$course",
-                        averageProgress: { $avg: "$progress" },
-                    },
-                },
-            ]),
-
-            Quiz.countDocuments(),
-
-            Quiz.countDocuments({ isActive: true }),
-        ]);
-
-        const result = {
-            message: "Statistics refreshed successfully",
-            generatedAt: new Date().toISOString(),
-            enrollmentsPerCourse,
-            progressPerCourse,
-            quizzes: {
-                total: totalQuizzes,
-                active: activeQuizzes,
             },
-        };
+        ]),
 
-        console.log("[JOB] statsRefresh completed");
+        Enrollment.aggregate([
+            {
+                $group: {
+                    _id: "$course",
+                    averageProgress: { $avg: "$progress" },
+                },
+            },
+        ]),
 
-        return result;
-    },
+        QuizAttempt.aggregate([
+            {
+                $lookup: {
+                    from: Quiz.collection.name,
+                    localField: "quiz",
+                    foreignField: "_id",
+                    as: "quiz",
+                },
+            },
+            { $unwind: "$quiz" },
+            {
+                $lookup: {
+                    from: Module.collection.name,
+                    localField: "quiz.moduleId",
+                    foreignField: "_id",
+                    as: "module",
+                },
+            },
+            { $unwind: "$module" },
+            {
+                $group: {
+                    _id: "$module.course",
+                    totalAttempts: { $sum: 1 },
+                    passedAttempts: {
+                        $sum: { $cond: ["$passed", 1, 0] },
+                    },
+                    averageScore: { $avg: "$scorePercent" },
+                },
+            },
+        ]),
+
+        Feedback.aggregate([
+            {
+                $group: {
+                    _id: "$course",
+                    feedbackCount: { $sum: 1 },
+                },
+            },
+        ]),
+
+        Quiz.countDocuments(),
+
+        Quiz.countDocuments({ isActive: true }),
+    ]);
+
+    const result = {
+        message: "Statistics refreshed successfully",
+        generatedAt: new Date().toISOString(),
+        enrollmentsPerCourse,
+        progressPerCourse,
+        quizAttemptsPerCourse,
+        feedbackPerCourse,
+        quizzes: {
+            total: totalQuizzes,
+            active: activeQuizzes,
+        },
+    };
+
+    console.log("[JOB] statsRefresh completed");
+
+    return result;
+},
 
 };
 

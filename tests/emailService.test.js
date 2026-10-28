@@ -67,11 +67,8 @@ describe("Email service", () => {
         to: "test@example.com",
         subject: "Test email",
       })
-    ).rejects.toThrow(
-      "EMAIL_DRIVER non pris en charge : unknown"
-    );
+    ).rejects.toThrow("EMAIL_DRIVER non pris en charge : unknown");
   });
-
 
   test("uses the sandbox driver when configured", async () => {
     await NotificationConfig.findOneAndUpdate(
@@ -107,7 +104,6 @@ describe("Email service", () => {
       })
     );
   });
-
 
   test("does not send email when notifications are disabled", async () => {
     await NotificationConfig.findOneAndUpdate(
