@@ -1,0 +1,279 @@
+- generic [ref=f33e3]:
+  - dialog "Atlassian cookies and tracking notice , (opens new window)" [ref=f33e7]:
+    - generic [ref=f33e8]:
+      - generic [ref=f33e11]:
+        - text: Atlassian uses cookies to improve your browsing experience, perform analytics and research, and conduct advertising. Accept all cookies to indicate that you agree to our use of cookies on your device.
+        - link "Atlassian cookies and tracking notice , (opens new window)" [ref=f33e12] [cursor=pointer]:
+          - /url: https://www.atlassian.com/legal/cookies
+          - text: Atlassian cookies and tracking notice
+          - generic [ref=f33e13]: ", (opens new window)"
+      - generic [ref=f33e14]:
+        - button "Preferences" [ref=f33e15] [cursor=pointer]
+        - button "Only necessary" [ref=f33e17] [cursor=pointer]
+        - button "Accept all" [ref=f33e19] [cursor=pointer]
+  - banner [ref=f33e23]:
+    - generic [ref=f33e24]:
+      - button "Collapse sidebar" [ref=f33e25] [cursor=pointer]
+      - button [ref=f33e31] [cursor=pointer]:
+        - alert "The App Switcher is loading" [ref=f33e35]
+      - link "Go to your Jira homepage" [ref=f33e48] [cursor=pointer]:
+        - /url: /jira
+        - generic [ref=f33e49]: Jira
+    - generic [ref=f33e58]:
+      - search [ref=f33e63]:
+        - textbox "Search" [ref=f33e66]
+      - button "Create" [ref=f33e69] [cursor=pointer]
+    - navigation "Actions" [ref=f33e73]:
+      - list [ref=f33e74]:
+        - listitem [ref=f33e75]:
+          - generic [ref=f33e77]:
+            - button "Over 9 Notifications" [ref=f33e78] [cursor=pointer]
+            - generic [aria-hidden]:
+              - generic: 9+
+        - listitem [ref=f33e85]:
+          - button "Help" [ref=f33e86] [cursor=pointer]
+        - listitem [ref=f33e90]:
+          - button "Settings" [ref=f33e92] [cursor=pointer]
+        - listitem [ref=f33e96]:
+          - button "mehdikarbitou@gmail.com" [ref=f33e97] [cursor=pointer]
+  - navigation "Sidebar" [ref=f33e103]:
+    - generic [ref=f33e106]:
+      - list [ref=f33e107]:
+        - generic [ref=f33e109]:
+          - listitem [ref=f33e111]:
+            - link "For you" [ref=f33e113] [cursor=pointer]:
+              - /url: /jira/for-you
+          - listitem [ref=f33e119]:
+            - button "Recent" [ref=f33e121] [cursor=pointer]
+          - listitem [ref=f33e126]:
+            - button "Starred" [ref=f33e128] [cursor=pointer]
+          - listitem [ref=f33e133]:
+            - button "Apps" [ref=f33e137] [cursor=pointer]
+          - listitem [ref=f33e142]:
+            - generic [ref=f33e143]:
+              - generic [ref=f33e145]:
+                - button "Spaces" [expanded] [ref=f33e146] [cursor=pointer]
+                - generic [ref=f33e151]:
+                  - button "Create space" [ref=f33e152] [cursor=pointer]
+                  - button "More actions for spaces" [ref=f33e156] [cursor=pointer]
+              - list [ref=f33e160]:
+                - listitem [ref=f33e161]:
+                  - group [ref=f33e162]:
+                    - paragraph [ref=f33e163]: Recent
+                    - list [ref=f33e164]:
+                      - listitem [ref=f33e165]:
+                        - generic [ref=f33e166]:
+                          - link "fondations_API_LMS" [ref=f33e167] [cursor=pointer]:
+                            - /url: /jira/software/projects/FAL/boards/67/backlog
+                          - generic:
+                            - button "More actions for fondations_API_LMS"
+                - listitem [ref=f33e176]:
+                  - group [ref=f33e177]:
+                    - list [ref=f33e178]:
+                      - listitem [ref=f33e179]:
+                        - button "More spaces" [ref=f33e181] [cursor=pointer]
+                      - list [ref=f33e186]:
+                        - group [ref=f33e187]:
+                          - heading "Recommended" [level=2] [ref=f33e188]
+                          - listitem [ref=f33e189]:
+                            - listitem [ref=f33e190]:
+                              - generic [ref=f33e191]:
+                                - button "Collect IT requests" [ref=f33e192] [cursor=pointer]
+                                - generic: Try
+          - listitem [ref=f33e197]:
+            - button "Filters" [ref=f33e201] [cursor=pointer]
+          - listitem [ref=f33e206]:
+            - generic [ref=f33e209]:
+              - button "Dashboards" [ref=f33e210] [cursor=pointer]
+              - button "Create dashboard" [ref=f33e215] [cursor=pointer]
+      - generic [ref=f33e220]:
+        - list [ref=f33e225]:
+          - listitem [ref=f33e227]:
+            - generic [ref=f33e228]:
+              - link "Teams , (opens new window)" [ref=f33e229] [cursor=pointer]:
+                - /url: https://home.atlassian.com/o/56de69b1-ac3e-4506-bc0d-a06ca03cb86d/people/?cloudId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f
+                - generic [ref=f33e231]: Teams
+                - generic [ref=f33e235]: ", (opens new window)"
+              - generic:
+                - img "Teams"
+              - generic:
+                - button "Teams"
+        - listitem [ref=f33e242]:
+          - button "Customize sidebar" [ref=f33e244] [cursor=pointer]
+  - main [ref=f33e249]:
+    - generic [ref=f33e260]:
+      - generic [ref=f33e262]:
+        - navigation "Work item breadcrumbs" [ref=f33e267]:
+          - list [ref=f33e268]:
+            - listitem [ref=f33e269]:
+              - listitem [ref=f33e270]:
+                - link "Spaces" [ref=f33e271] [cursor=pointer]:
+                  - /url: /jira/projects
+              - text: /
+            - listitem [ref=f33e273]:
+              - img "fondations_API_LMS" [ref=f33e276]
+              - listitem [ref=f33e277]:
+                - link "fondations_API_LMS" [ref=f33e278] [cursor=pointer]:
+                  - /url: https://marouakourdi61.atlassian.net/browse/FAL
+              - text: /
+            - listitem [ref=f33e280]:
+              - button "Task - Change parent" [ref=f33e282] [cursor=pointer]:
+                - img "Task" [ref=f33e284]
+              - listitem [ref=f33e285]:
+                - link "FAL-161" [ref=f33e286] [cursor=pointer]:
+                  - /url: https://marouakourdi61.atlassian.net/browse/FAL-161
+              - text: /
+            - listitem [ref=f33e288]:
+              - button "Sous-tâche - Change work type" [ref=f33e290] [cursor=pointer]:
+                - img "Sous-tâche" [ref=f33e292]
+              - generic:
+                - status
+              - listitem [ref=f33e293]:
+                - link "FAL-189" [ref=f33e294] [cursor=pointer]:
+                  - /url: /browse/FAL-189
+              - generic [ref=f33e297]:
+                - textbox [aria-hidden] [ref=f33e298]
+                - button [ref=f33e299] [cursor=pointer]:
+                  - img "Copy link" [ref=f33e301]
+        - generic [ref=f33e308]:
+          - button "2. Write React API request and response examples with demo data- Summary, edit"
+          - heading "2. Write React API request and response examples with demo data" [level=1] [ref=f33e310]
+        - button "Add or create work related to this Sous-tâche" [ref=f33e315] [cursor=pointer]
+        - generic [ref=f33e323]:
+          - heading "Collapse Description Description" [level=2] [ref=f33e324]:
+            - generic [ref=f33e328] [cursor=pointer]:
+              - button "Collapse Description" [ref=f33e329]
+              - generic [ref=f33e333]: Description
+          - region "Description section" [ref=f33e334]:
+            - generic [ref=f33e340]:
+              - button "Add Description, edit"
+              - generic [ref=f33e344]:
+                - paragraph [ref=f33e345]: Depends on subtask 1. Write a dedicated React API contract document using existing implementation and OpenAPI.
+                - paragraph [ref=f33e346]: "Acceptance: include request and response examples for the selected authentication, catalogue, enrollment, progression, quiz, feedback and trainer statistics journeys; explain required fields, HTTP errors, role restrictions and cached statistics; reference the seeded demo accounts and fixture setup without publishing real secrets."
+                - paragraph [ref=f33e347]: Label examples as verified only when supported by existing execution evidence; record gaps explicitly. The Postman collection remains FAL-163. Documentation only; no new automated tests or endpoint changes.
+        - generic [ref=f33e350]:
+          - heading "Linked work items" [level=2] [ref=f33e352]
+          - button "Add linked work item" [ref=f33e354] [cursor=pointer]
+        - generic [ref=f33e358]:
+          - heading "Activity" [level=2] [ref=f33e360]
+          - generic [ref=f33e361]:
+            - tablist "Show" [ref=f33e365]:
+              - tab "All" [ref=f33e366] [cursor=pointer]
+              - tab "Comments" [selected] [ref=f33e368]
+              - tab "History" [ref=f33e370] [cursor=pointer]
+              - tab "Work log" [ref=f33e372] [cursor=pointer]
+            - button "Newest first" [ref=f33e376] [cursor=pointer]
+          - tabpanel "Comments" [ref=f33e380]:
+            - generic [ref=f33e384]:
+              - img "Profile image of Mehdi Karbitou" [ref=f33e386]
+              - generic [ref=f33e389]:
+                - generic [ref=f33e390]:
+                  - button "Add a comment…" [ref=f33e391]
+                  - group "Quick comments" [ref=f33e393]:
+                    - button "🎉 Looks good!" [ref=f33e394] [cursor=pointer]
+                    - button "👋 Need help?" [ref=f33e396] [cursor=pointer]
+                    - button "⛔ This is blocked..." [ref=f33e398] [cursor=pointer]
+                    - button "🔍 Can you clarify...?" [ref=f33e400] [cursor=pointer]
+                    - button "✅ This is on track" [ref=f33e402] [cursor=pointer]
+                - generic [ref=f33e404]:
+                  - strong [ref=f33e405]: "Pro tip:"
+                  - text: press
+                  - generic [ref=f33e406]: M
+                  - text: to comment
+      - generic [ref=f33e409]:
+        - generic [ref=f33e411]:
+          - slider "Resize work item view side panel" [ref=f33e412]: "0.65"
+          - text: Resize work item view side panel
+        - generic [ref=f33e415] [cursor=pointer]
+      - generic [ref=f33e418]:
+        - group "Action items" [ref=f33e420]:
+          - generic [ref=f33e421]:
+            - 'button "Watch options: You are watching this issue, 1 person watching" [ref=f33e425] [cursor=pointer]':
+              - generic [ref=f33e428]: "1"
+            - generic [ref=f33e432]:
+              - button "Share" [ref=f33e433] [cursor=pointer]
+              - generic:
+                - status
+            - button "Actions" [ref=f33e438] [cursor=pointer]
+            - generic:
+              - status
+        - generic [ref=f33e442]:
+          - generic [ref=f33e445]:
+            - button "À faire - Change status" [ref=f33e453] [cursor=pointer]:
+              - generic [ref=f33e454]: À faire
+            - button "Automation" [ref=f33e459] [cursor=pointer]
+          - generic [ref=f33e464]:
+            - generic [ref=f33e468]:
+              - button [expanded] [ref=f33e472] [cursor=pointer]:
+                - heading "Details" [level=2] [ref=f33e477]
+              - generic [ref=f33e480]:
+                - generic [ref=f33e484]:
+                  - generic [ref=f33e486]:
+                    - generic [ref=f33e487]: Assignee
+                    - button "Assignee Pin to top. Only you can see pinned fields." [ref=f33e490] [cursor=pointer]
+                  - generic [ref=f33e493]:
+                    - button "Mehdi Karbitou- edit Assignee" [ref=f33e494]
+                    - generic [ref=f33e499]:
+                      - img "Mehdi Karbitou" [ref=f33e500]
+                      - generic [ref=f33e503]: Mehdi Karbitou
+                - generic [ref=f33e506]:
+                  - generic [ref=f33e508]:
+                    - generic [ref=f33e509]: Labels
+                    - button "Labels Pin to top. Only you can see pinned fields." [ref=f33e512] [cursor=pointer]
+                  - generic [ref=f33e515]:
+                    - button "Edit Labels" [ref=f33e516]
+                    - generic [ref=f33e517]: Add labels
+                - generic [ref=f33e522]:
+                  - generic [ref=f33e524]:
+                    - generic [ref=f33e525]: Parent
+                    - generic [ref=f33e526] [cursor=pointer]
+                    - button "Parent Pin to top. Only you can see pinned fields." [ref=f33e531] [cursor=pointer]
+                  - generic [ref=f33e534]:
+                    - button "Edit Parent" [ref=f33e535]
+                    - generic [ref=f33e536]:
+                      - img "Task icon" [ref=f33e537]
+                      - link "FAL-161 B3 [CONTRAT] Livrer un contrat API stable avec exemples pour React" [ref=f33e540] [cursor=pointer]:
+                        - /url: /browse/FAL-161
+                - generic [ref=f33e544]:
+                  - generic [ref=f33e546]:
+                    - generic [ref=f33e547]: Sprint
+                    - generic [ref=f33e548]:
+                      - generic [ref=f33e549] [cursor=pointer]
+                      - button "Sprint Pin to top. Only you can see pinned fields." [ref=f33e554] [cursor=pointer]
+                  - generic [ref=f33e557]:
+                    - button [disabled] [aria-hidden] [ref=f33e558]
+                    - link "Sprint 2 - Brief 3 - LMS API" [ref=f33e561] [cursor=pointer]:
+                      - /url: /secure/GHGoToBoard.jspa?sprintId=39
+                - generic [ref=f33e565]:
+                  - generic [ref=f33e567]:
+                    - generic [ref=f33e568]: Story point estimate
+                    - generic [ref=f33e569]:
+                      - generic [ref=f33e570] [cursor=pointer]
+                      - button "Story point estimate Pin to top. Only you can see pinned fields." [ref=f33e575] [cursor=pointer]
+                  - generic [ref=f33e578]:
+                    - button "Edit Story point estimate" [ref=f33e579]
+                    - generic [ref=f33e580]: Add story points
+                - generic [ref=f33e583]:
+                  - generic [ref=f33e585]:
+                    - generic [ref=f33e586]: Reporter
+                    - button "Reporter Pin to top. Only you can see pinned fields." [ref=f33e589] [cursor=pointer]
+                  - generic [ref=f33e592]:
+                    - button [disabled] [aria-hidden] [ref=f33e593]
+                    - generic [ref=f33e598]:
+                      - img "Mehdi Karbitou" [ref=f33e599]
+                      - generic [ref=f33e602]: Mehdi Karbitou
+            - button [expanded] [ref=f33e609] [cursor=pointer]:
+              - heading "Development" [level=2] [ref=f33e614]
+          - button [ref=f33e623] [cursor=pointer]:
+            - generic [ref=f33e627]:
+              - heading "Automation" [level=2] [ref=f33e628]
+              - generic [ref=f33e630]: Rule executions
+          - generic [ref=f33e636]:
+            - generic [ref=f33e638]:
+              - text: Created
+              - button [ref=f33e639] [cursor=pointer]:
+                - time [ref=f33e640]: 19 hours ago
+            - generic [ref=f33e642]:
+              - text: Updated
+              - button [ref=f33e643] [cursor=pointer]:
+                - time [ref=f33e644]: 19 hours ago

@@ -3,8 +3,8 @@
 | Contract metadata | Value |
 | --- | --- |
 | Consumer | LMS React frontend |
-| Document revision | 0.2 draft - 28 October 2026 |
-| Backend baseline | Integrated commit `de43520` |
+| Document revision | 0.4 draft - 29 October 2026 |
+| Backend baseline | Integrated commit `de43520`; API sources also checked against team main `384eb76` |
 | Tracking | FAL-161; scope FAL-188, examples FAL-189, handoff FAL-190 |
 | Approval | Pending backend/frontend agreement |
 | API URL version | Routes currently use `/api`, with no `/v1` prefix |
@@ -26,6 +26,9 @@ replayable API collection. None of these replaces checking the running service.
 [open decisions](#6-gaps-and-decisions-to-confirm),
 [delivery checklist](#8-delivery-checklist-and-evidence).
 
+Reviewers: see the [FAL-190 handoff and consistency review](react-api-contract-handoff.md)
+for the checked revisions, discrepancies, test results and remaining delivery steps.
+
 ## 1. Scope
 
 The contract covers the existing routes needed for the learning and trainer
@@ -39,6 +42,14 @@ reference, including fields and endpoint-specific errors.
 | Browse catalogue and course details | `GET /api/courses`, `GET /api/courses/{id}` | Public published courses. Catalogue accepts `category`, `level`, `keyword`, `sortBy`. |
 | Enroll and show my courses | `POST /api/courses/{courseId}/enroll`, `GET /api/enrollments/me` | Any authenticated account; enrollment has no learner-role restriction. Course must be published. |
 | Read learning content | `GET /api/courses/{id}/modules`, `GET /api/modules/{id}/resources` | Modules require active enrollment; resource listing is public in the current implementation. |
+| Track course progression | `GET /api/courses/{courseId}/progress` | Active or completed enrollment for the caller; recalculates and saves progress. See card 4.8. |
+| Read quizzes and submit/view attempts | `GET /api/quizzes/{quizId}`, `POST /api/quizzes/{quizId}/attempts`, `GET /api/quizzes/{quizId}/attempts` | Read/submit: learner only. Attempt history also permits the course-owner trainer. Submission has fewer prerequisite checks than reading. See card 4.5. |
+| Create, read and update feedback | `POST /api/feedback`, `GET /api/feedback/{feedbackId}`, `PATCH /api/feedback/{feedbackId}` | Create: course-owner trainer. Read: recipient, current owner or admin. Update: current owner or admin. See card 4.6. |
+| Read trainer statistics | `GET /api/trainer/stats` | Trainer only; cached snapshot, with explicit no-data state. See card 4.7. |
+
+These are the selected journeys for this draft. Detailed trainer content CRUD
+and additional screens remain in OpenAPI until the team agrees their contract scope.
+
 | Consult resources and complete modules | `POST /api/modules/{resourceId}/consult`, `POST /api/modules/{moduleId}/complete` | Active enrollment. Module completion also checks resources, previous module and any active mandatory quiz. The consult URL uses a resource ID despite its `/modules` prefix. |
 | Track and resume learning | `GET /api/courses/{courseId}/progress`, `GET /api/courses/{courseId}/resume` | Active or completed enrollment. Both recalculate and save enrollment progress. |
 | Read and submit a quiz | `GET /api/quizzes/{quizId}`, `POST /api/quizzes/{quizId}/attempts` | Learner only. Quiz reading checks enrollment/publication/unlock conditions; submission currently does not apply all those checks. |
@@ -466,6 +477,65 @@ does not refresh statistics. Show separate no-data, empty-course and stale-data
 states using these fields. There is no agreed maximum snapshot age yet.
 Errors: 401 invalid authentication, 403 wrong role, 500 unexpected failure.
 
+### 4.8 Read course progression
+
+| Request | Value |
+| --- | --- |
+| Operation | `GET /api/courses/{courseId}/progress` |
+| Access | Bearer token with an active or completed enrollment for that account |
+| Path | Required `courseId: string` ObjectId |
+| Body/query | None; learner identity comes from the token |
+| Success | HTTP 200 with `{ message: string, data: object }` |
+
+Illustrative request (replace the fictitious course ID and token):
+
+```http
+GET /api/courses/507f1f77bcf86cd799439011/progress
+Authorization: Bearer <learner-token>
+```
+
+Illustrative response for two published modules and two resources, with one
+module completed and one resource consulted:
+
+```json
+{
+  "message": "Progression du cours récupérée avec succès",
+  "data": {
+    "courseId": "507f1f77bcf86cd799439011",
+    "learnerId": "507f1f77bcf86cd799439012",
+    "totalModules": 2,
+    "completedModules": 1,
+    "totalResources": 2,
+    "consultedResources": 1,
+    "percentage": 50,
+    "enrollmentStatus": "active"
+  }
+}
+```
+
+Both IDs are strings; the four counts are integers, `percentage` is a number,
+and `enrollmentStatus` is `active` or `completed`. Modules and resources have
+equal weight: `(1 + 1) / (2 + 2) * 100 = 50`. With no published modules or
+resources, the percentage is zero. Values are rounded to two decimal places.
+
+This GET recalculates and saves enrollment progress; reaching 100 marks the
+enrollment completed. It does not automatically change a completed enrollment
+back to active if the percentage later drops. React should use the returned
+status instead of deriving it from the percentage.
+
+Errors: 400 invalid ID, 401 missing/invalid/expired token, 404 no active or
+completed enrollment (including cancelled enrollment), 500 unexpected failure.
+An illustrative 404 body is
+`{ "status": 404, "message": "Inscription active introuvable" }`.
+There is no learner-only role middleware on this route; access depends on the
+token identity and its enrollment.
+
+Evidence: source-checked against `controllers/courseProgressController.js`,
+`services/courseProgressService.js` and `routes/enrollmentRoutes.js` on
+29 October 2026. These IDs and response values are fictitious, not a replay
+against the seeded demo account. Existing progression tests provide separate
+behavior evidence; this card does not claim a fresh seed or HTTP replay.
+
 ### Endpoint-card standard for the remaining operations
 
 For every additional screen, record the method/path, path/query/header fields,
@@ -489,6 +559,19 @@ The password comes from local `SEED_DEMO_PASSWORD` (at least eight characters).
 It is not embedded in this contract. The seed creates three published courses,
 published modules/resources, quizzes and learner progress/attempt fixtures.
 The demo learner is enrolled in the first Node.js course.
+
+The first course starts with two published modules and two resources. One
+resource is consulted and one module completed, giving 50% progress. The
+seeded quiz has three questions and two existing attempts (33.33% failed and
+66.67% passed). Card 4.5 instead illustrates a fictitious one-question quiz;
+submitting its one-answer request to the seed quiz does not produce 100%.
+Use the live learner quiz response when composing a demo submission.
+
+The seed creates no feedback records and no successful statistics-refresh
+job. A feedback read/update requires an ID supplied by the backend owner or
+returned from an authorized feedback creation. A populated statistics example
+requires an existing successful refresh; otherwise use the documented no-data
+state. Existing database records can affect these starting conditions.
 
 The existing `npm run seed` command **replaces the matching demo course data
 and related records and resets the demo account passwords**. Ask the backend
@@ -591,12 +674,34 @@ invent a version header. Proposed change handling for team agreement:
 | Scope, endpoint index and authentication documented | Source-checked in this document. |
 | Existing response wrappers and non-paginated lists described | Source-checked; keep endpoint differences visible. |
 | Representative request/success/error/access cards and field types | Included above; fictitious examples, not a full replay. |
+| Consistency with integrated routes, OpenAPI and demo seed | Checked on 29 October 2026; see the [FAL-190 handoff](react-api-contract-handoff.md). |
 | Every planned React screen has a complete card | Pending final screen selection and remaining detailed trainer CRUD cards. |
 | Seed accounts, setup impact and ID dependencies explained | Source-checked; seed not run in this checkpoint. |
 | Importable request collection and environment | Separate FAL-163 delivery; not claimed here. |
 | Request replay matches contract | Pending recorded environment-specific execution. Existing feature tests are separate evidence. |
 | Backend/frontend agreement and review | Pending. |
 | Contract committed, reviewed and merged to team main | Pending for this document revision. |
+
+Checks performed for revision 0.4 on 29 October 2026:
+
+- Compared API source with freshly fetched team main `384eb76`. Its only
+  change since integrated `de43520` is the Docker seed-password environment
+  mapping; the API, validators, OpenAPI and seed implementation are unchanged.
+- Corrected the progression 404 example to include numeric `status`.
+- Completed the selected-journey index and clarified seed/example differences.
+- Full existing regression suite passed: 230 tests across 20 suites.
+- Detailed consistency checks and review instructions are recorded in the
+  [FAL-190 handoff](react-api-contract-handoff.md).
+
+Checks performed for revision 0.3 on 29 October 2026:
+
+- Added the source-checked course progression card, including calculation,
+  enrollment side effects, access and errors. No seed replay was performed.
+- All eight JSON examples parse; whitespace checks passed.
+- Existing Swagger tests passed (20 tests), and existing progression tests
+  passed (13 tests) against the isolated `lms_test` database.
+- These automated checks do not replace environment-specific example replay
+  or backend/frontend approval.
 
 Checks performed for revision 0.2 on 28 October 2026:
 

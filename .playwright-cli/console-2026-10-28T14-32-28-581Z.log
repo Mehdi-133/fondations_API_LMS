@@ -22,3 +22,1017 @@ Use document.createElement() or jQuery.parseHTML(), or preferably use a templati
 [   26813ms] [WARNING] DEPRECATED JS - Inline dialog constructor has been deprecated and will be removed in a future release. Use inline dialog 2 instead.   
      at l (https://d2m4riqu1jtjxe.cloudfront.net/marouakourdi61.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-CDN/qtw0ha/b/1/beb183fb8303632b5ef3e9337d0ab21a/_/download/contextbatch/js/jira.heritage.critical/batch.js:6:2054) @ https://d2m4riqu1jtjxe.cloudfront.net/marouakourdi61.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-CDN/qtw0ha/b/1/baa28e6c1815ab879300331e51131fca/_/download/contextbatch/js/jira.webresources:skate,jira.webresources:dialogs,jira.webresources:jira-global,jira.webresources:util-lite,jira.webresources:util,jira.webresources:feature-flags,com.atlassian.auiplugin:aui-spinner,com.atlassian.jira.jira-client-analytics-plugin:analytics-web-client,-jira.heritage.critical/batch.js?locale=en-US:31
 [   37774ms] [WARNING] IndexedDB timed out. @ https://d2m4riqu1jtjxe.cloudfront.net/marouakourdi61.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-CDN/qtw0ha/b/1/baa28e6c1815ab879300331e51131fca/_/download/contextbatch/js/jira.webresources:skate,jira.webresources:dialogs,jira.webresources:jira-global,jira.webresources:util-lite,jira.webresources:util,jira.webresources:feature-flags,com.atlassian.auiplugin:aui-spinner,com.atlassian.jira.jira-client-analytics-plugin:analytics-web-client,-jira.heritage.critical/batch.js?locale=en-US:3200
+[ 4154235ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/api/2/attachment/read/issue/FAL-161/credentials?maxTokenLength=65536:0
+[ 4154282ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/api/2/attachment/upload/issue/FAL-161/credentials:0
+[ 4154361ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[ 4154690ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=atlassianCookies&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[ 4154760ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[ 4154818ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[ 5276051ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[ 5276053ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[ 5278137ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://xp.atlassian.com/v1/rgstr?k=client-7hFqlBhHaY5b2zA7LaaHDy1QKH7yZigbikmrwNpCuRy&st=javascript-client&sv=3.30.2&t=1793203223229&sid=aa2a10d0-9f83-48cc-a17c-2921a69f8341&ec=2&gz=1:0
+[ 5279019ms] [ERROR] WebSocket connection to 'wss://marouakourdi61.atlassian.net/gateway/api/graphql/subscriptions' failed: Error in connection establishment: net::ERR_NAME_NOT_RESOLVED @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:1
+[ 5281694ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://xp.atlassian.com/v1/rgstr?k=client-7hFqlBhHaY5b2zA7LaaHDy1QKH7yZigbikmrwNpCuRy&st=javascript-client&sv=3.30.2&t=1793203227228&sid=aa2a10d0-9f83-48cc-a17c-2921a69f8341&ec=2&gz=1:0
+[ 5282132ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[ 5282136ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[ 5282140ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/api/2/attachment/read/issue/FAL-161/credentials?maxTokenLength=65536:0
+[ 5282141ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/api/2/attachment/upload/issue/FAL-161/credentials:0
+[ 5282142ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=atlassianCookies&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[ 5282142ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[ 5282147ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[ 5282691ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://as.atlassian.com/api/v1/batch:0
+[ 5282691ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[ 5285168ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[ 5285177ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[ 5285184ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.onError [as error] (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/async-issue-app--full-page.ac7e7f0c.js:716:29777)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:13533)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:14141)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:191456
+[ 5285183ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[ 5285184ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[ 5285187ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[ 5285191ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[ 5286778ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://xp.atlassian.com/v1/rgstr?k=client-7hFqlBhHaY5b2zA7LaaHDy1QKH7yZigbikmrwNpCuRy&st=javascript-client&sv=3.30.2&t=1793203232294&sid=aa2a10d0-9f83-48cc-a17c-2921a69f8341&ec=2&gz=1:0
+[ 5286778ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://xp.atlassian.com/v1/rgstr?k=client-7hFqlBhHaY5b2zA7LaaHDy1QKH7yZigbikmrwNpCuRy&st=javascript-client&sv=3.30.2&t=1793203233794&sid=aa2a10d0-9f83-48cc-a17c-2921a69f8341&ec=2&gz=1:0
+[ 5290360ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://xp.atlassian.com/v1/rgstr?k=client-7hFqlBhHaY5b2zA7LaaHDy1QKH7yZigbikmrwNpCuRy&st=javascript-client&sv=3.30.2&t=1793203235870&sid=aa2a10d0-9f83-48cc-a17c-2921a69f8341&ec=2&gz=1:0
+[ 5293243ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/api/2/attachment/upload/issue/FAL-161/credentials:0
+[ 5293244ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/api/2/attachment/read/issue/FAL-161/credentials?maxTokenLength=65536:0
+[ 5294331ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://xp.atlassian.com/v1/rgstr?k=client-7hFqlBhHaY5b2zA7LaaHDy1QKH7yZigbikmrwNpCuRy&st=javascript-client&sv=3.30.2&t=1793203239860&sid=aa2a10d0-9f83-48cc-a17c-2921a69f8341&ec=2&gz=1:0
+[ 5294334ms] [ERROR]  ERROR  [Statsig] A networking error occurred during POST request to https://xp.atlassian.com/v1/rgstr?k=client-7hFqlBhHaY5b2zA7LaaHDy1QKH7yZigbikmrwNpCuRy&st=javascript-client&sv=3.30.2&t=1793203239860&sid=aa2a10d0-9f83-48cc-a17c-2921a69f8341&ec=2&gz=1. TypeError: Failed to fetch TypeError: Failed to fetch
+    at n.<anonymous> (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:51196)
+    at Generator.next (<anonymous>)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:48723
+    at new Promise (<anonymous>)
+    at r (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:48472)
+    at n._sendRequest (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:50419)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:45485
+    at e.exports.ErrorBoundary._capture (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:45783)
+    at e.<computed> [as _sendRequest] (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:45454)
+    at n.<anonymous> (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:52367)
+    at Generator.next (<anonymous>)
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:48528) @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[ 5294335ms] [WARNING]   WARN  [Statsig] Failed to flush events. @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[ 5294339ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://xp.atlassian.com/v1/rgstr?k=client-7hFqlBhHaY5b2zA7LaaHDy1QKH7yZigbikmrwNpCuRy&st=javascript-client&sv=3.30.2&t=1793203240949&sid=aa2a10d0-9f83-48cc-a17c-2921a69f8341&ec=2&gz=1:0
+[ 5300953ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[ 5300953ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/api/2/attachment/upload/issue/FAL-161/credentials:0
+[ 5301197ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/api/2/attachment/read/issue/FAL-161/credentials?maxTokenLength=65536:0
+[ 5301903ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://xp.atlassian.com/v1/rgstr?k=client-7hFqlBhHaY5b2zA7LaaHDy1QKH7yZigbikmrwNpCuRy&st=javascript-client&sv=3.30.2&t=1793203247426&sid=aa2a10d0-9f83-48cc-a17c-2921a69f8341&ec=2&gz=1:0
+[ 5301903ms] [ERROR]  ERROR  [Statsig] A networking error occurred during POST request to https://xp.atlassian.com/v1/rgstr?k=client-7hFqlBhHaY5b2zA7LaaHDy1QKH7yZigbikmrwNpCuRy&st=javascript-client&sv=3.30.2&t=1793203247426&sid=aa2a10d0-9f83-48cc-a17c-2921a69f8341&ec=2&gz=1. TypeError: Failed to fetch TypeError: Failed to fetch
+    at n.<anonymous> (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:51196)
+    at Generator.next (<anonymous>)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:48723
+    at new Promise (<anonymous>)
+    at r (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:48472)
+    at n._sendRequest (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:50419)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:45485
+    at e.exports.ErrorBoundary._capture (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:45783)
+    at e.<computed> [as _sendRequest] (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:45454)
+    at n.<anonymous> (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:52367)
+    at Generator.next (<anonymous>)
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:48528) @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[ 5301903ms] [WARNING]   WARN  [Statsig] Failed to flush events. @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[ 5307071ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[ 5307072ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[ 5307080ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/async-issue-navigator-native-issue-table.f1a16b60.js:289:63480)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/async-issue-app--full-page.ac7e7f0c.js:648:22210)
+    at e.__tryOrSetError (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:35664)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:34818)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33922)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:120473)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:59970)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:59970)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:28698)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:27732
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/async-issue-app--full-page.ac7e7f0c.js:716:13364
+    at e.dispatch [as _next] (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:67798)
+    at e.__tryOrUnsub (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:35554)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:34875)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33922)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.notifyNext (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:43497)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:46639)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33922)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.notifyNext (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:62757)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:46639)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.notifyNext (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:62757)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:46639)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.notifyNext (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:62757)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:46639)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.notifyNext (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:43497)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:46639)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.notifyNext (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:44036)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:46639)
+[ 5307083ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/async-issue-navigator-native-issue-table.f1a16b60.js:289:63480)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/async-issue-app--full-page.ac7e7f0c.js:648:28335)
+    at e.__tryOrSetError (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:35664)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:34818)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33922)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:120473)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:59970)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:28698)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:27732
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/async-issue-app--full-page.ac7e7f0c.js:716:13364
+    at e.dispatch [as _next] (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:67798)
+    at e.__tryOrUnsub (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:35554)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:34875)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33922)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.notifyNext (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:43497)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:46639)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33922)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.notifyNext (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:62757)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:46639)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.notifyNext (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:62757)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:46639)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.notifyNext (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:62757)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:46639)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.notifyNext (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:43497)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:46639)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at e.notifyNext (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:44036)
+    at e._next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:46639)
+    at e.next (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:33593)
+    at Object.n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~stable~ar.05fd2121.js:6:44591)
+[ 5319490ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=atlassianCookies&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[12812147ms] [ERROR] Failed to load resource: net::ERR_SOCKET_NOT_CONNECTED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=atlassianCookies&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[12812192ms] [ERROR] Failed to load resource: net::ERR_SOCKET_NOT_CONNECTED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[12815116ms] [ERROR] Failed to load resource: net::ERR_NETWORK_CHANGED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[30597715ms] [ERROR] Failed to load resource: net::ERR_NETWORK_CHANGED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[30602466ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[30602468ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/consenthub/session/user/consents/cookies:0
+[30602492ms] [ERROR] [browser-storage-controls]: Failed to fetch  @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[30604851ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[30604852ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[30605072ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[30605049ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[30607502ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[30607575ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[30607577ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[30607581ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[30607584ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[30610289ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/emau:0
+[30611619ms] TypeError: Failed to fetch
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~commons~ar.93caab05.js:23:42071)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:325910
+    at n.track (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:4:250741)
+[30611744ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[30612225ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://as.atlassian.com/api/v1/batch:0
+[30612338ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[30613958ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=atlassianCookies&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[30618089ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[30618096ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[30618113ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[30618114ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[30618204ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[30618204ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[30627812ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=atlassianCookies&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[30643012ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[30679447ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[30687601ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[30687603ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[30687603ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[30697557ms] [ERROR] Failed to load resource: net::ERR_NETWORK_CHANGED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=atlassianCookies&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[30738500ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[30738501ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[30780246ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[30780246ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[30780248ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[30803123ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=atlassianCookies&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[30838132ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[30838133ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[30853713ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[30878555ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[30903181ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[30903182ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[30918715ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[30918718ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[30924847ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[30924849ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[30924873ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[30924881ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[30968164ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[30968165ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[30983729ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[31034288ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[31034289ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[31045396ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[31045396ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[31065678ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=atlassianCookies&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[31096205ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[31096206ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[31108777ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[31157352ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[31157353ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[31173757ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[31222042ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[31228158ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[31228159ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[31228159ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[31228166ms] [LOG] GASv3 submission failed with HTTP Status Code %d: %s -1 Unknown Status @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3
+[31228195ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[31228195ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[31238802ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/batch:0
+[31252671ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=atlassianCookies&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[31272261ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[31434146ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[31522114ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[31528259ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[31528259ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[31528311ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[31528325ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[31816076ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[31816108ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[31816110ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[31816168ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[31816169ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[31933910ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[32116249ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[32116314ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=atlassianCookies&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[32116315ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[32116318ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[32116448ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[32116449ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[32416277ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[32416386ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[32416387ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[32416468ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[32416470ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[32623496ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=atlassianCookies&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[32715998ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[32716036ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[32716039ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[32716060ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[32716064ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[32845749ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/gasv3/api/v1/metadata?product=jira&userId=712020%3Ad2ca9169-80c2-40c4-b2c5-ed959d4224c0&userIdType=atlassianAccount&tenantId=7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f&tenantIdType=cloudId:0
+[33318640ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[33319591ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[33389118ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[33319707ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[33389120ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[33615969ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/graphql/pq/9f3b4a09a7e4266768d98a555e0cad4773688c2aea1b8b19bc7c70ae5741160a?operation=Nav4NotificationsRefetchableQuery&variables=%7B%22collabContextRoutingAri%22%3A%22ari%3Acloud%3Aplatform%3A%3Asite%2F7f59e5eb-ae0b-4425-9388-ce3ba7fa4b1f%22%7D:0
+[33615984ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/unsafe/frontend-exception:0
+[33615993ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2123
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2115
+    at new Promise (<anonymous>)
+    at u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2093)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2326
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at c (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2275)
+    at e (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2612)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:44276
+    at Object.u (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:16:43538)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207559)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[33615989ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/rest/internal/2/log/safe/error:0
+[33615997ms] TypeError: Failed to fetch
+    at o (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1145)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1854
+    at n (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40384)
+    at Object.add (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40439)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1846
+    at new Promise (<anonymous>)
+    at s (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1824)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2012
+    at n.rateLimit (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:40221)
+    at l (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:1961)
+    at Object.safeErrorWithoutCustomerData (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:2:2532)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/jira-spa-issue-view.d59cbf0a.js:833:505975)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432590
+    at Set.forEach (<anonymous>)
+    at t.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:432561)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:430270)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at t._error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:487229)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:484971)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:427377)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:2:207573)
+    at Object.error (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~vendor~ar.254fe3ba.js:5:428422)
+    at a (https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:148)
+    at https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/shared~atlassian-navigation~vendor~ar.a876ff47.js:3:1453
+[66943007ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://marouakourdi61.atlassian.net/gateway/api/consenthub/session/user/consents/cookies:0
+[66955088ms] [ERROR] [browser-storage-controls]: Failed to fetch  @ https://jira-fe.prod-east.frontend.public.atl-paas.net/assets/parse-gates-and-init-controls-early-entry.7d07e366.js:3

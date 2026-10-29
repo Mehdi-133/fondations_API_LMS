@@ -6,6 +6,8 @@ Built with Node.js, Express, MongoDB/Mongoose, JWT, bcrypt, Zod and Multer. Swag
 
 Frontend developers: start with the [React API contract](docs/react-api-contract.md)
 for endpoint cards, authentication, response formats, demo setup and integration gaps.
+Reviewers can use the [contract handoff](docs/react-api-contract-handoff.md)
+for the backend comparison, verification evidence and remaining delivery steps.
 
 ## Local setup
 
