@@ -9,6 +9,12 @@ const trainerSummaryPreference = new mongoose.Schema(
             unique: true,
             immutable: true,
         },
+
+        subscribedToSummary: {
+            type: Boolean,
+            default: false,
+        },
+        
         includeDraftCourses: {
             type: Boolean,
             default: false,

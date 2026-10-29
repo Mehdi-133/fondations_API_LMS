@@ -117,6 +117,14 @@ const jobHandlers = {
         for (const trainer of trainers) {
             const preferences = await getPreferences(trainer._id);
 
+            //ne pas envoyer le résumé si formateur n'est pas abonnee
+            if (!preferences.subscribedToSummary) {
+                console.log(
+                    `[JOB] trainerSummary skipped for ${trainer.email}: not subscribed`
+                );
+                continue;
+            }
+
             const courseFilter = {
                 trainer: trainer._id,
             };
@@ -153,11 +161,14 @@ const jobHandlers = {
                 })),
             };
 
+            let enrollmentStats = [];
+            let progressStats = [];
+
             if (
                 preferences.includeEnrollmentStats &&
                 courseIds.length > 0
             ) {
-                const enrollmentStats = await Enrollment.aggregate([
+                enrollmentStats = await Enrollment.aggregate([
                     {
                         $match: {
                             course: { $in: courseIds },
@@ -178,7 +189,7 @@ const jobHandlers = {
                 preferences.includeProgressStats &&
                 courseIds.length > 0
             ) {
-                const progressStats = await Enrollment.aggregate([
+                progressStats = await Enrollment.aggregate([
                     {
                         $match: {
                             course: { $in: courseIds },
@@ -205,6 +216,24 @@ const jobHandlers = {
                     data: {
                         name: trainer.name,
                         courseCount: courses.length,
+
+                        enrollmentStats: preferences.includeEnrollmentStats
+                            ? enrollmentStats
+                                .map(
+                                    (stat) =>
+                                        `Cours ${stat._id}: ${stat.totalEnrollments} inscriptions`
+                                )
+                                .join("<br>")
+                            : "Statistiques des inscriptions désactivées.",
+
+                        progressStats: preferences.includeProgressStats
+                            ? progressStats
+                                .map(
+                                    (stat) =>
+                                        `Cours ${stat._id}: ${stat.averageProgress.toFixed(1)} %`
+                                )
+                                .join("<br>")
+                            : "Statistiques de progression désactivées.",
                     },
                     event: "trainer_summary",
                 });
@@ -229,96 +258,96 @@ const jobHandlers = {
 
 
     statsRefresh: async () => {
-    console.log("[JOB] statsRefresh executed");
+        console.log("[JOB] statsRefresh executed");
 
-    const [
-        enrollmentsPerCourse,
-        progressPerCourse,
-        quizAttemptsPerCourse,
-        feedbackPerCourse,
-        totalQuizzes,
-        activeQuizzes,
-    ] = await Promise.all([
-        Enrollment.aggregate([
-            {
-                $group: {
-                    _id: "$course",
-                    totalEnrollments: { $sum: 1 },
-                },
-            },
-        ]),
-
-        Enrollment.aggregate([
-            {
-                $group: {
-                    _id: "$course",
-                    averageProgress: { $avg: "$progress" },
-                },
-            },
-        ]),
-
-        QuizAttempt.aggregate([
-            {
-                $lookup: {
-                    from: Quiz.collection.name,
-                    localField: "quiz",
-                    foreignField: "_id",
-                    as: "quiz",
-                },
-            },
-            { $unwind: "$quiz" },
-            {
-                $lookup: {
-                    from: Module.collection.name,
-                    localField: "quiz.moduleId",
-                    foreignField: "_id",
-                    as: "module",
-                },
-            },
-            { $unwind: "$module" },
-            {
-                $group: {
-                    _id: "$module.course",
-                    totalAttempts: { $sum: 1 },
-                    passedAttempts: {
-                        $sum: { $cond: ["$passed", 1, 0] },
+        const [
+            enrollmentsPerCourse,
+            progressPerCourse,
+            quizAttemptsPerCourse,
+            feedbackPerCourse,
+            totalQuizzes,
+            activeQuizzes,
+        ] = await Promise.all([
+            Enrollment.aggregate([
+                {
+                    $group: {
+                        _id: "$course",
+                        totalEnrollments: { $sum: 1 },
                     },
-                    averageScore: { $avg: "$scorePercent" },
                 },
-            },
-        ]),
+            ]),
 
-        Feedback.aggregate([
-            {
-                $group: {
-                    _id: "$course",
-                    feedbackCount: { $sum: 1 },
+            Enrollment.aggregate([
+                {
+                    $group: {
+                        _id: "$course",
+                        averageProgress: { $avg: "$progress" },
+                    },
                 },
+            ]),
+
+            QuizAttempt.aggregate([
+                {
+                    $lookup: {
+                        from: Quiz.collection.name,
+                        localField: "quiz",
+                        foreignField: "_id",
+                        as: "quiz",
+                    },
+                },
+                { $unwind: "$quiz" },
+                {
+                    $lookup: {
+                        from: Module.collection.name,
+                        localField: "quiz.moduleId",
+                        foreignField: "_id",
+                        as: "module",
+                    },
+                },
+                { $unwind: "$module" },
+                {
+                    $group: {
+                        _id: "$module.course",
+                        totalAttempts: { $sum: 1 },
+                        passedAttempts: {
+                            $sum: { $cond: ["$passed", 1, 0] },
+                        },
+                        averageScore: { $avg: "$scorePercent" },
+                    },
+                },
+            ]),
+
+            Feedback.aggregate([
+                {
+                    $group: {
+                        _id: "$course",
+                        feedbackCount: { $sum: 1 },
+                    },
+                },
+            ]),
+
+            Quiz.countDocuments(),
+
+            Quiz.countDocuments({ isActive: true }),
+        ]);
+
+        const result = {
+            message: "Statistics refreshed successfully",
+            generatedAt: new Date().toISOString(),
+            enrollmentsPerCourse,
+            progressPerCourse,
+            quizAttemptsPerCourse,
+            feedbackPerCourse,
+            quizzes: {
+                total: totalQuizzes,
+                active: activeQuizzes,
             },
-        ]),
+        };
 
-        Quiz.countDocuments(),
+        console.log("[JOB] statsRefresh completed");
 
-        Quiz.countDocuments({ isActive: true }),
-    ]);
-
-    const result = {
-        message: "Statistics refreshed successfully",
-        generatedAt: new Date().toISOString(),
-        enrollmentsPerCourse,
-        progressPerCourse,
-        quizAttemptsPerCourse,
-        feedbackPerCourse,
-        quizzes: {
-            total: totalQuizzes,
-            active: activeQuizzes,
-        },
-    };
-
-    console.log("[JOB] statsRefresh completed");
-
-    return result;
-},
+        return result;
+    },
 
 };
 
