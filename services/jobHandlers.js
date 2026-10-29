@@ -161,11 +161,14 @@ const jobHandlers = {
                 })),
             };
 
+            let enrollmentStats = [];
+            let progressStats = [];
+
             if (
                 preferences.includeEnrollmentStats &&
                 courseIds.length > 0
             ) {
-                const enrollmentStats = await Enrollment.aggregate([
+                enrollmentStats = await Enrollment.aggregate([
                     {
                         $match: {
                             course: { $in: courseIds },
@@ -186,7 +189,7 @@ const jobHandlers = {
                 preferences.includeProgressStats &&
                 courseIds.length > 0
             ) {
-                const progressStats = await Enrollment.aggregate([
+                progressStats = await Enrollment.aggregate([
                     {
                         $match: {
                             course: { $in: courseIds },
@@ -213,6 +216,24 @@ const jobHandlers = {
                     data: {
                         name: trainer.name,
                         courseCount: courses.length,
+
+                        enrollmentStats: preferences.includeEnrollmentStats
+                            ? enrollmentStats
+                                .map(
+                                    (stat) =>
+                                        `Cours ${stat._id}: ${stat.totalEnrollments} inscriptions`
+                                )
+                                .join("<br>")
+                            : "Statistiques des inscriptions désactivées.",
+
+                        progressStats: preferences.includeProgressStats
+                            ? progressStats
+                                .map(
+                                    (stat) =>
+                                        `Cours ${stat._id}: ${stat.averageProgress.toFixed(1)} %`
+                                )
+                                .join("<br>")
+                            : "Statistiques de progression désactivées.",
                     },
                     event: "trainer_summary",
                 });
