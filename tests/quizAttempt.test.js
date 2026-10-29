@@ -272,6 +272,9 @@ describe("QuizAttempt persistence", () => {
     expect(privateQuiz.questions[0].correctChoiceId).toBe("a");
   });
 
+
+   
+
   test("isolates two real learners' histories even with a forged learner query", async () => {
     const secondLearner = await User.create({
       name: "Second privacy learner",
