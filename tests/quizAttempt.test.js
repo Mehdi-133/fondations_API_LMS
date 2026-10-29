@@ -143,6 +143,30 @@ describe("QuizAttempt persistence", () => {
     expect(await QuizAttempt.countDocuments({ quiz: quiz._id })).toBe(0);
   });
 
+  test("rejects an answer for a question outside the quiz", async () => {
+    const response = await request(app)
+      .post(`/api/quizzes/${quiz._id}/attempts`)
+      .set("Authorization", `Bearer ${fixture.token}`)
+      .send({
+        answers: [{ questionId: "q999", choiceId: "a" }],
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(await QuizAttempt.countDocuments({ quiz: quiz._id })).toBe(0);
+  });
+
+  test("rejects a choice outside the submitted question", async () => {
+    const response = await request(app)
+      .post(`/api/quizzes/${quiz._id}/attempts`)
+      .set("Authorization", `Bearer ${fixture.token}`)
+      .send({
+        answers: [{ questionId: "q1", choiceId: "q999-choice" }],
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(await QuizAttempt.countDocuments({ quiz: quiz._id })).toBe(0);
+  });
+
   test("allows the course trainer to view learner attempts", async () => {
     await QuizAttempt.create({
       learner: fixture.learner._id,
@@ -247,6 +271,9 @@ describe("QuizAttempt persistence", () => {
     const privateQuiz = await Quiz.findById(quiz._id);
     expect(privateQuiz.questions[0].correctChoiceId).toBe("a");
   });
+
+
+   
 
   test("isolates two real learners' histories even with a forged learner query", async () => {
     const secondLearner = await User.create({

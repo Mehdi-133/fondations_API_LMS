@@ -5,6 +5,34 @@ const { calculateQuizScore } = require("./quizScoringService")
 const Course = require("../models/Course")
 const Module = require("../models/Module")
 
+const validateAnswersBelongToQuiz = (quiz, answers) => {
+    for (const answer of answers) {
+        const question = quiz.questions.find(
+            (item) => item.id === answer.questionId
+        )
+
+        if (!question) {
+            const error = new Error(
+                `Question ${answer.questionId} does not belong to this quiz`
+            )
+            error.statusCode = 400
+            throw error
+        }
+
+        const choiceExists = question.choices.some(
+            (choice) => choice.id === answer.choiceId
+        )
+
+        if (!choiceExists) {
+            const error = new Error(
+                `Choice ${answer.choiceId} does not belong to question ${answer.questionId}`
+            )
+            error.statusCode = 400
+            throw error
+        }
+    }
+}
+
 const submitQuizAttempt = async ({ quizId, learnerId, answers}) => {
     if(!Array.isArray(answers)) {
         const error = new Error("answers must be an array")
@@ -19,6 +47,8 @@ const submitQuizAttempt = async ({ quizId, learnerId, answers}) => {
         error.statusCode = 404
         throw error
     }
+
+    validateAnswersBelongToQuiz(quiz, answers)
 
     const score = calculateQuizScore(quiz, answers)
 
