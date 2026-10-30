@@ -118,6 +118,10 @@ Swagger describes request bodies, parameters, authentication and responses. Path
 
 ## Tests
 
+For the frontend request collection, environment setup and replay instructions, see the
+[Postman frontend handoff](docs/postman/README.md). Actual collection execution results
+are recorded separately in [the collection verification log](docs/postman/TESTS.md).
+
 Tests require MongoDB and `JWT_SECRET`. They create and remove records in `lms_test`; use a development database server.
 
 With Compose MongoDB running, in PowerShell:
