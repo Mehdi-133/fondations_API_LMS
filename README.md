@@ -8,6 +8,10 @@ Frontend developers: start with the [React API contract](docs/react-api-contract
 for endpoint cards, authentication, response formats, demo setup and integration gaps.
 Reviewers can use the [contract handoff](docs/react-api-contract-handoff.md)
 for the backend comparison, verification evidence and remaining delivery steps.
+Brief 3 review tracking: see the [cross-review evidence register](docs/cross-review-evidence.md)
+for PR references, evidence gaps and the pre-merge review checkpoints.
+The [review delivery status](docs/delivery-review-status.md) records the verified
+result and remaining acceptance gaps.
 
 ## Local setup
 
